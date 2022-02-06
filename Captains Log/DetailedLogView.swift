@@ -18,7 +18,7 @@ struct DetailedLogView: View {
                 HStack {
                     Label("Location", systemImage: "clock")
                     Spacer()
-                    Text("\(log.location[0]), \(log.location[1])")
+                    Text("\(log.location)")
                 }
             }
             Section(header: Text("Transcription")) {

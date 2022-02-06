@@ -8,7 +8,8 @@ struct CardView: View {
                 .font(.headline)
             Spacer()
             HStack {
-                Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
+//                Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
+                Label("\(log.date)", systemImage: "calendar")
                 Spacer()
                 Label("\(log.duration, specifier: "%.2f")", systemImage: "clock")
             }
