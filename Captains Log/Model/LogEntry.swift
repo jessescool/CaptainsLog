@@ -1,6 +1,7 @@
 import Foundation
+import RealmSwift
 
-struct LogEntry: Identifiable {
+class LogEntry: Identifiable {
     let id: UUID
     var name: String
     var date: Date
