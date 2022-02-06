@@ -15,17 +15,14 @@
 		74ADE73A2724ED37002D11EB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE7392724ED37002D11EB /* CardView.swift */; };
 		74ADE73C2724F089002D11EB /* LogViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73B2724F089002D11EB /* LogViewList.swift */; };
 		74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73F2724F997002D11EB /* DetailedLogView.swift */; };
-		C63B93A0278FAC6000EDDF49 /* BlackHoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B939F278FAC6000EDDF49 /* BlackHoleView.swift */; };
 		C67FE3BE27B02DF0008ADD94 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BD27B02DF0008ADD94 /* Realm */; };
 		C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BF27B02DF0008ADD94 /* RealmSwift */; };
-		C6A69AD62781282200D6A55F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6A69AD42781282200D6A55F /* Model.xcdatamodeld */; };
 		C6A69AD827812BDA00D6A55F /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A69AD727812BDA00D6A55F /* Audio.swift */; };
 		C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A69ADE2781325A00D6A55F /* ProfileView.swift */; };
 		C6B7D88F274DBDDA00C767B8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B7D88E274DBDDA00C767B8 /* SearchView.swift */; };
 		C6B7D891274DBEB200C767B8 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B7D890274DBEB200C767B8 /* ButtonView.swift */; };
 		C6D3762F27851339003FD962 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3762E27851339003FD962 /* SettingsView.swift */; };
 		C6DF87D327AF43D400955947 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DF87D227AF43D400955947 /* NavBarView.swift */; };
-		C6DF87DB27AF486200955947 /* codableJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DF87DA27AF486200955947 /* codableJSON.swift */; };
 		C6DF87E027AF930400955947 /* NewLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DF87DF27AF930400955947 /* NewLogView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,15 +37,12 @@
 		74ADE7392724ED37002D11EB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		74ADE73B2724F089002D11EB /* LogViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewList.swift; sourceTree = "<group>"; };
 		74ADE73F2724F997002D11EB /* DetailedLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedLogView.swift; sourceTree = "<group>"; };
-		C63B939F278FAC6000EDDF49 /* BlackHoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackHoleView.swift; sourceTree = "<group>"; };
-		C6A69AD52781282200D6A55F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C6A69AD727812BDA00D6A55F /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		C6A69ADE2781325A00D6A55F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C6B7D88E274DBDDA00C767B8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		C6B7D890274DBEB200C767B8 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		C6D3762E27851339003FD962 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C6DF87D227AF43D400955947 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
-		C6DF87DA27AF486200955947 /* codableJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = codableJSON.swift; sourceTree = "<group>"; };
 		C6DF87DF27AF930400955947 /* NewLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +62,6 @@
 		740C2C732722479C004C95CF = {
 			isa = PBXGroup;
 			children = (
-				C6A69AD42781282200D6A55F /* Model.xcdatamodeld */,
 				740C2C7E2722479C004C95CF /* Captains Log */,
 				740C2C7D2722479C004C95CF /* Products */,
 			);
@@ -111,7 +104,6 @@
 			children = (
 				740C2C9127224BD1004C95CF /* LogEntry.swift */,
 				C6A69AD727812BDA00D6A55F /* Audio.swift */,
-				C6DF87DA27AF486200955947 /* codableJSON.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,7 +115,6 @@
 				C6B7D88E274DBDDA00C767B8 /* SearchView.swift */,
 				74ADE73B2724F089002D11EB /* LogViewList.swift */,
 				74ADE73F2724F997002D11EB /* DetailedLogView.swift */,
-				C63B939F278FAC6000EDDF49 /* BlackHoleView.swift */,
 				C6DF87DF27AF930400955947 /* NewLogView.swift */,
 			);
 			name = "Subordinate Views";
@@ -220,17 +211,14 @@
 				74ADE73A2724ED37002D11EB /* CardView.swift in Sources */,
 				C6B7D88F274DBDDA00C767B8 /* SearchView.swift in Sources */,
 				C6B7D891274DBEB200C767B8 /* ButtonView.swift in Sources */,
-				C63B93A0278FAC6000EDDF49 /* BlackHoleView.swift in Sources */,
 				C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */,
 				74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */,
 				74ADE73C2724F089002D11EB /* LogViewList.swift in Sources */,
 				740C2C822722479C004C95CF /* TitleView.swift in Sources */,
-				C6DF87DB27AF486200955947 /* codableJSON.swift in Sources */,
 				740C2C9227224BD1004C95CF /* LogEntry.swift in Sources */,
 				C6D3762F27851339003FD962 /* SettingsView.swift in Sources */,
 				740C2C802722479C004C95CF /* CaptainsLog.swift in Sources */,
 				C6DF87E027AF930400955947 /* NewLogView.swift in Sources */,
-				C6A69AD62781282200D6A55F /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,20 +431,6 @@
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		C6A69AD42781282200D6A55F /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C6A69AD52781282200D6A55F /* Model.xcdatamodel */,
-			);
-			currentVersion = C6A69AD52781282200D6A55F /* Model.xcdatamodel */;
-			name = Model.xcdatamodeld;
-			path = "Captains Log/Model.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 740C2C742722479C004C95CF /* Project object */;
 }

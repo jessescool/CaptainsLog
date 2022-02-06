@@ -31,20 +31,20 @@ struct ButtonView: View {
     
         HStack {
             VStack {
-                NavigationLink(destination: BlackHoleView()) {
+                NavigationLink(destination: Text("hei")) {
                     OldButton(image: "map")
                 }
-                NavigationLink(destination: BlackHoleView()) {
+                NavigationLink(destination: Text("hei")) {
                     OldButton(image: "tag")
                 }
             }
             .frame(maxHeight: 80)
             
-            NavigationLink(destination: BlackHoleView()) {
+            NavigationLink(destination: Text("hei")) {
                 OldButton(image: "list.star")
                     .font(.title)
             }
-            NavigationLink(destination: BlackHoleView()) {
+            NavigationLink(destination: Text("hei")) {
                 OldButton(image: "magnifyingglass")
                     .font(.title)
             }
