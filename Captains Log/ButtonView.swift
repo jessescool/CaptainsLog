@@ -48,7 +48,7 @@ struct ButtonView: View {
                 OldButton(image: "magnifyingglass")
                     .font(.title)
             }
-            NavigationLink(destination: BlackHoleView()) {
+            NavigationLink(destination: NewLogView()) {
                 OldButton(image: "plus")
                     .font(.title)
             }

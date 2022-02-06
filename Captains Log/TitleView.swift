@@ -17,7 +17,7 @@ struct TitleView: View {
                 NavBarView(showProfileView: $showProfileView, showSettingsView: $showSettingsView)
                     .padding(.bottom)
                 Spacer()
-                LogViewList(logs: LogEntry.tempData)
+                LogViewList(logs: logBook)
                 Spacer()
                 ButtonView()
             }
