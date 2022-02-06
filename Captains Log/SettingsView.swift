@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var showGreeting: Bool = false
     @Binding var showSettingsView: Bool
     var body: some View {
         VStack {
             Text("Settings").font(.title)
-            Toggle("Hello", isOn: $showGreeting)
             Button("Hide settingsView") {
                 showSettingsView = false
             }
@@ -21,9 +19,8 @@ struct SettingsView: View {
     }
 }
 
-//struct SettingsView_Previews: PreviewProvider {
-//    @Binding var showSettingsView: Bool
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(showSettingsView: .constant(true))
+    }
+}

@@ -8,14 +8,14 @@ import Foundation
 import SwiftUI
 
 struct TitleView: View {
-    
     @State var showSettingsView: Bool = false
+    @State var showProfileView: Bool = false
     
     var body: some View {
         NavigationView {
             VStack {
-                NavBarView()
-                    .padding()
+                NavBarView(showProfileView: $showProfileView, showSettingsView: $showSettingsView)
+                    .padding(.bottom)
                 Spacer()
                 LogViewList(logs: LogEntry.tempData)
                 Spacer()

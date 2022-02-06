@@ -1,6 +1,20 @@
 import SwiftUI
 
-struct BlueButton: View {
+
+struct AdvancedButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            Spacer()
+            configuration.label.foregroundColor(.black)
+            Spacer()
+        }
+        .padding()
+        .background(Color.blue.cornerRadius(8))
+        .scaleEffect(configuration.isPressed ? 0.95 : 1)
+    }
+}
+
+struct OldButton: View {
     let image: String
     
     var body: some View {
@@ -8,7 +22,7 @@ struct BlueButton: View {
             .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 80)
             .foregroundColor(.white)
             .background(Color(red: 0.498, green: 0.668, blue: 0.797))
-            .cornerRadius(20)
+            .cornerRadius(10)
     }
 }
 
@@ -17,25 +31,25 @@ struct ButtonView: View {
     
         HStack {
             VStack {
-                NavigationLink(destination: LogViewList(logs: LogEntry.tempData)) {
-                    BlueButton(image: "map")
+                NavigationLink(destination: BlackHoleView()) {
+                    OldButton(image: "map")
                 }
-                NavigationLink(destination: LogViewList(logs: LogEntry.tempData)) {
-                    BlueButton(image: "tag")
+                NavigationLink(destination: BlackHoleView()) {
+                    OldButton(image: "tag")
                 }
             }
             .frame(maxHeight: 80)
             
-            NavigationLink(destination: LogViewList(logs: LogEntry.tempData)) {
-                BlueButton(image: "list.star")
+            NavigationLink(destination: BlackHoleView()) {
+                OldButton(image: "list.star")
                     .font(.title)
             }
-            NavigationLink(destination: LogViewList(logs: LogEntry.tempData)) {
-                BlueButton(image: "magnifyingglass")
+            NavigationLink(destination: BlackHoleView()) {
+                OldButton(image: "magnifyingglass")
                     .font(.title)
             }
-            NavigationLink(destination: LogViewList(logs: LogEntry.tempData)) {
-                BlueButton(image: "plus")
+            NavigationLink(destination: BlackHoleView()) {
+                OldButton(image: "plus")
                     .font(.title)
             }
         }

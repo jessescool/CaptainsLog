@@ -39,6 +39,7 @@ struct SpeechRecognizer {
         -  Parameters:
             - speech: A binding to a string where the transcription is written.
      */
+    
     func record(to speech: Binding<String>) {
         relay(speech, message: "Requesting access")
         canAccess { authorized in

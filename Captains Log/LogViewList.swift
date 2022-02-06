@@ -9,6 +9,7 @@ struct LogViewList: View {
                     CardView(log: log)
                 }
             }
+            .listStyle(.plain)
             .navigationBarHidden(true)
         }
     }
@@ -19,3 +20,12 @@ struct LogView_Previews: PreviewProvider {
             LogViewList(logs: LogEntry.tempData)
     }
 }
+
+/**
+    .automatic
+    .grouped
+    .inset
+    .insetGrouped
+    .plain
+    .sidebar
+*/

@@ -8,21 +8,14 @@ struct CardView: View {
                 .font(.headline)
             Spacer()
             HStack {
-                Label("\(log.date)", systemImage: "person")
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(Text("Attendees"))
-                    .accessibilityValue(Text("moo"))
+                Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
                 Spacer()
-                Label("\(log.duration)", systemImage: "clock")
-                    .padding(.trailing, 20)
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(Text("Log length"))
-                    .accessibilityValue(Text("\(log.duration)"))
+                Label("\(log.duration, specifier: "%.2f")", systemImage: "clock")
             }
             .font(.caption)
         }
         .padding()
-        .foregroundColor(.blue)
+        .foregroundColor(Color(hue: 0.576, saturation: 0.672, brightness: 0.568))
     }
 }
 
