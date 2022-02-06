@@ -27,7 +27,7 @@ struct CardView: View {
 }
 
 struct CardView_Previews: PreviewProvider {
-    static var log = LogEntry.data[0]
+    static var log = LogEntry.tempData[0]
     static var previews: some View {
         CardView(log: log)
             .previewLayout(.fixed(width: 400, height: 60))

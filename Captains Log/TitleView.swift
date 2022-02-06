@@ -7,39 +7,25 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct TitleView: View {
+    
+    @State var showSettingsView: Bool = false
+    
     var body: some View {
-        VStack {
-            
-            HStack {
-
-                NavigationLink(destination: ProfileView()) {
-                    Text("\(Image(systemName: "person"))")
-                        .padding(.leading, 30.0)
-                        .foregroundColor(.blue)
-                }
-                
+        NavigationView {
+            VStack {
+                NavBarView()
+                    .padding()
                 Spacer()
-                
-                Text("Captain's Log").bold()
-                
+                LogViewList(logs: LogEntry.tempData)
                 Spacer()
-                
-                NavigationLink(destination: SettingsView()) {
-                    Text("\(Image(systemName: "gear"))")
-                        .padding(.trailing, 30.0)
-                        .foregroundColor(.blue)
-                }
-                
+                ButtonView()
             }
-            Spacer()
-            ButtonView()
+            .navigationBarHidden(true)
         }
     }
 }
 
-@available(iOS 15.0, *)
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
         TitleView()

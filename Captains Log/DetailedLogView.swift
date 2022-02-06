@@ -32,7 +32,7 @@ struct DetailedLogView: View {
 struct DetailedLogView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DetailedLogView(log: LogEntry.data[0])
+            DetailedLogView(log: LogEntry.tempData[0])
         }
     }
 }
