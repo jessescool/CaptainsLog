@@ -1,9 +1,6 @@
 import Foundation
 import RealmSwift
 
-let realm = try! Realm()
-let importedLogs = realm.objects(LogEntry.self)
-
 class LogEntry: Object, Identifiable {
     @Persisted(primaryKey: true) var id: UUID = UUID()
     @Persisted var name: String = ""
@@ -28,15 +25,13 @@ extension LogEntry {
     static var tempData: [LogEntry] {
         [
             LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
-            LogEntry(name: "Day 2", date: "Tuesday", duration: 23.60, location: 123.4, transcription: "And I didn't need no deputy"),
-            LogEntry(name: "Day 3", date: "Wednesday", duration: 26.60, location: 123.4, transcription: "I shot the sherrif..."),
-            LogEntry(name: "Day 3", date: "Thursday", duration: 26.60, location: 123.4, transcription: "I shot the sherrif..."),
-            LogEntry(name: "Day 3", date: "Friday", duration: 26.60, location: 123.4, transcription: "I shot the sherrif..."),
-            LogEntry(name: "Day 3", date: "Saturday", duration: 26.60, location: 123.4, transcription: "I shot the sherrif..."),
-            LogEntry(name: "Day 3", date: "Sunday", duration: 26.60, location: 123.4, transcription: "I shot the sherrif...")
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
+            LogEntry(name: "Day 1", date: "Monday", duration: 22.60, location: 123.4, transcription: "I shot the sherrif"),
         ]
     }
 }
-
-let logBook: [LogEntry] = importedLogs.shuffled()
-// why shuffled? IDK.

@@ -9,18 +9,12 @@ struct NewLogView: View {
             TextField("Name", text: $newLog.name)
             TextField("Date", text: $newLog.date)
             TextField("Transcription", text: $newLog.transcription)
-            Button("Add log to logbook", action: storeLog).buttonStyle(.bordered)
+            Button("Add log to logbook") {
+                pushToStorage(log: newLog)
+            }
+                .buttonStyle(.bordered)
         }
         .padding()
-    }
-    
-    func storeLog() {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(newLog)
-        }
-        print(realm.objects(LogEntry.self).count)
-        print("Realm is at: \(realm.configuration.fileURL!)")
     }
 }
 

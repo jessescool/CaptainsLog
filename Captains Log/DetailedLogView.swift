@@ -25,7 +25,6 @@ struct DetailedLogView: View {
                 Text(log.transcription)
             }
         }
-        .navigationTitle(log.name)
     }
 }
 

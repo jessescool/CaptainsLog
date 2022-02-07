@@ -21,8 +21,8 @@ struct TitleView: View {
                 Spacer()
                 ButtonView()
             }
-            .navigationBarHidden(true)
         }
+            .navigationBarHidden(true)
     }
 }
 
