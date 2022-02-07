@@ -4,18 +4,17 @@
 //
 //  Created by Jesse Cool on 2/5/22.
 //
-
 import SwiftUI
 
 struct NavBarView: View {
-    @Binding var showProfileView: Bool
-    @Binding var showSettingsView: Bool
+    @Binding var showingProfileView: Bool
+    @Binding var showingSettingsView: Bool
     
     var body: some View {
         HStack {
-            NavigationLink(destination: ProfileView(showProfileView: $showProfileView)) {
-                Text("\(Image(systemName: "person"))")
-                    .padding(.leading, 30.0)
+            NavigationLink(destination: ProfileView(showingProfileView: $showingProfileView)) {
+                Image(systemName: "person")
+                    .padding(.leading, 15)
                     .foregroundColor(.blue)
             }
             
@@ -25,9 +24,9 @@ struct NavBarView: View {
             
             Spacer()
             
-            NavigationLink(destination: SettingsView(showSettingsView: $showSettingsView)) {
-                Text("\(Image(systemName: "gear"))")
-                    .padding(.trailing, 30.0)
+            NavigationLink(destination: SettingsView(showingSettingsView: $showingSettingsView)) {
+                Image(systemName: "gear")
+                    .padding(.trailing, 15)
                     .foregroundColor(.blue)
             }
         }
@@ -36,7 +35,7 @@ struct NavBarView: View {
 
 struct NavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavBarView(showProfileView: .constant(false), showSettingsView: .constant(false))
+        NavBarView(showingProfileView: .constant(false), showingSettingsView: .constant(false))
             .previewLayout(.fixed(width: 400, height: 60))
     }
 }

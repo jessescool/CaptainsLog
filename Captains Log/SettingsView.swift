@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Binding var showSettingsView: Bool
+    @Binding var showingSettingsView: Bool
     var body: some View {
         VStack {
             Text("Settings").font(.title)
             Button("Hide settingsView") {
-                showSettingsView = false
+                showingSettingsView = false
             }
         }
     }
@@ -21,6 +21,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(showSettingsView: .constant(true))
+        SettingsView(showingSettingsView: .constant(true))
     }
 }

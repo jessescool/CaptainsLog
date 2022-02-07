@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Binding var showProfileView: Bool
+    @Binding var showingProfileView: Bool
     var body: some View {
         VStack {
             Text("Profile").font(.title)
             Button("Hide profileView") {
-                showProfileView = false
+                showingProfileView = false
             }
         }
     }
@@ -15,6 +15,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(showProfileView: .constant(false))
+        ProfileView(showingProfileView: .constant(false))
     }
 }

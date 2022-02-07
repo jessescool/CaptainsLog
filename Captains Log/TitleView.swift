@@ -8,21 +8,20 @@ import Foundation
 import SwiftUI
 
 struct TitleView: View {
-    @State var showSettingsView: Bool = false
-    @State var showProfileView: Bool = false
+    @State var showingNewLogView: Bool = false
+    
+    @State var showingSettingsView: Bool = false
+    @State var showingProfileView: Bool = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                NavBarView(showProfileView: $showProfileView, showSettingsView: $showSettingsView)
-                    .padding(.bottom)
-                Spacer()
-                LogViewList(logs: logBook)
-                Spacer()
-                ButtonView()
-            }
+        VStack {
+            NavBarView(showingProfileView: $showingProfileView, showingSettingsView: $showingSettingsView)
+                .padding()
+            Spacer()
+            LogViewList(logs: LogEntry.tempData)
+            Spacer()
+            ButtonView(showingNewLogView: $showingNewLogView)
         }
-            .navigationBarHidden(true)
     }
 }
 

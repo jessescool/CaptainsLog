@@ -1,66 +1,39 @@
 import SwiftUI
 
 
-struct AdvancedButton: ButtonStyle {
+struct RecordButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
             Spacer()
-            configuration.label.foregroundColor(.black)
+            configuration.label
+                .foregroundColor(.white)
+                .font(Font.custom("Times New Roman", size: 30))
             Spacer()
         }
         .padding()
-        .background(Color.blue.cornerRadius(8))
+        .background(Color.red.cornerRadius(8))
         .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
 
-struct OldButton: View {
-    let image: String
-    
-    var body: some View {
-        Image(systemName: image)
-            .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 80)
-            .foregroundColor(.white)
-            .background(Color(red: 0.498, green: 0.668, blue: 0.797))
-            .cornerRadius(10)
-    }
-}
-
 struct ButtonView: View {
-    var body: some View {
+    @Binding var showingNewLogView: Bool
     
-        HStack {
-            VStack {
-                NavigationLink(destination: Text("hei")) {
-                    OldButton(image: "map")
-                }
-                NavigationLink(destination: Text("hei")) {
-                    OldButton(image: "tag")
-                }
-            }
-            .frame(maxHeight: 80)
-            
-            NavigationLink(destination: Text("hei")) {
-                OldButton(image: "list.star")
-                    .font(.title)
-            }
-            NavigationLink(destination: Text("hei")) {
-                OldButton(image: "magnifyingglass")
-                    .font(.title)
-            }
-            NavigationLink(destination: NewLogView()) {
-                OldButton(image: "plus")
-                    .font(.title)
-            }
+    var body: some View {
+        Button() {
+            showingNewLogView = true
+        } label: {
+            Image(systemName: "mic.fill")
         }
-        .padding()
+            .buttonStyle(RecordButton())
+            .padding()
     }
 }
 
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView()
+        ButtonView(showingNewLogView: .constant(false))
             .previewLayout(.fixed(width: 400, height: 100))
     }
 }

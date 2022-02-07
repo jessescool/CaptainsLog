@@ -13,6 +13,7 @@ struct CaptainsLog: App {
         WindowGroup {
             NavigationView {
                 TitleView()
+                .navigationBarHidden(true)
             }
         }
     }
