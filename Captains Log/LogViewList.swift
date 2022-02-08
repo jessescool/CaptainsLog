@@ -9,7 +9,7 @@ struct LogViewList: View {
                     CardView(log: log)
                 }
             }
-            .listStyle(.plain)
+            .listStyle(.inset)
             .navigationBarHidden(true)
         }
     }

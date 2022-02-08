@@ -81,7 +81,10 @@
 				740C2C7F2722479C004C95CF /* CaptainsLog.swift */,
 				740C2C812722479C004C95CF /* TitleView.swift */,
 				C6B7D890274DBEB200C767B8 /* ButtonView.swift */,
-				C6DF87DE27AF8C4C00955947 /* Navigation Bar */,
+				C6DF87D227AF43D400955947 /* NavBarView.swift */,
+				C6D3762E27851339003FD962 /* SettingsView.swift */,
+				C6A69ADE2781325A00D6A55F /* ProfileView.swift */,
+				74ADE73B2724F089002D11EB /* LogViewList.swift */,
 				C6A69AE0278132FE00D6A55F /* Subordinate Views */,
 				740C2C9027224BAE004C95CF /* Model */,
 				740C2C832722479F004C95CF /* Assets.xcassets */,
@@ -113,21 +116,10 @@
 			isa = PBXGroup;
 			children = (
 				74ADE7392724ED37002D11EB /* CardView.swift */,
-				74ADE73B2724F089002D11EB /* LogViewList.swift */,
 				74ADE73F2724F997002D11EB /* DetailedLogView.swift */,
 				C6DF87DF27AF930400955947 /* NewLogView.swift */,
 			);
 			name = "Subordinate Views";
-			sourceTree = "<group>";
-		};
-		C6DF87DE27AF8C4C00955947 /* Navigation Bar */ = {
-			isa = PBXGroup;
-			children = (
-				C6DF87D227AF43D400955947 /* NavBarView.swift */,
-				C6D3762E27851339003FD962 /* SettingsView.swift */,
-				C6A69ADE2781325A00D6A55F /* ProfileView.swift */,
-			);
-			name = "Navigation Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

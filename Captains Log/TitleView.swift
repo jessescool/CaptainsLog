@@ -21,6 +21,9 @@ struct TitleView: View {
             LogViewList(logs: LogEntry.tempData)
             Spacer()
             ButtonView(showingNewLogView: $showingNewLogView)
+                .sheet(isPresented: $showingNewLogView /* onDismiss: reset log sitaution */ ) {
+                    NewLogView()
+                }
         }
     }
 }
