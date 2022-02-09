@@ -13,7 +13,6 @@ struct CardView: View {
                 Spacer()
                 Label("\(log.duration, specifier: "%.2f")", systemImage: "clock")
             }
-            .font(.caption)
         }
         .padding()
         .foregroundColor(Color(hue: 0.576, saturation: 0.672, brightness: 0.568))
@@ -31,7 +30,7 @@ struct LogbookView: View {
             }
         }
         .listStyle(.inset)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a log, phrase, person...")
     }
 }
 
