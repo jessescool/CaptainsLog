@@ -20,19 +20,16 @@ struct CardView: View {
     }
 }
 
-struct LogViewList: View {
+struct LogbookView: View {
     let logs: [LogEntry]
     var body: some View {
-        NavigationView {
-            List(logs) { log in
-                NavigationLink(destination: DetailedLogView(log: log)) {
-                    CardView(log: log)
-                }
+        List(logs) { log in
+            NavigationLink(destination: DetailedLogView(log: log)) {
+                CardView(log: log)
             }
-            .listStyle(.inset)
-            .navigationBarHidden(true)
         }
-    }
+        .listStyle(.inset)
+}
 }
 
 struct CardView_Previews: PreviewProvider {
@@ -43,9 +40,13 @@ struct CardView_Previews: PreviewProvider {
     }
 }
 
-struct LogViewList_Previews: PreviewProvider {
+struct LogbookView_Previews: PreviewProvider {
     static var previews: some View {
-            LogViewList(logs: LogEntry.tempData)
+        NavigationView {
+            LogbookView(logs: LogEntry.tempData)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Logbook")
+        }
     }
 }
 

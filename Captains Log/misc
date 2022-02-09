@@ -1,0 +1,20 @@
+### OG TITLE BAR
+
+HStack {
+    NavigationLink(destination: ProfileView(showingProfileView: $showingProfileView)) {
+        Image(systemName: "person")
+            .padding(.leading, 15)
+            .foregroundColor(.blue)
+    }
+    
+    Spacer()
+    Text("Recording").font(.title).bold()
+    Spacer()
+    
+    NavigationLink(destination: SettingsView(showingSettingsView: $showingSettingsView)) {
+        Image(systemName: "gear")
+            .padding(.trailing, 15)
+            .foregroundColor(.blue)
+    }
+}
+.padding()

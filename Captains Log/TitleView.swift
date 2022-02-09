@@ -18,58 +18,37 @@ struct RecordButton: ButtonStyle {
 
 struct TitleView: View {
     @State var showingNewLogView: Bool = false
-    @State var showingSettingsView: Bool = false
-    @State var showingProfileView: Bool = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                
-            // ----------
-                
-                HStack {
-                    NavigationLink(destination: ProfileView(showingProfileView: $showingProfileView)) {
-                        Image(systemName: "person")
-                            .padding(.leading, 15)
-                            .foregroundColor(.blue)
-                    }
-                    
-                    Spacer()
-                    Text("Recording").font(.title).bold()
-                    Spacer()
-                    
-                    NavigationLink(destination: SettingsView(showingSettingsView: $showingSettingsView)) {
-                        Image(systemName: "gear")
-                            .padding(.trailing, 15)
-                            .foregroundColor(.blue)
-                    }
-                }
-                .padding()
-                
-            // ----------
-                
-                Spacer()
-                
-            // ----------
-                
-                Button() {
-                    showingNewLogView = true
-                } label: {
-                    Image(systemName: "mic.fill")
-                }
-                    .buttonStyle(RecordButton())
-                    .padding()
-                    .sheet(isPresented: $showingNewLogView /* onDismiss: reset log sitaution */ ) {
-                        RecordingView()
-                    }
+        VStack {
+            
+    // ----------
+        
+        Spacer()
+        
+    // ----------
+        
+        Button() {
+            showingNewLogView = true
+        } label: {
+            Image(systemName: "mic.fill")
+        }
+            .buttonStyle(RecordButton())
+            .padding()
+            .sheet(isPresented: $showingNewLogView /* onDismiss: reset log sitaution */ ) {
+                RecordingView()
             }
-            .navigationBarHidden(true)
         }
     }
 }
 
+
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleView()
+        NavigationView {
+            TitleView()
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Recording")
+        }
     }
 }
