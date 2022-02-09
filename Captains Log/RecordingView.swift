@@ -6,6 +6,8 @@ struct RecordingView: View {
     
     var body: some View {
         VStack {
+            Text("New Log").font(.title).bold().padding(.top)
+            Spacer()
             TextField("Name", text: $newLog.name)
             TextField("Date", text: $newLog.date)
             TextField("Transcription", text: $newLog.transcription)

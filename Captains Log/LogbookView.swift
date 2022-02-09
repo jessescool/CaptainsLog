@@ -22,6 +22,8 @@ struct CardView: View {
 
 struct LogbookView: View {
     let logs: [LogEntry]
+    @State private var searchText = ""
+    
     var body: some View {
         List(logs) { log in
             NavigationLink(destination: DetailedLogView(log: log)) {
@@ -29,7 +31,8 @@ struct LogbookView: View {
             }
         }
         .listStyle(.inset)
-}
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+    }
 }
 
 struct CardView_Previews: PreviewProvider {
