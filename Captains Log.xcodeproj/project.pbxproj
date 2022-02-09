@@ -12,7 +12,6 @@
 		740C2C842722479F004C95CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740C2C832722479F004C95CF /* Assets.xcassets */; };
 		740C2C872722479F004C95CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740C2C862722479F004C95CF /* Preview Assets.xcassets */; };
 		740C2C9227224BD1004C95CF /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740C2C9127224BD1004C95CF /* LogEntry.swift */; };
-		74ADE73A2724ED37002D11EB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE7392724ED37002D11EB /* CardView.swift */; };
 		74ADE73C2724F089002D11EB /* LogViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73B2724F089002D11EB /* LogViewList.swift */; };
 		74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73F2724F997002D11EB /* DetailedLogView.swift */; };
 		C67FE3BE27B02DF0008ADD94 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BD27B02DF0008ADD94 /* Realm */; };
@@ -20,10 +19,8 @@
 		C67FE3C427B0C3E3008ADD94 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FE3C327B0C3E3008ADD94 /* Storage.swift */; };
 		C6A69AD827812BDA00D6A55F /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A69AD727812BDA00D6A55F /* Audio.swift */; };
 		C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A69ADE2781325A00D6A55F /* ProfileView.swift */; };
-		C6B7D891274DBEB200C767B8 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B7D890274DBEB200C767B8 /* ButtonView.swift */; };
 		C6D3762F27851339003FD962 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3762E27851339003FD962 /* SettingsView.swift */; };
-		C6DF87D327AF43D400955947 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DF87D227AF43D400955947 /* NavBarView.swift */; };
-		C6DF87E027AF930400955947 /* NewLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DF87DF27AF930400955947 /* NewLogView.swift */; };
+		C6DF87E027AF930400955947 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DF87DF27AF930400955947 /* RecordingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,16 +31,13 @@
 		740C2C862722479F004C95CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		740C2C882722479F004C95CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		740C2C9127224BD1004C95CF /* LogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
-		74ADE7392724ED37002D11EB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		74ADE73B2724F089002D11EB /* LogViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewList.swift; sourceTree = "<group>"; };
 		74ADE73F2724F997002D11EB /* DetailedLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedLogView.swift; sourceTree = "<group>"; };
 		C67FE3C327B0C3E3008ADD94 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C6A69AD727812BDA00D6A55F /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		C6A69ADE2781325A00D6A55F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		C6B7D890274DBEB200C767B8 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		C6D3762E27851339003FD962 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		C6DF87D227AF43D400955947 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
-		C6DF87DF27AF930400955947 /* NewLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLogView.swift; sourceTree = "<group>"; };
+		C6DF87DF27AF930400955947 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +73,9 @@
 			isa = PBXGroup;
 			children = (
 				740C2C7F2722479C004C95CF /* CaptainsLog.swift */,
-				740C2C812722479C004C95CF /* TitleView.swift */,
-				C6B7D890274DBEB200C767B8 /* ButtonView.swift */,
-				C6DF87D227AF43D400955947 /* NavBarView.swift */,
-				C6D3762E27851339003FD962 /* SettingsView.swift */,
-				C6A69ADE2781325A00D6A55F /* ProfileView.swift */,
-				74ADE73B2724F089002D11EB /* LogViewList.swift */,
-				C6A69AE0278132FE00D6A55F /* Subordinate Views */,
+				C67FE3C527B4421F008ADD94 /* Recording Screen */,
+				C67FE3C727B4424D008ADD94 /* Logbook Screen */,
+				C67FE3C827B4428F008ADD94 /* Options */,
 				740C2C9027224BAE004C95CF /* Model */,
 				740C2C832722479F004C95CF /* Assets.xcassets */,
 				740C2C882722479F004C95CF /* Info.plist */,
@@ -112,14 +102,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C6A69AE0278132FE00D6A55F /* Subordinate Views */ = {
+		C67FE3C527B4421F008ADD94 /* Recording Screen */ = {
 			isa = PBXGroup;
 			children = (
-				74ADE7392724ED37002D11EB /* CardView.swift */,
-				74ADE73F2724F997002D11EB /* DetailedLogView.swift */,
-				C6DF87DF27AF930400955947 /* NewLogView.swift */,
+				740C2C812722479C004C95CF /* TitleView.swift */,
+				C6DF87DF27AF930400955947 /* RecordingView.swift */,
 			);
-			name = "Subordinate Views";
+			name = "Recording Screen";
+			sourceTree = "<group>";
+		};
+		C67FE3C727B4424D008ADD94 /* Logbook Screen */ = {
+			isa = PBXGroup;
+			children = (
+				74ADE73B2724F089002D11EB /* LogViewList.swift */,
+				74ADE73F2724F997002D11EB /* DetailedLogView.swift */,
+			);
+			name = "Logbook Screen";
+			sourceTree = "<group>";
+		};
+		C67FE3C827B4428F008ADD94 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				C6A69ADE2781325A00D6A55F /* ProfileView.swift */,
+				C6D3762E27851339003FD962 /* SettingsView.swift */,
+			);
+			name = Options;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,10 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6DF87D327AF43D400955947 /* NavBarView.swift in Sources */,
 				C6A69AD827812BDA00D6A55F /* Audio.swift in Sources */,
-				74ADE73A2724ED37002D11EB /* CardView.swift in Sources */,
-				C6B7D891274DBEB200C767B8 /* ButtonView.swift in Sources */,
 				C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */,
 				74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */,
 				74ADE73C2724F089002D11EB /* LogViewList.swift in Sources */,
@@ -209,7 +213,7 @@
 				740C2C9227224BD1004C95CF /* LogEntry.swift in Sources */,
 				C6D3762F27851339003FD962 /* SettingsView.swift in Sources */,
 				740C2C802722479C004C95CF /* CaptainsLog.swift in Sources */,
-				C6DF87E027AF930400955947 /* NewLogView.swift in Sources */,
+				C6DF87E027AF930400955947 /* RecordingView.swift in Sources */,
 				C67FE3C427B0C3E3008ADD94 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

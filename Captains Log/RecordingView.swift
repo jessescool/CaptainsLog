@@ -1,7 +1,7 @@
 import SwiftUI
 import RealmSwift
 
-struct NewLogView: View {
+struct RecordingView: View {
     @ObservedRealmObject var newLog = LogEntry()
     
     var body: some View {
@@ -18,8 +18,8 @@ struct NewLogView: View {
     }
 }
 
-struct NewLogView_Previews: PreviewProvider {
+struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
-        NewLogView()
+        RecordingView()
     }
 }

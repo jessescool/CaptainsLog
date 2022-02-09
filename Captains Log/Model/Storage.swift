@@ -1,10 +1,3 @@
-//
-//  Storage.swift
-//  Captains Log
-//
-//  Created by Jesse Cool on 2/6/22.
-//
-
 import Foundation
 import RealmSwift
 

@@ -1,10 +1,3 @@
-//
-//  SettingsView.swift
-//  Captains Log
-//
-//  Created by Jesse Cool on 1/4/22.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
