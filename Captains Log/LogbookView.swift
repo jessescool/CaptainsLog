@@ -29,7 +29,7 @@ struct LogbookView: View {
             }
         }
         .listStyle(.inset)
-        .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: "Search for a log, phrase, person...")
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a log, phrase, person...")
     }
 }
 

@@ -28,7 +28,7 @@ struct WrapperView: View {
                             }
                         }
                     }
-                LogbookView(logs: LogEntry.tempData)
+                LogbookView(logs: logBook)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationTitle("Logbook")
             }

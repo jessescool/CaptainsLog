@@ -5,7 +5,7 @@ class LogEntry: Object, Identifiable {
     @Persisted(primaryKey: true) var id: UUID = UUID()
     @Persisted var name: String = ""
     @Persisted var date: Date = Date.now
-    @Persisted var duration: Double = 0.0
+    @Persisted var duration: TimeInterval = 0.0
     @Persisted var location: Double = 0.0
     @Persisted var transcription: String = ""
     
