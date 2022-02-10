@@ -1,4 +1,5 @@
 import SwiftUI
+import RealmSwift
 
 struct CardView: View {
     let log: LogEntry
@@ -19,7 +20,7 @@ struct CardView: View {
 }
 
 struct LogbookView: View {
-    let logs: [LogEntry]
+    let logs: Results<LogEntry>
     @State private var searchText = ""
     
     var body: some View {
@@ -44,7 +45,7 @@ struct CardView_Previews: PreviewProvider {
 struct LogbookView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogbookView(logs: LogEntry.tempData)
+            LogbookView(logs: logBook)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Logbook")
         }
