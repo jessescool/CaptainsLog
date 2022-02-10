@@ -11,7 +11,7 @@ struct RecordButton: ButtonStyle {
             Spacer()
         }
         .padding()
-        .background(Color.red.cornerRadius(8))
+        .background(Color.orange.cornerRadius(8))
         .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
@@ -23,8 +23,6 @@ struct TitleView: View {
     
     var body: some View {
         VStack {
-            
-            Text("Recording").font(.title).bold()
             Spacer()
 
     // ----------
@@ -67,6 +65,7 @@ struct TitleView_Previews: PreviewProvider {
         NavigationView {
             TitleView()
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Record")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         NavigationLink(destination: ProfileView()) {

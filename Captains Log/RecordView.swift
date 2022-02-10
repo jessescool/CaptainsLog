@@ -11,11 +11,16 @@ struct RecordView: View {
             Spacer()
             TextField("Name", text: $newLog.name)
             TextField("Transcription", text: $newLog.transcription)
+            
             Button("Add log to logbook") {
                 pushToStorage(log: newLog)
                 showingRecordView = false
             }
                 .buttonStyle(.bordered)
+            
+            Button("Cancel", role: .destructive) {
+                showingRecordView = false
+            }
             Spacer()
         }
         .padding()
