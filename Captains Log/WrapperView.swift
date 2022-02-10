@@ -13,7 +13,6 @@ struct WrapperView: View {
             TabView {
                 TitleView()
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle("Recording")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             NavigationLink(destination: ProfileView()) {

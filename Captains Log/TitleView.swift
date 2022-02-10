@@ -17,27 +17,46 @@ struct RecordButton: ButtonStyle {
 }
 
 struct TitleView: View {
-    @State var showingNewLogView: Bool = false
+    private var date = Date.now.formatted(date: .complete, time: .omitted)
+    private var time = Date.now.formatted(date: .omitted, time: .shortened)
+    @State var showingRecordView: Bool = false
     
     var body: some View {
         VStack {
             
+            Text("Recording").font(.title).bold()
+            Spacer()
+
     // ----------
-        
-        Spacer()
-        
-    // ----------
-        
-        Button() {
-            showingNewLogView = true
-        } label: {
-            Image(systemName: "mic.fill")
-        }
-            .buttonStyle(RecordButton())
-            .padding()
-            .sheet(isPresented: $showingNewLogView /* onDismiss: reset log sitaution */ ) {
-                RecordingView()
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(systemName: "calendar")
+                    Text("\(date)")
+                        .font(.title2)
+                        .bold()
+                }
+                HStack {
+                    Image(systemName: "clock")
+                    Text("\(time)")
+                        .font(.title2)
+                        .bold()
+                }
             }
+                
+            Spacer()
+        
+    // ----------
+        
+            Button() {
+                showingRecordView = true
+            } label: {
+                Image(systemName: "mic.fill")
+            }
+                .buttonStyle(RecordButton())
+                .padding()
+                .sheet(isPresented: $showingRecordView /* onDismiss: reset log sitaution */ ) {
+                    RecordView(showingRecordView: $showingRecordView)
+                }
         }
     }
 }
@@ -48,7 +67,20 @@ struct TitleView_Previews: PreviewProvider {
         NavigationView {
             TitleView()
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Recording")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: ProfileView()) {
+                            Image(systemName: "person")
+                                .padding(.leading, 15)
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SettingsView()) {
+                            Image(systemName: "gear")
+                                .padding(.trailing, 15)
+                        }
+                    }
+                }
         }
     }
 }

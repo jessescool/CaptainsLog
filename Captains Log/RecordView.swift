@@ -1,7 +1,8 @@
 import SwiftUI
 import RealmSwift
 
-struct RecordingView: View {
+struct RecordView: View {
+    @Binding var showingRecordView: Bool
     @ObservedRealmObject var newLog = LogEntry()
     
     var body: some View {
@@ -9,12 +10,13 @@ struct RecordingView: View {
             Text("New Log").font(.title).bold().padding(.top)
             Spacer()
             TextField("Name", text: $newLog.name)
-            TextField("Date", text: $newLog.date)
             TextField("Transcription", text: $newLog.transcription)
             Button("Add log to logbook") {
                 pushToStorage(log: newLog)
+                showingRecordView = false
             }
                 .buttonStyle(.bordered)
+            Spacer()
         }
         .padding()
     }
@@ -22,6 +24,6 @@ struct RecordingView: View {
 
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordingView()
+        RecordView(showingRecordView: .constant(true))
     }
 }

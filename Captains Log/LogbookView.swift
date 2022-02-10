@@ -8,10 +8,9 @@ struct CardView: View {
                 .font(.headline)
             Spacer()
             HStack {
-//                Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
-                Label("\(log.date)", systemImage: "calendar")
+                Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
                 Spacer()
-                Label("\(log.duration, specifier: "%.2f")", systemImage: "clock")
+                Label("\(log.duration, specifier: "%.2f")", systemImage: "hourglass.tophalf.filled")
             }
         }
         .padding()
@@ -30,7 +29,7 @@ struct LogbookView: View {
             }
         }
         .listStyle(.inset)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a log, phrase, person...")
+        .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: "Search for a log, phrase, person...")
     }
 }
 
