@@ -13,4 +13,5 @@ func pushToStorage(log: LogEntry) {
     print("Pushed \(log.name) to storage")
     print(realm.objects(LogEntry.self).count)
     print("Realm URL: \(realm.configuration.fileURL!)")
+    print(logBook)
 }

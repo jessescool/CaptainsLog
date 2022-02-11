@@ -10,7 +10,7 @@ struct LogbookView: View {
         VStack {
             Text("Logbook").font(.title).bold().padding()
             
-            List(logs) { log in
+            List(sortedLogs) { log in
                 NavigationLink(destination: DetailedLogView(log: log)) {
                     CardView(log: log)
                 }
@@ -19,6 +19,20 @@ struct LogbookView: View {
             
             SearchBar(text: $searchText)
                 .padding()
+        }
+    }
+    
+    var sortedLogs: Results<LogEntry> {
+        if searchText.isEmpty {
+            return logs
+        } else {
+            // obviously not final
+            lazy var matches: Results<LogEntry> = {
+                realm.objects(LogEntry.self).where {
+                    $0.name == searchText
+                }
+            }()
+            return matches
         }
     }
 }

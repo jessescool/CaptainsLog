@@ -1,6 +1,7 @@
 import Foundation
+import RealmSwift
 
-//func logSearch(keyword: String) -> LogEntry {
+//func searchLogs(for keyword: String) -> LogEntry {
 //    
 //}
 
