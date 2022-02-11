@@ -1,6 +1,40 @@
 import SwiftUI
 import RealmSwift
 
+
+struct LogbookView: View {
+    let logs: Results<LogEntry>
+    @State private var searchText = ""
+    
+    var body: some View {
+        VStack {
+            Text("Logbook").font(.title).bold().padding()
+            List(logs) { log in
+                NavigationLink(destination: DetailedLogView(log: log)) {
+                    CardView(log: log)
+                }
+            }
+            .listStyle(.inset)
+        }
+    }
+}
+
+
+struct LogbookView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            LogbookView(logs: logBook)
+                .navigationBarHidden(true)
+        }
+    }
+}
+
+
+
+
+// CardView
+
+
 struct CardView: View {
     let log: LogEntry
     var body: some View {
@@ -19,21 +53,6 @@ struct CardView: View {
     }
 }
 
-struct LogbookView: View {
-    let logs: Results<LogEntry>
-    @State private var searchText = ""
-    
-    var body: some View {
-        List(logs) { log in
-            NavigationLink(destination: DetailedLogView(log: log)) {
-                CardView(log: log)
-            }
-        }
-        .listStyle(.inset)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a log, phrase, person...")
-    }
-}
-
 struct CardView_Previews: PreviewProvider {
     static var log = LogEntry.tempData[0]
     static var previews: some View {
@@ -42,15 +61,6 @@ struct CardView_Previews: PreviewProvider {
     }
 }
 
-struct LogbookView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            LogbookView(logs: logBook)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Logbook")
-        }
-    }
-}
 
 /**
     .automatic

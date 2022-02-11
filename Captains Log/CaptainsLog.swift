@@ -1,10 +1,17 @@
 import SwiftUI
 
 @main
-struct CaptainsLog: App {    
+struct CaptainsLog: App {
     var body: some Scene {
         WindowGroup {
-            WrapperView()
+            NavigationView {
+                TabView {
+                    TitleView()
+                    LogbookView(logs: logBook)
+                }
+                .navigationBarHidden(true)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+            }
         }
     }
 }

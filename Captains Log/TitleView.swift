@@ -23,6 +23,26 @@ struct TitleView: View {
     
     var body: some View {
         VStack {
+            
+            HStack {
+                NavigationLink(destination: ProfileView()) {
+                    Image(systemName: "person")
+                        .padding(.leading, 25)
+                        .foregroundColor(.blue)
+                }
+                
+                Spacer()
+                Text("Recording").font(.title).bold()
+                Spacer()
+                
+                NavigationLink(destination: SettingsView()) {
+                    Image(systemName: "gear")
+                        .padding(.trailing, 25)
+                        .foregroundColor(.blue)
+                }
+            }
+            .padding()
+            
             Spacer()
 
     // ----------
@@ -64,22 +84,7 @@ struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             TitleView()
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Record")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: ProfileView()) {
-                            Image(systemName: "person")
-                                .padding(.leading, 15)
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: SettingsView()) {
-                            Image(systemName: "gear")
-                                .padding(.trailing, 15)
-                        }
-                    }
-                }
+                .navigationBarHidden(true)
         }
     }
 }
