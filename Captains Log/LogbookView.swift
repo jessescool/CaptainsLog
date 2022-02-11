@@ -9,12 +9,16 @@ struct LogbookView: View {
     var body: some View {
         VStack {
             Text("Logbook").font(.title).bold().padding()
+            
             List(logs) { log in
                 NavigationLink(destination: DetailedLogView(log: log)) {
                     CardView(log: log)
                 }
             }
             .listStyle(.inset)
+            
+            SearchBar(text: $searchText)
+                .padding()
         }
     }
 }
