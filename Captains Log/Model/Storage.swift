@@ -16,10 +16,11 @@ func pushToStorage(log: LogEntry) {
     print(logBook)
 }
 
-
-func deleteLog(with primaryKey: UUID) {
+func deleteLog(primaryKey: UUID) {
     let realm = try! Realm()
-    try! realm.write {
-        realm.delete(realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey)!)
+    if let objectToDelete = realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey) {
+        try! realm.write {
+            realm.delete(objectToDelete)
+        }
     }
 }

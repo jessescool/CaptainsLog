@@ -3,8 +3,22 @@ import RealmSwift
 
 
 struct LogbookView: View {
-    let logs: Results<LogEntry>
+    var logs: Results<LogEntry>
     @State private var searchText = ""
+    
+    var sortedLogs: Results<LogEntry> {
+        if searchText.isEmpty {
+            return logs
+        } else {
+            // obviously not final
+            lazy var matches: Results<LogEntry> = {
+                realm.objects(LogEntry.self).where {
+                    $0.name == searchText
+                }
+            }()
+            return matches
+        }
+    }
     
     var body: some View {
         VStack {
@@ -30,23 +44,12 @@ struct LogbookView: View {
                 }
             }
             .listStyle(.inset)
+            .onAppear() {
+                print("\(logs.count) logs exist")
+            }
             
             SearchBar(text: $searchText)
                 .padding()
-        }
-    }
-    
-    var sortedLogs: Results<LogEntry> {
-        if searchText.isEmpty {
-            return logs
-        } else {
-            // obviously not final
-            lazy var matches: Results<LogEntry> = {
-                realm.objects(LogEntry.self).where {
-                    $0.name == searchText
-                }
-            }()
-            return matches
         }
     }
 }

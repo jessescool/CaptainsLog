@@ -27,14 +27,20 @@ struct DetailedLogView: View {
                 }
                 Section(header: Text("Transcription")) {
                     Text(log.transcription)
+                    Text(log.id.uuidString)
                 }
                 
             }
             .listStyle(.inset)
             
-            Button("Delete log", role: .destructive) {
+            Button("Edit...") {
+                // edit here...
+            }
+            .buttonStyle(.bordered)
+            
+            Button("Delete", role: .destructive) {
                 presentationMode.wrappedValue.dismiss()
-                deleteLog(with: log.id)
+                deleteLog(primaryKey: log.id)
             }
             .buttonStyle(.bordered)
             
