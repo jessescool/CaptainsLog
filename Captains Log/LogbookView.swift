@@ -8,7 +8,21 @@ struct LogbookView: View {
     
     var body: some View {
         VStack {
-            Text("Logbook").font(.title).bold().padding()
+            HStack {
+                Image(systemName: "pencil")
+                    .padding(.leading, 25)
+                    .foregroundColor(.blue)
+                
+                Spacer()
+                Text("Logbook").font(.title).bold()
+                Spacer()
+                
+                Image(systemName: "line.3.horizontal.decrease.circle")
+                    .padding(.trailing, 25)
+                    .foregroundColor(.blue)
+            }
+            .padding()
+
             
             List(sortedLogs) { log in
                 NavigationLink(destination: DetailedLogView(log: log)) {
@@ -38,20 +52,7 @@ struct LogbookView: View {
 }
 
 
-struct LogbookView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            LogbookView(logs: logBook)
-                .navigationBarHidden(true)
-        }
-    }
-}
-
-
-
-
 // CardView
-
 
 struct CardView: View {
     let log: LogEntry
@@ -76,6 +77,15 @@ struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         CardView(log: log)
             .previewLayout(.fixed(width: 400, height: 60))
+    }
+}
+
+struct LogbookView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            LogbookView(logs: logBook)
+                .navigationBarHidden(true)
+        }
     }
 }
 

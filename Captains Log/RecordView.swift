@@ -9,10 +9,14 @@ struct RecordView: View {
         VStack {
             Text("New Log").font(.title).bold().padding(.top)
             Spacer()
-            TextField("Name", text: $newLog.name)
-            TextField("Transcription", text: $newLog.transcription)
+            VStack {
+                Text(newLog.date.formatted(date: .numeric, time: .shortened))
+                Text("\(newLog.location)")
+                TextField("Name", text: $newLog.name)
+                TextField("Transcription", text: $newLog.transcription)
+            }
             
-            Button("Add log to logbook") {
+            Button("Confirm") {
                 pushToStorage(log: newLog)
                 showingRecordView = false
             }

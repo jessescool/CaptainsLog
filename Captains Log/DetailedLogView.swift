@@ -1,31 +1,44 @@
 import SwiftUI
+import RealmSwift
 
 struct DetailedLogView: View {
-    let log: LogEntry
+    @ObservedRealmObject var log: LogEntry
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        List {
-            Section(header: Text("Specs")) {
-                HStack {
-                    Label("Date", systemImage: "star")
-                    Spacer()
-                    Text("\(log.date)")
+        VStack {
+            List {
+                Section(header: Text("Specs")) {
+                    HStack {
+                        Label("Date", systemImage: "star")
+                        Spacer()
+                        Text("\(log.date.formatted(date: .complete, time: .shortened))")
+                    }
+                    HStack {
+                        Label("Duration", systemImage: "clock")
+                        Spacer()
+                        Text("\(log.duration)")
+                    }
+                    HStack {
+                        Label("Location", systemImage: "pin")
+                        Spacer()
+                        Text("\(log.location)")
+                    }
                 }
-                HStack {
-                    Label("Duration", systemImage: "clock")
-                    Spacer()
-                    Text("\(log.duration)")
+                Section(header: Text("Transcription")) {
+                    Text(log.transcription)
                 }
-                HStack {
-                    Label("Location", systemImage: "clock")
-                    Spacer()
-                    Text("\(log.location)")
-                }
+                
             }
-            Section(header: Text("Transcription")) {
-                Text(log.transcription)
+            .listStyle(.inset)
+            
+            Button("Delete log", role: .destructive) {
+                presentationMode.wrappedValue.dismiss()
+                deleteLog(with: log.id)
             }
+            .buttonStyle(.bordered)
+            
         }
-        .listStyle(.inset)
         .navigationTitle(log.name)
     }
 }

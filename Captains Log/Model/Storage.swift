@@ -15,3 +15,11 @@ func pushToStorage(log: LogEntry) {
     print("Realm URL: \(realm.configuration.fileURL!)")
     print(logBook)
 }
+
+
+func deleteLog(with primaryKey: UUID) {
+    let realm = try! Realm()
+    try! realm.write {
+        realm.delete(realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey)!)
+    }
+}
