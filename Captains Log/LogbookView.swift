@@ -45,7 +45,7 @@ struct LogbookView: View {
             }
             .listStyle(.inset)
             .onAppear() {
-                print("\(logs.count) logs exist")
+                print("\(logs.count) poop")
             }
             
             SearchBar(text: $searchText)

@@ -2,8 +2,8 @@ import SwiftUI
 import RealmSwift
 
 struct DetailedLogView: View {
-    @ObservedRealmObject var log: LogEntry
     @Environment(\.presentationMode) var presentationMode
+    var log: LogEntry
     
     var body: some View {
         VStack {
@@ -27,7 +27,6 @@ struct DetailedLogView: View {
                 }
                 Section(header: Text("Transcription")) {
                     Text(log.transcription)
-                    Text(log.id.uuidString)
                 }
                 
             }
