@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>"Audio is recorded to create log entries and is stored securely on your device."</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>"Your phone will securely transcribe a copy of each log you record, making it searchable and indexable. This data will not leave your device or be shared with anyone."</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
