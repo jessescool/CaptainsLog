@@ -3,7 +3,7 @@ import RealmSwift
 
 struct DetailedLogView: View {
     @Environment(\.dismiss) var dismiss
-    var log: LogEntry
+    @ObservedRealmObject var log: LogEntry // not sure if this is final
     
     var body: some View {
         VStack {
