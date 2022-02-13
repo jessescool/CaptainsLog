@@ -14,6 +14,7 @@
 		740C2C9227224BD1004C95CF /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740C2C9127224BD1004C95CF /* LogEntry.swift */; };
 		74ADE73C2724F089002D11EB /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73B2724F089002D11EB /* LogbookView.swift */; };
 		74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73F2724F997002D11EB /* DetailedLogView.swift */; };
+		C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628523C27B9A9D0009CFBF8 /* CardView.swift */; };
 		C67FE3BE27B02DF0008ADD94 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BD27B02DF0008ADD94 /* Realm */; };
 		C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BF27B02DF0008ADD94 /* RealmSwift */; };
 		C67FE3C427B0C3E3008ADD94 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FE3C327B0C3E3008ADD94 /* Storage.swift */; };
@@ -37,6 +38,7 @@
 		740C2C9127224BD1004C95CF /* LogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
 		74ADE73B2724F089002D11EB /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
 		74ADE73F2724F997002D11EB /* DetailedLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedLogView.swift; sourceTree = "<group>"; };
+		C628523C27B9A9D0009CFBF8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C67FE3C327B0C3E3008ADD94 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C67FE3CD27B466A4008ADD94 /* misc */ = {isa = PBXFileReference; lastKnownFileType = text; path = misc; sourceTree = "<group>"; };
 		C67FE3D127B4A240008ADD94 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				74ADE73B2724F089002D11EB /* LogbookView.swift */,
+				C628523C27B9A9D0009CFBF8 /* CardView.swift */,
 				C67FE3D527B706D3008ADD94 /* SearchBar.swift */,
 				74ADE73F2724F997002D11EB /* DetailedLogView.swift */,
 			);
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */,
 				C67FE3D627B706D3008ADD94 /* SearchBar.swift in Sources */,
 				C67FE3D427B6FA47008ADD94 /* User.swift in Sources */,
 				C6A69AD827812BDA00D6A55F /* Audio.swift in Sources */,

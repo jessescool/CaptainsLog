@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct DetailedLogView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     var log: LogEntry
     
     var body: some View {
@@ -38,7 +38,7 @@ struct DetailedLogView: View {
             .buttonStyle(.bordered)
             
             Button("Delete", role: .destructive) {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
                 deleteLog(primaryKey: log.id)
             }
             .buttonStyle(.bordered)
