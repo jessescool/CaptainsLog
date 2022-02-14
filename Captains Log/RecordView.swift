@@ -11,54 +11,44 @@ struct RecordView: View {
     var body: some View {
         VStack {
             Text("New Log").font(.title).bold().padding(.top)
-            Spacer()
             
-            VStack {
-                if isRecording {
-                    Text("I am recording!")
-                } else {
-                    Text("Not recording...")
-                }
-                Text(speechRecognizer.transcript).font(.headline).padding()
-                Text(newLog.date.formatted(date: .numeric, time: .shortened))
-                Text("\(newLog.location)")
-                TextField("Name", text: $newLog.name)
-                TextField("Transcription", text: $newLog.transcription)
+            if isRecording {
+                Text("I am recording!")
+            } else {
+                Text("Not recording...")
             }
             
+            Text(speechRecognizer.transcript).padding()
+            
             Spacer()
             
-            VStack {
-                
-                HStack {
-                    Button("Transcribe") {
-                        speechRecognizer.reset()
-                        speechRecognizer.transcribe()
-                        isRecording = true
-                    }.buttonStyle(.bordered)
-                    Button("Stop transcribing", role: .destructive) {
-                        speechRecognizer.stopTranscribing()
-                        isRecording = false
-                    }
-                }
-                
+            if isRecording {
+                Button("Stop recording", role: .destructive) {
+                    speechRecognizer.stopTranscribing()
+                    isRecording = false
+                }.buttonStyle(.borderedProminent)
+            } else {
+                TextField("Name", text: $newLog.name)
                 HStack {
                     Button("Confirm") {
+                        newLog.transcription = speechRecognizer.transcript
                         pushToStorage(log: newLog)
+                        
                         showingRecordView = false
-                    }
-                        .buttonStyle(.bordered)
+                    }.buttonStyle(.bordered)
                     
                     Button("Cancel", role: .destructive) {
                         showingRecordView = false
-                    }
+                    }.buttonStyle(.bordered)
                 }
-                
             }
-                
-            Spacer()
         }
         .padding()
+        .onAppear {
+            isRecording = true
+            speechRecognizer.reset()
+            speechRecognizer.transcribe()
+        }
 
     }
 }
