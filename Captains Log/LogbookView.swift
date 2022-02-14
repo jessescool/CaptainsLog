@@ -37,9 +37,11 @@ struct LogbookView: View {
             .padding()
 
             
-            List(sortedLogs) { log in
-                NavigationLink(destination: DetailedLogView(log: log)) {
-                    CardView(log: log)
+            List {
+                ForEach(sortedLogs) { log in
+                    NavigationLink(destination: DetailedLogView(log: log)) {
+                        CardView(log: log)
+                    }
                 }
             }
             .listStyle(.inset)

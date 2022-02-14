@@ -17,11 +17,11 @@ func pushToStorage(log: LogEntry) {
 }
 
 func deleteLog(primaryKey: UUID) {
-//    let realm = try! Realm()
-//    if let objectToDelete = realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey) {
-//        try! realm.write {
-//            realm.delete(objectToDelete)
-//        }
-//    }
+    let realm = try! Realm()
+    if let objectToDelete = realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey) {
+        try! realm.write {
+            realm.delete(objectToDelete)
+        }
+    }
     print("Not working...")
 } // not working

@@ -18,7 +18,11 @@ struct RecordView: View {
                 Text("Not recording...")
             }
             
-            Text(speechRecognizer.transcript).padding()
+            VStack {
+                Text(speechRecognizer.transcript)
+            }
+                .padding()
+
             
             Spacer()
             
@@ -41,6 +45,7 @@ struct RecordView: View {
                         showingRecordView = false
                     }.buttonStyle(.bordered)
                 }
+                .padding(.bottom)
             }
         }
         .padding()
