@@ -20,7 +20,6 @@ class LogEntry: Object, Identifiable {
     }
 }
 
-
 // temporary data for preview purposes
 extension LogEntry {
     static var tempData: [LogEntry] {

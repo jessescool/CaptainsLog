@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct LogbookView: View {
-    var logs: Results<LogEntry>
+    @ObservedResults(LogEntry.self) var logs
     @State private var searchText = ""
     
     var sortedLogs: Results<LogEntry> {
@@ -55,7 +55,7 @@ struct LogbookView: View {
 struct LogbookView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogbookView(logs: logbook)
+            LogbookView()
                 .navigationBarHidden(true)
         }
     }

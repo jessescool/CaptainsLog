@@ -7,7 +7,7 @@ struct CaptainsLog: App {
             NavigationView {
                 TabView {
                     TitleView()
-                    LogbookView(logs: logbook)
+                    LogbookView()
                 }
                 .navigationBarHidden(true)
                 .tabViewStyle(.page(indexDisplayMode: .never))
