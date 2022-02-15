@@ -55,7 +55,7 @@ struct LogbookView: View {
 struct LogbookView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogbookView(logs: logBook)
+            LogbookView(logs: logbook)
                 .navigationBarHidden(true)
         }
     }

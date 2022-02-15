@@ -4,7 +4,7 @@ import RealmSwift
 
 struct RecordView: View {
     @Binding var showingRecordView: Bool
-    @ObservedRealmObject var newLog = LogEntry()
+    @StateRealmObject var newLog = LogEntry()
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording: Bool = false
     

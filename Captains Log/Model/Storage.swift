@@ -2,7 +2,16 @@ import Foundation
 import RealmSwift
 
 let realm = try! Realm()
-var logBook = realm.objects(LogEntry.self)
+
+// subject to change when users can create multiple logbooks
+var logbook = realm.objects(LogEntry.self)
+//var logbook: List<LogEntry> {
+//    var book = List<LogEntry>()
+//    for log in allLogs {
+//        book.append(log)
+//    }
+//    return book
+//}
 
 func pushToStorage(log: LogEntry) {
     let realm = try! Realm()
@@ -13,7 +22,7 @@ func pushToStorage(log: LogEntry) {
     print("Pushed \(log.name) to storage")
     print(realm.objects(LogEntry.self).count)
     print("Realm URL: \(realm.configuration.fileURL!)")
-    print(logBook)
+    print(logbook)
 }
 
 func deleteLog(primaryKey: UUID) {

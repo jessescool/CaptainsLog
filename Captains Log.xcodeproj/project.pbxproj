@@ -104,9 +104,9 @@
 		740C2C9027224BAE004C95CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C628524E27B9C475009CFBF8 /* LogEntry.swift */,
 				C628524B27B9C475009CFBF8 /* Search.swift */,
 				C628524D27B9C475009CFBF8 /* SpeechRecognizer.swift */,
+				C628524E27B9C475009CFBF8 /* LogEntry.swift */,
 				C628524F27B9C475009CFBF8 /* Storage.swift */,
 			);
 			path = Model;
