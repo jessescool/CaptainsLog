@@ -9,19 +9,24 @@ struct DetailedLogView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("Specs")) {
+                Section(header: Text("Info")) {
                     HStack {
-                        Label("Date", systemImage: "star")
+                        Label("Date", systemImage: "calendar")
                         Spacer()
-                        Text("\(log.date.formatted(date: .numeric, time: .shortened))")
+                        if !isEditing {
+                            Text("\(log.date.formatted(date: .numeric, time: .shortened))")
+                        } else {
+                            DatePicker("Please enter a date", selection: $log.date)
+                                .labelsHidden()
+                        }
                     }
                     HStack {
-                        Label("Duration", systemImage: "clock")
+                        Label("Duration", systemImage: "hourglass.tophalf.filled")
                         Spacer()
                         Text("\(log.duration, specifier: "%.2f")s")
                     }
                     HStack {
-                        Label("Location", systemImage: "pin")
+                        Label("Location", systemImage: "mappin.and.ellipse")
                         Spacer()
                         Text("\(log.location)")
                     }

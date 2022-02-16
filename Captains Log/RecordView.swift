@@ -38,7 +38,11 @@ struct RecordView: View {
                 HStack {
                     Button("Confirm") {
                         newLog.transcription = speechRecognizer.transcript
-                        pushToStorage(log: newLog)
+                        if newLog.name.isEmpty {
+                            let realm = try! Realm()
+                            newLog.name = "Log \(realm.objects(LogEntry.self).count + 1)"
+                        }
+                        store(log: newLog)
                         
                         showingRecordView = false
                     }.buttonStyle(.bordered)

@@ -48,6 +48,7 @@ struct SearchBar: View {
                     Text("Cancel")
                 }
                 .padding(.trailing, 10)
+                .buttonStyle(.bordered)
                 .transition(.move(edge: .trailing))
             }
         }

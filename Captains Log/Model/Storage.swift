@@ -3,7 +3,7 @@ import RealmSwift
 
 let realm = try! Realm()
 
-func pushToStorage(log: LogEntry) {
+func store(log: LogEntry) {
     let realm = try! Realm()
     try! realm.write {
         realm.add(log, update: .modified)

@@ -11,7 +11,7 @@ struct RecordButton: ButtonStyle {
             Spacer()
         }
         .padding()
-        .background(Color.orange.cornerRadius(8))
+        .background(Color.cyan.cornerRadius(8))
         .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
@@ -29,6 +29,7 @@ struct TitleView: View {
                     Image(systemName: "person")
                         .padding(.leading, 25)
                         .foregroundColor(.blue)
+                        .imageScale(.large)
                 }
                 
                 Spacer()
@@ -39,6 +40,7 @@ struct TitleView: View {
                     Image(systemName: "gear")
                         .padding(.trailing, 25)
                         .foregroundColor(.blue)
+                        .imageScale(.large)
                 }
             }
             .padding()
