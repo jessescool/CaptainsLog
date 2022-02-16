@@ -10,18 +10,21 @@ func pushToStorage(log: LogEntry) {
     }
   
     // for debug
-    print("Pushed \(log.name) to storage")
-    print(realm.objects(LogEntry.self).count)
+    print("Pushed \(log.name) to storage.")
+    print("There are now \(realm.objects(LogEntry.self).count) remaining.")
     print("Realm URL: \(realm.configuration.fileURL!)")
-    print()
 }
 
 func deleteLog(primaryKey: UUID) {
     let realm = try! Realm()
     if let objectToDelete = realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey) {
         try! realm.write {
+            print("Deleted \(objectToDelete.name)/")
             realm.delete(objectToDelete)
         }
     }
-    print("Not working...")
-} // not working
+    
+    // for debug
+    print("There are now \(realm.objects(LogEntry.self).count) remaining")
+    print("Realm URL: \(realm.configuration.fileURL!)")
+}

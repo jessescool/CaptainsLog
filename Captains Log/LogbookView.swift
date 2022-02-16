@@ -3,21 +3,22 @@ import RealmSwift
 
 struct LogbookView: View {
     @ObservedResults(LogEntry.self) var logs
+    // add .filter and .sortDescriptro
     @State private var searchText = ""
     
-    var sortedLogs: Results<LogEntry> {
-        if searchText.isEmpty {
-            return logs
-        } else {
-            // obviously not final
-            lazy var matches: Results<LogEntry> = {
-                realm.objects(LogEntry.self).where {
-                    $0.name == searchText
-                }
-            }()
-            return matches
-        }
-    }
+//    var sortedLogs: Results<LogEntry> {
+//        if searchText.isEmpty {
+//            return logs
+//        } else {
+//            // obviously not final
+//            lazy var matches: Results<LogEntry> = {
+//                realm.objects(LogEntry.self).where {
+//                    $0.name.contains(searchText)
+//                }
+//            }()
+//            return matches
+//        }
+//    }
     
     var body: some View {
         VStack {
@@ -38,7 +39,7 @@ struct LogbookView: View {
 
             
             List {
-                ForEach(sortedLogs) { log in
+                ForEach(logs) { log in
                     NavigationLink(destination: DetailedLogView(log: log)) {
                         CardView(log: log)
                     }

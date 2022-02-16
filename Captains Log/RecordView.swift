@@ -33,6 +33,8 @@ struct RecordView: View {
                 }.buttonStyle(.borderedProminent)
             } else {
                 TextField("Name", text: $newLog.name)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal)
                 HStack {
                     Button("Confirm") {
                         newLog.transcription = speechRecognizer.transcript

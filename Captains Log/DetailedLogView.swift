@@ -3,7 +3,8 @@ import RealmSwift
 
 struct DetailedLogView: View {
     @Environment(\.dismiss) var dismiss
-    var log: LogEntry // not sure if this is final
+    @ObservedRealmObject var log: LogEntry // not sure if this is final
+    @State private var isEditing: Bool = false
     
     var body: some View {
         VStack {
@@ -12,12 +13,12 @@ struct DetailedLogView: View {
                     HStack {
                         Label("Date", systemImage: "star")
                         Spacer()
-                        Text("\(log.date.formatted(date: .complete, time: .shortened))")
+                        Text("\(log.date.formatted(date: .numeric, time: .shortened))")
                     }
                     HStack {
                         Label("Duration", systemImage: "clock")
                         Spacer()
-                        Text("\(log.duration)")
+                        Text("\(log.duration, specifier: "%.2f")s")
                     }
                     HStack {
                         Label("Location", systemImage: "pin")
@@ -26,22 +27,31 @@ struct DetailedLogView: View {
                     }
                 }
                 Section(header: Text("Transcription")) {
-                    Text(log.transcription)
+                    if isEditing {
+                        TextEditor(text: $log.transcription)
+                            .foregroundColor(.gray)
+                    } else {
+                        Text(log.transcription)
+
+                    }
                 }
                 
             }
             .listStyle(.inset)
             
-            Button("Edit...") {
-                // edit here...
+            
+            Button(isEditing ? "Done" : "Edit...") {
+                isEditing.toggle()
             }
             .buttonStyle(.bordered)
             
-            Button("Delete", role: .destructive) {
-                dismiss()
-                deleteLog(primaryKey: log.id)
+            if !isEditing {
+                Button("Delete", role: .destructive) {
+                    dismiss()
+                    deleteLog(primaryKey: log.id)
+                }
+                .buttonStyle(.bordered)
             }
-            .buttonStyle(.bordered)
             
         }
         .navigationTitle(log.name)

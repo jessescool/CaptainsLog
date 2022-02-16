@@ -10,7 +10,7 @@ struct CardView: View {
             HStack {
                 Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
                 Spacer()
-                Label("\(log.duration, specifier: "%.2f")", systemImage: "hourglass.tophalf.filled")
+                Label("\(log.duration, specifier: "%.2f")s", systemImage: "hourglass.tophalf.filled")
             }
         }
         .padding()
