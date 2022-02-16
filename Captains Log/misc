@@ -48,3 +48,24 @@ HStack {
                     .navigationTitle("Logbook")
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
+
+
+
+            
+//            if filtering {
+//                ScrollView(.horizontal, showsIndicators: false) {
+//                    HStack {
+//                        ForEach(1..<10) { _ in
+//                            Button {
+//                                Text("Astronaut details")
+//                            } label: {
+//                                Image(systemName: "globe")
+//                                    .imageScale(.large)
+//                                    .frame(width: 104, height: 72)
+//                                    .clipShape(Capsule())
+//                                    .overlay(Capsule().strokeBorder(.white, lineWidth: 1))
+//                            }
+//                        }
+//                    }
+//                }
+//            }

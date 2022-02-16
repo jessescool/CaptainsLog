@@ -44,19 +44,21 @@ struct DetailedLogView: View {
             }
             .listStyle(.inset)
             
-            
-            Button(isEditing ? "Done" : "Edit...") {
-                isEditing.toggle()
-            }
-            .buttonStyle(.bordered)
-            
-            if !isEditing {
-                Button("Delete", role: .destructive) {
-                    dismiss()
-                    deleteLog(primaryKey: log.id)
+            VStack {
+                Button(isEditing ? "Done" : "Edit...") {
+                    isEditing.toggle()
                 }
                 .buttonStyle(.bordered)
+                
+                if !isEditing {
+                    Button("Delete", role: .destructive) {
+                        dismiss()
+                        deleteLog(primaryKey: log.id)
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
+            .padding()
             
         }
         .navigationTitle(log.name)

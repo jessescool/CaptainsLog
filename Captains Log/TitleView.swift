@@ -11,7 +11,7 @@ struct RecordButton: ButtonStyle {
             Spacer()
         }
         .padding()
-        .background(Color.cyan.cornerRadius(8))
+        .background(Color.defaultBlue.cornerRadius(8))
         .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
@@ -27,9 +27,7 @@ struct TitleView: View {
             HStack {
                 NavigationLink(destination: ProfileView()) {
                     Image(systemName: "person")
-                        .padding(.leading, 25)
-                        .foregroundColor(.blue)
-                        .imageScale(.large)
+                        .navBarIcon(withPadding: .leading)
                 }
                 
                 Spacer()
@@ -38,9 +36,7 @@ struct TitleView: View {
                 
                 NavigationLink(destination: SettingsView()) {
                     Image(systemName: "gear")
-                        .padding(.trailing, 25)
-                        .foregroundColor(.blue)
-                        .imageScale(.large)
+                        .navBarIcon(withPadding: .trailing)
                 }
             }
             .padding()

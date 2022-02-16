@@ -3,11 +3,14 @@ import RealmSwift
 
 struct LogbookView: View {
     @ObservedResults(LogEntry.self) var logs
-    @State private var searchText = ""
+    @State private var filtering = false
     
-    var sortedLogs: Results<LogEntry> {
+    @State private var searchText = ""
+    @State private var sortedBy: String = "date"
+    @State private var sortOrderAscending: Bool = true
+    var relevantLogs: Results<LogEntry> {
         if searchText.isEmpty {
-            return logs
+            return logs.sorted(byKeyPath: sortedBy, ascending: sortOrderAscending)
         } else {
             // obviously not final
             lazy var matches: Results<LogEntry> = {
@@ -15,7 +18,7 @@ struct LogbookView: View {
                     $0.name.contains(searchText) || $0.transcription.contains(searchText)
                 }
             }()
-            return matches
+            return matches.sorted(byKeyPath: sortedBy, ascending: sortOrderAscending)
         }
     }
     
@@ -24,12 +27,10 @@ struct LogbookView: View {
             HStack {
                 
                 Button {
-                    // something here
+                    sortOrderAscending.toggle()
                 } label: {
-                    Image(systemName: "pencil.and.outline")
-                        .padding(.leading, 25)
-                        .foregroundColor(.blue)
-                        .imageScale(.large)
+                    Image(systemName: sortOrderAscending ? "arrow.up" : "arrow.down")
+                        .navBarIcon(withPadding: .leading)
                 }
                 
                 Spacer()
@@ -37,20 +38,23 @@ struct LogbookView: View {
                 Spacer()
                 
                 Button {
-                    // filter options here
+                    filtering.toggle()
                 } label: {
                     Image(systemName: "line.3.horizontal.decrease.circle")
-                        .padding(.trailing, 25)
-                        .foregroundColor(.blue)
-                        .imageScale(.large)
+                        .navBarIcon(withPadding: .trailing)
                 }
-
+                .confirmationDialog("Sort logs by...", isPresented: $filtering, titleVisibility: .visible) {
+                    
+                    Button("Title") { sortedBy = "name" }
+                    Button("Date created ") { sortedBy = "date" }
+                    Button("Duration") { sortedBy = "duration" }
+                    
+                }
             }
             .padding()
-
             
             List {
-                ForEach(sortedLogs) { log in
+                ForEach(relevantLogs) { log in
                     NavigationLink(destination: DetailedLogView(log: log)) {
                         CardView(log: log)
                     }
