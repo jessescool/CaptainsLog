@@ -2,9 +2,32 @@ import Foundation
 import SwiftUI
 import PopupView
 
+struct Row<Actor: View>: View {
+    var text: String
+    var textColor: Color = .primary
+    var icon: Image
+    var iconColor: Color = .blue
+    var actor: Actor
+    
+    var body: some View {
+        HStack {
+            Label {
+                Text(text).foregroundColor(textColor)
+            } icon: {
+                // temporarily for system icons only
+                icon.foregroundColor(iconColor)
+            }
+            
+            Spacer()
+            
+            actor
+            
+        }
+    }
+}
+
 struct SettingsView: View {
     
-    @Environment(\.colorScheme) var systemTheme
     @State private var showingAboutPopup: Bool = false
     @State private var showingTipJar: Bool = false
     
@@ -13,7 +36,10 @@ struct SettingsView: View {
     @State private var showingDefaultSort: Bool = false
     @State private var defaultSort: Sort = Sort.name
     @State private var customColor: Color = Color.defaultBlue
-    @State private var setTheme: ColorScheme = .light
+    
+    @Environment(\.colorScheme) var currentSystemTheme
+    @State private var syncWithSystemTheme: Bool = true
+    @State private var forcedTheme: ColorScheme = .light
     
     var body: some View {
         VStack {
@@ -21,87 +47,109 @@ struct SettingsView: View {
                 
                 Section(header: Text("General")) {
                     
+                    
+                    
                     Button {
                         showingDefaultSort = true
                     } label: {
-                        HStack {
-                            Label("Default Sort", systemImage: "arrow.up.arrow.down")
-                            Spacer()
-                            Text(defaultSort.rawValue)
+                        Row(text: "Default Sort", icon: Image(systemName: "arrow.up.arrow.down"),
+                            actor: Text(defaultSort.rawValue)
                                 .foregroundColor(.secondary)
-                        }
+                        )
                     }
                     .confirmationDialog("Default sorting method:", isPresented: $showingDefaultSort, titleVisibility: .hidden) {
-    
-                        Button("Name") { defaultSort = Sort.name }
-                        Button("Date created ") { defaultSort = Sort.date }
-                        Button("Duration") { defaultSort = Sort.duration }
-                        
+                        Button(Sort.name.rawValue) { defaultSort = Sort.name }
+                        Button(Sort.date.rawValue) { defaultSort = Sort.date }
+                        Button(Sort.duration.rawValue) { defaultSort = Sort.duration }
                     }
                     
-                    HStack {
-                        Label("Haptic Feedback", systemImage: "waveform")
-                        Spacer()
-                        Toggle("Toggle haptic feedback", isOn: $hapticFeedback)
+                    
+                    Row(text: "Haptic Feedback", icon: Image(systemName: "waveform"),
+                        actor: Toggle("Toggle haptic feedback", isOn: $hapticFeedback)
                             .labelsHidden()
-                    }
+                    )
                     
                 }
                 
-                Section(header: Text("Appearance")) {
-                    HStack {
-                        Label("Accent Color", systemImage: "paintpalette")
-                        Spacer()
-                        ColorPicker("Set an accent color", selection: $customColor)
-                            .labelsHidden()
-                    }
-                    HStack {
-                        Label("Theme", systemImage: "moon")
-                        Spacer()
-                        Picker("Choose a theme", selection: $setTheme) {
-                            Image(systemName: "arrow.2.squarepath")
-                            Image(systemName: "sun.max")
-                            Image(systemName: "moon")
+                Section(header: Text("Theme")) {
+                    
+                    Row(text: "Accent Color", icon: Image(systemName: "paintpalette"),
+                        actor: ColorPicker("Set an accent color", selection: $customColor).labelsHidden()
+                    )
+                    
+                    Row(text: "Use System Theme", icon: Image(systemName: "moon"),
+                        actor: Toggle("Use System Mode", isOn: $syncWithSystemTheme).labelsHidden()
+                    )
+                    
+                    if !syncWithSystemTheme {
+                        Picker("Choose a theme", selection: $forcedTheme) {
+                            Image(systemName: "sun.max").tag(ColorScheme.light)
+                            Image(systemName: "moon").tag(ColorScheme.dark)
                         }
-                        .frame(width: 150) // bad to use constant values
                         .pickerStyle(.segmented)
+                        .padding(.horizontal)
                     }
+                
                 }
                 
                 Section(header: Text("Privacy & Security")) {
                     
                     NavigationLink(destination: PasswordView()) {
-                        Label("FaceID & Passcode", systemImage: "faceid")
+                        Row(text: "FaceID & Passcode", icon: Image(systemName: "faceid"),
+                            actor: Spacer()
+                        )
                     }
                     
                     NavigationLink(destination: EncryptionView()) {
-                        Label("Log Encryption", systemImage: "key")
+                        Row(text: "Log Encryption", icon: Image(systemName: "key"),
+                            actor: Spacer()
+                        )
                     }
+                    
                 }
                 
                 
                 
                 Section {
+                    
                     Button {
                         showingAboutPopup = true
                     } label: {
-                        Label("About", systemImage: "at")
+                        Row(text: "About", icon: Image(systemName: "at"),
+                            actor: Spacer()
+                        )
                     }
                     
                     Button {
                         showingTipJar = true
                     } label: {
-                        Label("Tip Jar", systemImage: "centsign.square")
+                        Row(text: "Tip Jar", icon: Image(systemName: "centsign.square"),
+                            actor: Spacer()
+                        )
                     }
                     
-                    Label("Rate Captain's Log", systemImage: "heart.fill")
+                    Button {
+                        showingTipJar = true
+                    } label: {
+                        Row(text: "Rate Captain's Log", icon: Image(systemName: "heart.fill"),
+                            actor: Spacer()
+                        )
+                    }
+                    
                 }
                 
                 Section {
-                    Label("Export Logs...", systemImage: "square.and.arrow.up.on.square")
+                    
+                    Row(text: "Export Logs...", icon: Image(systemName: "square.and.arrow.up.on.square"),
+                        actor: Spacer()
+                    )
+                    
                     NavigationLink(destination: ResetView()) {
-                        Label("Reset...", systemImage: "trash")
+                        Row(text: "Reset...", icon: Image(systemName: "trash"),
+                            actor: Spacer()
+                        )
                     }
+                    
                 }
                 
             }
