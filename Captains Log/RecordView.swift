@@ -14,9 +14,9 @@ struct RecordView: View {
             Text("New Log").font(.title).bold().padding(.top)
             
             if isRecording {
-                Text("I am recording!")
+                Text("I am recording!").padding()
             } else {
-                Text("Not recording...")
+                Text("Not recording...").padding()
             }
             
             VStack {
@@ -28,11 +28,14 @@ struct RecordView: View {
             Spacer()
             
             if isRecording {
-                Button("Stop recording", role: .destructive) {
+                Button(role: .destructive) {
                     speechRecognizer.stopTranscribing()
                     isRecording = false
                     isNaming = true
-                }.buttonStyle(.borderedProminent)
+                } label: {
+                    Image(systemName: "stop.circle")
+                }
+                .buttonStyle(RecordButton())
             } else {
                 TextField("Name", text: $newLog.name)
                     .textFieldStyle(.roundedBorder)

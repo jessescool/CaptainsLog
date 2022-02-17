@@ -1,21 +1,6 @@
 import Foundation
 import SwiftUI
 
-struct RecordButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            Spacer()
-            configuration.label
-                .foregroundColor(.white)
-                .font(Font.custom("Times New Roman", size: 30))
-            Spacer()
-        }
-        .padding()
-        .background(Color.defaultBlue.cornerRadius(8))
-        .scaleEffect(configuration.isPressed ? 0.95 : 1)
-    }
-}
-
 struct TitleView: View {
     private var date = Date.now.formatted(date: .complete, time: .omitted)
     private var time = Date.now.formatted(date: .omitted, time: .shortened)
