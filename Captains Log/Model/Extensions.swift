@@ -13,3 +13,8 @@ extension Image {
     }
 }
 
+enum Sort: String {
+    case date = "date"
+    case name = "name"
+    case duration = "duration"
+}

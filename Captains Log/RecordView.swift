@@ -7,6 +7,7 @@ struct RecordView: View {
     @StateRealmObject var newLog = LogEntry()
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording: Bool = false
+    @FocusState private var isNaming: Bool
     
     var body: some View {
         VStack {
@@ -30,11 +31,13 @@ struct RecordView: View {
                 Button("Stop recording", role: .destructive) {
                     speechRecognizer.stopTranscribing()
                     isRecording = false
+                    isNaming = true
                 }.buttonStyle(.borderedProminent)
             } else {
                 TextField("Name", text: $newLog.name)
                     .textFieldStyle(.roundedBorder)
                     .padding(.horizontal)
+                    .focused($isNaming)
                 HStack {
                     Button("Confirm") {
                         newLog.transcription = speechRecognizer.transcript

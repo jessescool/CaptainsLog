@@ -29,7 +29,7 @@ struct LogbookView: View {
                 Button {
                     sortOrderAscending.toggle()
                 } label: {
-                    Image(systemName: sortOrderAscending ? "arrow.up" : "arrow.down")
+                    Image(systemName: sortOrderAscending ? "arrow.down" : "arrow.up")
                         .navBarIcon(withPadding: .leading)
                 }
                 
