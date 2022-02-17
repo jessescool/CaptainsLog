@@ -1,9 +1,13 @@
 import Foundation
 import SwiftUI
+import PopupView
 
 struct SettingsView: View {
     
     @Environment(\.colorScheme) var systemTheme
+    @State private var showingAboutPopup: Bool = false
+    @State private var showingTipJar: Bool = false
+    
     // temporary bindings
     @State private var hapticFeedback: Bool = true
     @State private var showingDefaultSort: Bool = false
@@ -78,10 +82,18 @@ struct SettingsView: View {
                 
                 
                 Section {
-                    NavigationLink(destination: AboutView()) {
+                    Button {
+                        showingAboutPopup = true
+                    } label: {
                         Label("About", systemImage: "at")
                     }
-                    Label("Tip Jar", systemImage: "centsign.square")
+                    
+                    Button {
+                        showingTipJar = true
+                    } label: {
+                        Label("Tip Jar", systemImage: "centsign.square")
+                    }
+                    
                     Label("Rate Captain's Log", systemImage: "heart.fill")
                 }
                 
@@ -94,7 +106,33 @@ struct SettingsView: View {
                 
             }
             .listStyle(.insetGrouped)
+            
+            // About POPUP
+            .popup(isPresented: $showingAboutPopup, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: true) {
+                VStack {
+                    Text("About").font(.title)
+                    Text("Version 1.0").font(.title2)
+                    Spacer()
+                    Text("Captain's Log is an voice log swith supporting features like search, transcription, sorting. Based on the Captain's Log from Gene Roddenberry's Star Trek, the original idea of the app was to create a simple voice recorder to help remember the days that pass by.")
+                }
+                .frame(width: 300, height: 400)
+                .padding()
+                .background(.cyan)
+            }
+            
+            .popup(isPresented: $showingTipJar, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: true) {
+                VStack {
+                    Text("Tip Jar").font(.title)
+                    Text("Make a donation").font(.title2)
+                    Spacer()
+                }
+                .frame(width: 300, height: 400)
+                .padding()
+                .background(.cyan)
+            }
+            
         }
+
         .navigationBarHidden(false)
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)

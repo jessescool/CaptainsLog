@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "PopupView",
+        "repositoryURL": "https://github.com/exyte/PopupView",
+        "state": {
+          "branch": null,
+          "revision": "77c04cef5651a07ab795f8b4edeb39cb231b2411",
+          "version": "1.0.7"
+        }
+      },
+      {
         "package": "RealmDatabase",
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {

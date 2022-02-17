@@ -18,6 +18,7 @@
 		C61D1B3227BDCB80007071C7 /* EncryptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3127BDCB80007071C7 /* EncryptionView.swift */; };
 		C61D1B3427BDCC14007071C7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3327BDCC14007071C7 /* AboutView.swift */; };
 		C61D1B3627BDCC63007071C7 /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3527BDCC63007071C7 /* ResetView.swift */; };
+		C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = C61D1B3827BEBCCF007071C7 /* PopupView */; };
 		C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628523C27B9A9D0009CFBF8 /* CardView.swift */; };
 		C628525227B9C475009CFBF8 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524D27B9C475009CFBF8 /* SpeechRecognizer.swift */; };
 		C628525327B9C475009CFBF8 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524E27B9C475009CFBF8 /* LogEntry.swift */; };
@@ -63,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */,
 				C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */,
 				C67FE3BE27B02DF0008ADD94 /* Realm in Frameworks */,
 			);
@@ -183,6 +185,7 @@
 			packageProductDependencies = (
 				C67FE3BD27B02DF0008ADD94 /* Realm */,
 				C67FE3BF27B02DF0008ADD94 /* RealmSwift */,
+				C61D1B3827BEBCCF007071C7 /* PopupView */,
 			);
 			productName = "Captains Log";
 			productReference = 740C2C7C2722479C004C95CF /* Captains Log.app */;
@@ -213,6 +216,7 @@
 			mainGroup = 740C2C732722479C004C95CF;
 			packageReferences = (
 				C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 740C2C7D2722479C004C95CF /* Products */;
 			projectDirPath = "";
@@ -449,6 +453,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -460,6 +472,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C61D1B3827BEBCCF007071C7 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
 		C67FE3BD27B02DF0008ADD94 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */;
