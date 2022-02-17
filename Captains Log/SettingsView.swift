@@ -6,6 +6,7 @@ struct SettingsView: View {
     @Environment(\.colorScheme) var systemTheme
     // temporary bindings
     @State private var hapticFeedback: Bool = true
+    @State private var showingDefaultSort: Bool = false
     @State private var defaultSort: Sort = Sort.name
     @State private var customColor: Color = Color.defaultBlue
     @State private var setTheme: ColorScheme = .light
@@ -16,11 +17,22 @@ struct SettingsView: View {
                 
                 Section(header: Text("General")) {
                     
-                    HStack {
-                        Label("Default Sort", systemImage: "arrow.up.arrow.down")
-                        Spacer()
-                        Text(defaultSort.rawValue)
-                            .foregroundColor(.secondary)
+                    Button {
+                        showingDefaultSort = true
+                    } label: {
+                        HStack {
+                            Label("Default Sort", systemImage: "arrow.up.arrow.down")
+                            Spacer()
+                            Text(defaultSort.rawValue)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .confirmationDialog("Default sorting method:", isPresented: $showingDefaultSort, titleVisibility: .hidden) {
+    
+                        Button("Name") { defaultSort = Sort.name }
+                        Button("Date created ") { defaultSort = Sort.date }
+                        Button("Duration") { defaultSort = Sort.duration }
+                        
                     }
                     
                     HStack {
