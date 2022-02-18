@@ -11,20 +11,20 @@ struct RecordView: View {
     
     var body: some View {
         VStack {
-            Text("New Log").font(.title).bold().padding(.top)
             
             if isRecording {
-                Text("I am recording!").padding()
+                Text("Recording...").font(.title).bold().padding(.top)
+            } else if newLog.name.isEmpty {
+                Text("Name").font(.title).bold().padding(.top).foregroundColor(.secondary)
             } else {
-                Text("Not recording...").padding()
+                Text(newLog.name).font(.title).bold().padding(.top)
             }
             
-            VStack {
-                Text(speechRecognizer.transcript)
-            }
+            Spacer()
+            
+            Text(speechRecognizer.transcript)
                 .padding()
 
-            
             Spacer()
             
             if isRecording {
@@ -61,6 +61,7 @@ struct RecordView: View {
             }
         }
         .padding()
+        
         .onAppear {
             isRecording = true
             speechRecognizer.reset()

@@ -19,19 +19,3 @@ enum Sort: String {
     case name = "name"
     case duration = "duration"
 }
-
-struct RecordButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            Spacer()
-            configuration.label
-                .foregroundColor(.white)
-                .font(Font.custom("San Fransisco", size: 30))
-            Spacer()
-        }
-        .padding()
-        .background(Color.recordRed)
-        .cornerRadius(8)
-        .scaleEffect(configuration.isPressed ? 0.95 : 1)
-    }
-}

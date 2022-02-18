@@ -1,9 +1,11 @@
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct TitleView: View {
     private var date = Date.now.formatted(date: .complete, time: .omitted)
     private var time = Date.now.formatted(date: .omitted, time: .shortened)
+    
     @State var showingRecordView: Bool = false
     
     var body: some View {
@@ -16,7 +18,7 @@ struct TitleView: View {
                 }
                 
                 Spacer()
-                Text("Recording").font(.title).bold()
+                Text("Record").font(.title).bold()
                 Spacer()
                 
                 NavigationLink(destination: SettingsView()) {
@@ -30,19 +32,30 @@ struct TitleView: View {
 
     // ----------
             VStack(alignment: .leading) {
+                
+                HStack {
+                    Image(systemName: "mappin")
+                        .padding(.trailing)
+                    Text("Oakland") // to be changed
+                        .font(.title2)
+                        .bold()
+                }
                 HStack {
                     Image(systemName: "calendar")
+                        .padding(.trailing)
                     Text("\(date)")
                         .font(.title2)
                         .bold()
                 }
                 HStack {
                     Image(systemName: "clock")
+                        .padding(.trailing)
                     Text("\(time)")
                         .font(.title2)
                         .bold()
                 }
             }
+            .padding()
                 
             Spacer()
         
@@ -51,7 +64,7 @@ struct TitleView: View {
             Button() {
                 showingRecordView = true
             } label: {
-                Image(systemName: "mic.fill")
+                Image(systemName: "record.circle")
             }
                 .buttonStyle(RecordButton())
                 .padding()
