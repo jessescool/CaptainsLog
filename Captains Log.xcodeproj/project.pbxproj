@@ -14,10 +14,7 @@
 		74ADE73C2724F089002D11EB /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73B2724F089002D11EB /* LogbookView.swift */; };
 		74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADE73F2724F997002D11EB /* DetailedLogView.swift */; };
 		C61D1B2D27BDACCC007071C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B2C27BDACCC007071C7 /* User.swift */; };
-		C61D1B3027BDCB77007071C7 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B2F27BDCB77007071C7 /* PasswordView.swift */; };
 		C61D1B3227BDCB80007071C7 /* EncryptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3127BDCB80007071C7 /* EncryptionView.swift */; };
-		C61D1B3427BDCC14007071C7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3327BDCC14007071C7 /* AboutView.swift */; };
-		C61D1B3627BDCC63007071C7 /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3527BDCC63007071C7 /* ResetView.swift */; };
 		C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = C61D1B3827BEBCCF007071C7 /* PopupView */; };
 		C61D1B3B27C04578007071C7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3A27C04578007071C7 /* Location.swift */; };
 		C61D1B3D27C059CD007071C7 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3C27C059CD007071C7 /* Buttons.swift */; };
@@ -45,10 +42,7 @@
 		74ADE73B2724F089002D11EB /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
 		74ADE73F2724F997002D11EB /* DetailedLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedLogView.swift; sourceTree = "<group>"; };
 		C61D1B2C27BDACCC007071C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		C61D1B2F27BDCB77007071C7 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		C61D1B3127BDCB80007071C7 /* EncryptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionView.swift; sourceTree = "<group>"; };
-		C61D1B3327BDCC14007071C7 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		C61D1B3527BDCC63007071C7 /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
 		C61D1B3A27C04578007071C7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C61D1B3C27C059CD007071C7 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		C628523C27B9A9D0009CFBF8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -134,9 +128,6 @@
 		C61D1B2E27BDBA5C007071C7 /* Subordinate Settings */ = {
 			isa = PBXGroup;
 			children = (
-				C61D1B3527BDCC63007071C7 /* ResetView.swift */,
-				C61D1B3327BDCC14007071C7 /* AboutView.swift */,
-				C61D1B2F27BDCB77007071C7 /* PasswordView.swift */,
 				C61D1B3127BDCB80007071C7 /* EncryptionView.swift */,
 			);
 			name = "Subordinate Settings";
@@ -251,10 +242,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C61D1B3627BDCC63007071C7 /* ResetView.swift in Sources */,
 				C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */,
 				C628525427B9C475009CFBF8 /* Storage.swift in Sources */,
-				C61D1B3427BDCC14007071C7 /* AboutView.swift in Sources */,
 				C67FE3D627B706D3008ADD94 /* SearchBar.swift in Sources */,
 				C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */,
 				74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */,
@@ -264,7 +253,6 @@
 				74ADE73C2724F089002D11EB /* LogbookView.swift in Sources */,
 				740C2C822722479C004C95CF /* TitleView.swift in Sources */,
 				C6D3762F27851339003FD962 /* SettingsView.swift in Sources */,
-				C61D1B3027BDCB77007071C7 /* PasswordView.swift in Sources */,
 				C61D1B3B27C04578007071C7 /* Location.swift in Sources */,
 				C61D1B3D27C059CD007071C7 /* Buttons.swift in Sources */,
 				C628525327B9C475009CFBF8 /* LogEntry.swift in Sources */,

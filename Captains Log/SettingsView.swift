@@ -33,15 +33,17 @@ struct SettingsView: View {
     @State private var showingReset: Bool = false
     @State private var showingDefaultSort: Bool = false
 
-    // temporary bindings
     @AppStorage("hapticFeedback") private var hapticFeedback: Bool = true
     @AppStorage("defaultSort") private var defaultSort: Sort = Sort.name
-    @AppStorage("accentColorHex") private var accentColorHex: String = "BC3333"
-    @State private var accentColor: Color = Color.red // needs AppStorage
+    @AppStorage("authenticate") private var authenticate: Bool = false
     
     @Environment(\.colorScheme) var currentSystemTheme
     @AppStorage("syncWithSystemTheme") private var syncWithSystemTheme: Bool = true
     @AppStorage("forcedThemeString") private var forcedThemeString: String = "light"
+    
+    // NEEDS WORK
+    @AppStorage("accentColorHex") private var accentColorHex: String = "BC3333"
+    @State private var accentColor: Color = Color.red
     @State private var forcedTheme: ColorScheme = .light // needs AppStorage
     
     var body: some View {
@@ -49,8 +51,6 @@ struct SettingsView: View {
             List {
                 
                 Section(header: Text("General")) {
-                    
-                    
                     
                     Button {
                         showingDefaultSort = true
@@ -97,11 +97,9 @@ struct SettingsView: View {
                 
                 Section(header: Text("Privacy & Security")) {
                     
-                    NavigationLink(destination: PasswordView()) {
-                        Row(text: "FaceID & Passcode", icon: Image(systemName: "faceid"),
-                            actor: Spacer()
-                        )
-                    }
+                    Row(text: "FaceID & Passcode", icon: Image(systemName: "faceid"),
+                        actor: Toggle("Toggle Face ID & Passcode", isOn: $authenticate).labelsHidden()
+                    )
                     
                     NavigationLink(destination: EncryptionView()) {
                         Row(text: "Log Encryption", icon: Image(systemName: "key"),
@@ -110,8 +108,6 @@ struct SettingsView: View {
                     }
                     
                 }
-                
-                
                 
                 Section {
                     
@@ -164,8 +160,6 @@ struct SettingsView: View {
                         }
                         
                     }
-                    
-                    
                     
                 }
                 
