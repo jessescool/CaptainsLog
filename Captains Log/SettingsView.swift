@@ -129,7 +129,6 @@ struct SettingsView: View {
                     }
                     
                     Button {
-                        showingTipJar = true
                     } label: {
                         Row(text: "Rate Captain's Log", icon: Image(systemName: "heart.fill"),
                             actor: Spacer()
@@ -163,9 +162,10 @@ struct SettingsView: View {
                     Spacer()
                     Text("Captain's Log is an voice log swith supporting features like search, transcription, sorting. Based on the Captain's Log from Gene Roddenberry's Star Trek, the original idea of the app was to create a simple voice recorder to help remember the days that pass by.")
                 }
-                .frame(width: 300, height: 400)
+                .frame(width: 320, height: 400)
                 .padding()
-                .background(.cyan)
+                .background(.gray)
+                .cornerRadius(10)
             }
             
             .popup(isPresented: $showingTipJar, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: true) {
@@ -174,9 +174,10 @@ struct SettingsView: View {
                     Text("Make a donation").font(.title2)
                     Spacer()
                 }
-                .frame(width: 300, height: 400)
+                .frame(width: 320, height: 400)
                 .padding()
-                .background(.cyan)
+                .background(.gray)
+                .cornerRadius(10)
             }
             
         }

@@ -55,12 +55,13 @@ struct LogbookView: View {
             
             List {
                 ForEach(relevantLogs) { log in
-                    NavigationLink(destination: DetailedLogView(log: log)) {
+                    NavigationLink(destination: DetailedLogView(log: log).id(UUID())) {
                         CardView(log: log)
                     }
                 }
             }
             .listStyle(.inset)
+            .animation(.default)
             
             SearchBar(text: $searchText)
                 .padding()

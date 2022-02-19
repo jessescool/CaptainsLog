@@ -38,13 +38,12 @@ struct SearchBar: View {
                         }
                     }
                 )
-                .padding(.horizontal, 10)
             
             if searchIsFocused {
-                Button(action: {
+                Button {
                     searchIsFocused = false
                     self.text = ""
-                }) {
+                } label: {
                     Text("Cancel")
                 }
                 .padding(.trailing, 10)
