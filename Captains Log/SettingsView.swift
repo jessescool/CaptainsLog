@@ -30,16 +30,19 @@ struct SettingsView: View {
     
     @State private var showingAboutPopup: Bool = false
     @State private var showingTipJar: Bool = false
-    
-    // temporary bindings
-    @State private var hapticFeedback: Bool = true
+    @State private var showingReset: Bool = false
     @State private var showingDefaultSort: Bool = false
-    @State private var defaultSort: Sort = Sort.name
-    @State private var customColor: Color = Color.defaultBlue
+
+    // temporary bindings
+    @AppStorage("hapticFeedback") private var hapticFeedback: Bool = true
+    @AppStorage("defaultSort") private var defaultSort: Sort = Sort.name
+    @AppStorage("accentColorHex") private var accentColorHex: String = "BC3333"
+    @State private var accentColor: Color = Color.red // needs AppStorage
     
     @Environment(\.colorScheme) var currentSystemTheme
-    @State private var syncWithSystemTheme: Bool = true
-    @State private var forcedTheme: ColorScheme = .light
+    @AppStorage("syncWithSystemTheme") private var syncWithSystemTheme: Bool = true
+    @AppStorage("forcedThemeString") private var forcedThemeString: String = "light"
+    @State private var forcedTheme: ColorScheme = .light // needs AppStorage
     
     var body: some View {
         VStack {
@@ -74,7 +77,7 @@ struct SettingsView: View {
                 Section(header: Text("Theme")) {
                     
                     Row(text: "Accent Color", icon: Image(systemName: "paintpalette"),
-                        actor: ColorPicker("Set an accent color", selection: $customColor).labelsHidden()
+                        actor: ColorPicker("Set an accent color", selection: $accentColor).labelsHidden()
                     )
                     
                     Row(text: "Use System Theme", icon: Image(systemName: "moon"),
@@ -139,15 +142,30 @@ struct SettingsView: View {
                 
                 Section {
                     
-                    Row(text: "Export Logs...", icon: Image(systemName: "square.and.arrow.up.on.square"),
-                        actor: Spacer()
-                    )
-                    
-                    NavigationLink(destination: ResetView()) {
-                        Row(text: "Reset...", icon: Image(systemName: "trash"),
+                    Button(role: .destructive) {
+                        showingReset = true
+                    } label: {
+                        Row(text: "Reset...", icon: Image(systemName: "trash"), iconColor: .red,
                             actor: Spacer()
                         )
                     }
+                    .confirmationDialog("Reset dialogue", isPresented: $showingReset, titleVisibility: .hidden) {
+                        
+                        Button("Reset default accent color", role: .destructive) {
+                            print("resetting default color") // Needs functionality....
+                        }
+                        .buttonStyle(.borderedProminent)
+                        
+                        Button("Delete all log entries", role: .destructive) {
+                            try! realm.write {
+                                let allLogs = realm.objects(LogEntry.self)
+                                realm.delete(allLogs)
+                            }
+                        }
+                        
+                    }
+                    
+                    
                     
                 }
                 
