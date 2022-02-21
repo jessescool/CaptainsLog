@@ -5,19 +5,33 @@
 
 import Foundation
 import SwiftUI
-import AVFoundation
+import AVFAudio
 import Combine
 
 extension Date {
-    func toString( dateFormat format  : String ) -> String {
+    func toString(dateFormat format: String ) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
 }
 
+func getCreationDate(for file: URL) -> Date {
+    if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
+        let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
+        return creationDate
+    } else {
+        return Date()
+    }
+}
 
-class AudioRecorder: NSObject,ObservableObject {
+struct Recording {
+    let fileURL: URL
+    let createdAt: Date
+}
+
+
+class AudioRecorder: NSObject, ObservableObject {
     
     override init() {
         super.init()
@@ -61,6 +75,7 @@ class AudioRecorder: NSObject,ObservableObject {
             audioRecorder.record()
 
             recording = true
+            
         } catch {
             print("Could not start recording")
         }
@@ -72,6 +87,7 @@ class AudioRecorder: NSObject,ObservableObject {
         
         fetchRecordings()
     }
+    
     
     func fetchRecordings() {
         recordings.removeAll()
@@ -88,6 +104,7 @@ class AudioRecorder: NSObject,ObservableObject {
         
         objectWillChange.send(self)
     }
+    
     
     func deleteRecording(urlsToDelete: [URL]) {
         

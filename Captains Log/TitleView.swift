@@ -5,7 +5,7 @@ import CoreLocation
 struct TitleView: View {
     private var date = Date.now.formatted(date: .complete, time: .omitted)
     private var time = Date.now.formatted(date: .omitted, time: .shortened)
-    
+
     @State var showingRecordView: Bool = false
     
     var body: some View {

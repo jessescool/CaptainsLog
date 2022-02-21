@@ -9,6 +9,8 @@ struct RecordView: View {
     @State private var isRecording: Bool = false
     @FocusState private var isNaming: Bool
     
+    @StateObject var audioRecorder = AudioRecorder()
+    
     var body: some View {
         VStack {
             
@@ -30,6 +32,10 @@ struct RecordView: View {
             if isRecording {
                 Button(role: .destructive) {
                     speechRecognizer.stopTranscribing()
+                    
+                    // testing...
+                    audioRecorder.stopRecording()
+                    
                     isRecording = false
                     isNaming = true
                 } label: {
@@ -66,6 +72,9 @@ struct RecordView: View {
             isRecording = true
             speechRecognizer.reset()
             speechRecognizer.transcribe()
+            
+            // testing...
+            audioRecorder.startRecording()
         }
 
     }

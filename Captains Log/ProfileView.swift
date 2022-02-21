@@ -5,16 +5,27 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            Button("Record") {
-                audioRecorder.recorder.record()
-            }
-            if audioRecorder.recorder.isRecording {
-                Text("recording")
+            RecordingsList(audioRecorder: audioRecorder)
+            if audioRecorder.recording == false {
+                Button(action: {audioRecorder.startRecording()}) {
+                    Image(systemName: "circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipped()
+                        .foregroundColor(.red)
+                        .padding(.bottom, 40)
+                }
             } else {
-                Text("nope")
-            }
-            Button("Stop") {
-                audioRecorder.recorder.stop()
+                Button(action: {self.audioRecorder.stopRecording()}) {
+                    Image(systemName: "stop.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipped()
+                        .foregroundColor(.red)
+                        .padding(.bottom, 40)
+                }
             }
         }
         .navigationBarHidden(false)
