@@ -1,9 +1,21 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @StateObject var audioRecorder = AudioRecorder()
+    
     var body: some View {
         VStack {
-
+            Button("Record") {
+                audioRecorder.recorder.record()
+            }
+            if audioRecorder.recorder.isRecording {
+                Text("recording")
+            } else {
+                Text("nope")
+            }
+            Button("Stop") {
+                audioRecorder.recorder.stop()
+            }
         }
         .navigationBarHidden(false)
         .navigationTitle("Profile")
