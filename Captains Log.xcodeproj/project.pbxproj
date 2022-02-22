@@ -18,7 +18,6 @@
 		C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = C61D1B3827BEBCCF007071C7 /* PopupView */; };
 		C61D1B3B27C04578007071C7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3A27C04578007071C7 /* Location.swift */; };
 		C61D1B3D27C059CD007071C7 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3C27C059CD007071C7 /* Buttons.swift */; };
-		C61D1B3F27C29BF4007071C7 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B3E27C29BF4007071C7 /* AudioRecorder.swift */; };
 		C61D1B4127C352BC007071C7 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B4027C352BC007071C7 /* Recorder.swift */; };
 		C61D1B4327C354F8007071C7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B4227C354F8007071C7 /* RecordingView.swift */; };
 		C61D1B4527C35527007071C7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B4427C35527007071C7 /* Player.swift */; };
@@ -49,7 +48,6 @@
 		C61D1B3127BDCB80007071C7 /* EncryptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionView.swift; sourceTree = "<group>"; };
 		C61D1B3A27C04578007071C7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C61D1B3C27C059CD007071C7 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
-		C61D1B3E27C29BF4007071C7 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		C61D1B4027C352BC007071C7 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		C61D1B4227C354F8007071C7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		C61D1B4427C35527007071C7 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -122,9 +120,7 @@
 		740C2C9027224BAE004C95CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C628524D27B9C475009CFBF8 /* SpeechRecognizer.swift */,
-				C61D1B3E27C29BF4007071C7 /* AudioRecorder.swift */,
-				C61D1B4627C358E4007071C7 /* BlackBird */,
+				C61D1B4827C45C4F007071C7 /* Audio Models */,
 				C628524E27B9C475009CFBF8 /* LogEntry.swift */,
 				C61D1B2C27BDACCC007071C7 /* User.swift */,
 				C628524F27B9C475009CFBF8 /* Storage.swift */,
@@ -143,13 +139,15 @@
 			name = "Subordinate Settings";
 			sourceTree = "<group>";
 		};
-		C61D1B4627C358E4007071C7 /* BlackBird */ = {
+		C61D1B4827C45C4F007071C7 /* Audio Models */ = {
 			isa = PBXGroup;
 			children = (
+				C628524D27B9C475009CFBF8 /* SpeechRecognizer.swift */,
 				C61D1B4027C352BC007071C7 /* Recorder.swift */,
 				C61D1B4427C35527007071C7 /* Player.swift */,
 				C61D1B4227C354F8007071C7 /* RecordingView.swift */,
 			);
+			name = "Audio Models";
 			path = BlackBird;
 			sourceTree = "<group>";
 		};
@@ -262,7 +260,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C61D1B3F27C29BF4007071C7 /* AudioRecorder.swift in Sources */,
 				C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */,
 				C628525427B9C475009CFBF8 /* Storage.swift in Sources */,
 				C67FE3D627B706D3008ADD94 /* SearchBar.swift in Sources */,

@@ -74,6 +74,7 @@ struct RecordView: View {
             speechRecognizer.transcribe()
             
             // testing...
+            audioRecorder.recordingName = newLog.id.uuidString // probably not the best way... maybe a lazy property in recorder class
             audioRecorder.startRecording()
         }
 

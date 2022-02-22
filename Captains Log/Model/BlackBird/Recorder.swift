@@ -1,67 +1,45 @@
-//AudioRecorder.swift
-
-//Created by BLCKBIRDS on 28.10.19.
-//Visit www.BLCKBIRDS.com for more.
-
-import Foundation
-import SwiftUI
 import AVFAudio
-import Combine
-
-extension Date {
-    func toString(dateFormat format: String ) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-}
-
-func getCreationDate(for file: URL) -> Date {
-    if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
-        let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
-        return creationDate
-    } else {
-        return Date()
-    }
-}
-
-struct Recording {
-    let fileURL: URL
-    let createdAt: Date
-}
 
 
-class AudioRecorder: NSObject, ObservableObject {
-    
-    override init() {
-        super.init()
-        fetchRecordings()
-    }
-    
-    let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
+
+class AudioRecorder: ObservableObject {
     
     var audioRecorder: AVAudioRecorder!
+    var isRecording = false
     
-    var recordings = [Recording]()
+    var recordingName: String = ""
+
     
-    var recording = false {
-        didSet {
-            objectWillChange.send(self)
+    enum RecorderError: Error {
+        case notPermittedToRecord
+        case sessionFailed
+        case recordingError
+        case deleteError
+
+        var message: String {
+            switch self {
+            case .notPermittedToRecord: return "Not authorized to record audio"
+            case .sessionFailed: return "Failed to create audio session"
+            case .recordingError: return "Could not start recording"
+            case .deleteError: return "Audio could not be deleted"
+            }
         }
     }
     
+//    "\(Date().toString(dateFormat: "MM-dd-yyyy HH:mm:ss")).m4a"
+    /// Creates a file in the File System, records audio to it
     func startRecording() {
+        
         let recordingSession = AVAudioSession.sharedInstance()
         
         do {
             try recordingSession.setCategory(.playAndRecord, mode: .default)
             try recordingSession.setActive(true)
         } catch {
-            print("Failed to set up recording session")
+            RecorderError.sessionFailed
         }
         
-        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("\(recordingName).m4a")
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -72,39 +50,21 @@ class AudioRecorder: NSObject, ObservableObject {
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            print(audioFilename)
+            // audioRecorder.prepareToRecord() // Is this needed?
+            isRecording = true
             audioRecorder.record()
-
-            recording = true
-            
         } catch {
-            print("Could not start recording")
+            isRecording = false
+            RecorderError.recordingError
         }
     }
+    
     
     func stopRecording() {
         audioRecorder.stop()
-        recording = false
-        
-        fetchRecordings()
+        isRecording = false
     }
-    
-    
-    func fetchRecordings() {
-        recordings.removeAll()
-        
-        let fileManager = FileManager.default
-        let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-        for audio in directoryContents {
-            let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
-            recordings.append(recording)
-        }
-        
-        recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
-        
-        objectWillChange.send(self)
-    }
-    
     
     func deleteRecording(urlsToDelete: [URL]) {
         
@@ -113,12 +73,12 @@ class AudioRecorder: NSObject, ObservableObject {
             do {
                try FileManager.default.removeItem(at: url)
             } catch {
-                print("File could not be deleted!")
+                RecorderError.deleteError
             }
         }
-        
-        fetchRecordings()
     }
-    
 }
+
+    
+
 

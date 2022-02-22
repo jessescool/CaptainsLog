@@ -30,6 +30,11 @@ struct DetailedLogView: View {
                         Spacer()
                         Text("\(log.location)")
                     }
+                    HStack {
+                        Label("Audio", systemImage: "speaker")
+                        Spacer()
+                        // audio player
+                    }
                 }
                 Section(header: Text("Transcription")) {
                     if isEditing {
