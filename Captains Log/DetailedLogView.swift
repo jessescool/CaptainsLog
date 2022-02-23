@@ -49,7 +49,6 @@ struct DetailedLogView: View {
                             .foregroundColor(.gray)
                     } else {
                         Text(log.transcription)
-
                     }
                 }
                 
@@ -59,7 +58,9 @@ struct DetailedLogView: View {
             VStack {
                 
                 Button {
-                    recognizeFile(url: getAudioRecording(id: log.id))
+                    Task {
+                        await recognizeFile(url: getAudioRecording(id: log.id))
+                    }
                 } label: {
                     Text("Transcribe")
                 }

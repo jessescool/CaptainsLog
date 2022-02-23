@@ -7,19 +7,17 @@
 
 import Speech
 
-func recognizeFile(url: URL) -> [String] {
-    
+func recognizeFile(url: URL) async -> [String] {
+    // should throw errors....
     guard let recognizer = SFSpeechRecognizer() else {
         // Not supported in user's locale
-        return ["nah"]
+        return ["Error"]
     }
     
     if !recognizer.isAvailable {
         // SpeechRecognizer not available
-        return ["nah"]
+        return ["Error"]
     }
-    
-    
     
     let request = SFSpeechURLRecognitionRequest(url: url)
     request.shouldReportPartialResults = false
@@ -27,29 +25,35 @@ func recognizeFile(url: URL) -> [String] {
     
     if recognizer.supportsOnDeviceRecognition {
         request.requiresOnDeviceRecognition = true
+        print("Supports ODR")
     }
     
-    print("Supports ODR: \(recognizer.supportsOnDeviceRecognition)")
-
-    func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) -> [String] {
-        var transcript: [String] = []
+    // maybe should be async....
+    func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async -> [String] {
         
-        recognizer.recognitionTask(with: request) { (result, error) in
-            guard let result = result else {
-                print(error)
-                return
-            }
+        return await withCheckedContinuation { continuation in
             
-            print(result.bestTranscription.formattedString)
-            transcript.append(result.bestTranscription.formattedString)
+            var transcript = [String]()
 
+            recognizer.recognitionTask(with: request) { (result, error) in
+                guard let result = result else {
+                    print("ERROR: \(error!)")
+                    return
+                }
+                
+                transcript.append(result.bestTranscription.formattedString)
+                
+                if result.isFinal {
+                    continuation.resume(returning: transcript)
+                }
+            }
         }
-        
-        return transcript
     }
     
-    return recognize(request: request, with: recognizer)
+    return await recognize(request: request, with: recognizer)
 }
+
+// I want this to return a String....
 
 
 
