@@ -2,12 +2,12 @@ import Foundation
 import SwiftUI
 import PopupView
 
-struct Row<Actor: View>: View {
+struct Row<Appendage: View>: View {
     var text: String
     var textColor: Color = .primary
     var icon: Image
     var iconColor: Color = .blue
-    var actor: Actor
+    var appendage: Appendage
     
     var body: some View {
         HStack {
@@ -20,7 +20,7 @@ struct Row<Actor: View>: View {
             
             Spacer()
             
-            actor
+            appendage
             
         }
     }
@@ -56,7 +56,7 @@ struct SettingsView: View {
                         showingDefaultSort = true
                     } label: {
                         Row(text: "Default Sort", icon: Image(systemName: "arrow.up.arrow.down"),
-                            actor: Text(defaultSort.rawValue)
+                            appendage: Text(defaultSort.rawValue)
                                 .foregroundColor(.secondary)
                         )
                     }
@@ -68,7 +68,7 @@ struct SettingsView: View {
                     
                     
                     Row(text: "Haptic Feedback", icon: Image(systemName: "waveform"),
-                        actor: Toggle("Toggle haptic feedback", isOn: $hapticFeedback)
+                        appendage: Toggle("Toggle haptic feedback", isOn: $hapticFeedback)
                             .labelsHidden()
                     )
                     
@@ -77,11 +77,11 @@ struct SettingsView: View {
                 Section(header: Text("Theme")) {
                     
                     Row(text: "Accent Color", icon: Image(systemName: "paintpalette"),
-                        actor: ColorPicker("Set an accent color", selection: $accentColor).labelsHidden()
+                        appendage: ColorPicker("Set an accent color", selection: $accentColor).labelsHidden()
                     )
                     
                     Row(text: "Use System Theme", icon: Image(systemName: "moon"),
-                        actor: Toggle("Use System Mode", isOn: $syncWithSystemTheme).labelsHidden()
+                        appendage: Toggle("Use System Mode", isOn: $syncWithSystemTheme).labelsHidden()
                     )
                     
                     if !syncWithSystemTheme {
@@ -98,12 +98,12 @@ struct SettingsView: View {
                 Section(header: Text("Privacy & Security")) {
                     
                     Row(text: "FaceID & Passcode", icon: Image(systemName: "faceid"),
-                        actor: Toggle("Toggle Face ID & Passcode", isOn: $authenticate).labelsHidden()
+                        appendage: Toggle("Toggle Face ID & Passcode", isOn: $authenticate).labelsHidden()
                     )
                     
                     NavigationLink(destination: EncryptionView()) {
                         Row(text: "Log Encryption", icon: Image(systemName: "key"),
-                            actor: Spacer()
+                            appendage: Spacer()
                         )
                     }
                     
@@ -115,7 +115,7 @@ struct SettingsView: View {
                         showingAboutPopup = true
                     } label: {
                         Row(text: "About", icon: Image(systemName: "at"),
-                            actor: Spacer()
+                            appendage: Spacer()
                         )
                     }
                     
@@ -123,14 +123,14 @@ struct SettingsView: View {
                         showingTipJar = true
                     } label: {
                         Row(text: "Tip Jar", icon: Image(systemName: "centsign.square"),
-                            actor: Spacer()
+                            appendage: Spacer()
                         )
                     }
                     
                     Button {
                     } label: {
                         Row(text: "Rate Captain's Log", icon: Image(systemName: "heart.fill"),
-                            actor: Spacer()
+                            appendage: Spacer()
                         )
                     }
                     
@@ -142,7 +142,7 @@ struct SettingsView: View {
                         showingReset = true
                     } label: {
                         Row(text: "Reset...", icon: Image(systemName: "trash"), iconColor: .red,
-                            actor: Spacer()
+                            appendage: Spacer()
                         )
                     }
                     .confirmationDialog("Reset dialogue", isPresented: $showingReset, titleVisibility: .hidden) {

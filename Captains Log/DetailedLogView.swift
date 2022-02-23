@@ -1,14 +1,12 @@
 import SwiftUI
 import RealmSwift
-import Subsonic
+import SwiftySound // for now...
 
 struct DetailedLogView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedRealmObject var log: LogEntry // not sure if this is final
     @State private var isEditing: Bool = false
-    @StateObject private var audioPlayer = AudioPlayer()
-    
-    
+        
     var body: some View {
         VStack {
             List {
@@ -33,15 +31,6 @@ struct DetailedLogView: View {
                         Spacer()
                         Text("\(log.location)")
                     }
-                    HStack {
-                        Label("Audio", systemImage: "speaker")
-                        Spacer()
-                        Button {
-                            audioPlayer.startPlayback(audio: getAudioRecording(id: log.id)) // a little sketch...
-                        } label: {
-                            Image(systemName: "play")
-                        }
-                    }
                 }
                 Section(header: Text("Transcription")) {
                     if isEditing {
@@ -55,19 +44,18 @@ struct DetailedLogView: View {
             }
             .listStyle(.inset)
             
+            Spacer()
+            
+            Button {
+                Sound.play(url: getAudioRecording(id: log.id))
+            } label: {
+                Image(systemName: "play")
+                    .imageScale(.large)
+            }
+            
+            Spacer()
+                        
             VStack {
-                
-                Button {
-                    Task {
-                        do {
-                            try await recognizeFile(url: getAudioRecording(id: log.id))
-                        } catch {
-                            print("Unexpected error: \(error)")
-                        }
-                    }
-                } label: {
-                    Text("Transcribe")
-                }
                 
                 Button(isEditing ? "Done" : "Edit...") {
                     isEditing.toggle()
@@ -86,6 +74,11 @@ struct DetailedLogView: View {
             
         }
         .navigationTitle(log.name)
+        
+        .onDisappear {
+            // might be naive...
+            Sound.stopAll()
+        }
     }
 }
 

@@ -22,9 +22,9 @@
 		C61D1B4327C354F8007071C7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B4227C354F8007071C7 /* RecordingView.swift */; };
 		C61D1B4527C35527007071C7 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B4427C35527007071C7 /* AudioPlayer.swift */; };
 		C61D1B4A27C477D5007071C7 /* Transcriptionist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61D1B4927C477D5007071C7 /* Transcriptionist.swift */; };
-		C61D1B5027C566DE007071C7 /* Subsonic in Frameworks */ = {isa = PBXBuildFile; productRef = C61D1B4F27C566DE007071C7 /* Subsonic */; };
+		C61D1B5527C6F747007071C7 /* SwiftySound in Frameworks */ = {isa = PBXBuildFile; productRef = C61D1B5427C6F747007071C7 /* SwiftySound */; };
 		C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628523C27B9A9D0009CFBF8 /* CardView.swift */; };
-		C628525227B9C475009CFBF8 /* LiveSpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524D27B9C475009CFBF8 /* LiveSpeechRecognizer.swift */; };
+		C628525227B9C475009CFBF8 /* LiveRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524D27B9C475009CFBF8 /* LiveRecognizer.swift */; };
 		C628525327B9C475009CFBF8 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524E27B9C475009CFBF8 /* LogEntry.swift */; };
 		C628525427B9C475009CFBF8 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524F27B9C475009CFBF8 /* Storage.swift */; };
 		C67FE3BE27B02DF0008ADD94 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BD27B02DF0008ADD94 /* Realm */; };
@@ -55,7 +55,7 @@
 		C61D1B4427C35527007071C7 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		C61D1B4927C477D5007071C7 /* Transcriptionist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcriptionist.swift; sourceTree = "<group>"; };
 		C628523C27B9A9D0009CFBF8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		C628524D27B9C475009CFBF8 /* LiveSpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSpeechRecognizer.swift; sourceTree = "<group>"; };
+		C628524D27B9C475009CFBF8 /* LiveRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveRecognizer.swift; sourceTree = "<group>"; };
 		C628524E27B9C475009CFBF8 /* LogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
 		C628524F27B9C475009CFBF8 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C67FE3CD27B466A4008ADD94 /* misc */ = {isa = PBXFileReference; lastKnownFileType = text; path = misc; sourceTree = "<group>"; };
@@ -72,8 +72,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */,
+				C61D1B5527C6F747007071C7 /* SwiftySound in Frameworks */,
 				C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */,
-				C61D1B5027C566DE007071C7 /* Subsonic in Frameworks */,
 				C67FE3BE27B02DF0008ADD94 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,7 +146,7 @@
 		C61D1B4827C45C4F007071C7 /* Audio Models */ = {
 			isa = PBXGroup;
 			children = (
-				C628524D27B9C475009CFBF8 /* LiveSpeechRecognizer.swift */,
+				C628524D27B9C475009CFBF8 /* LiveRecognizer.swift */,
 				C61D1B4927C477D5007071C7 /* Transcriptionist.swift */,
 				C61D1B4027C352BC007071C7 /* AudioRecorder.swift */,
 				C61D1B4427C35527007071C7 /* AudioPlayer.swift */,
@@ -206,7 +206,7 @@
 				C67FE3BD27B02DF0008ADD94 /* Realm */,
 				C67FE3BF27B02DF0008ADD94 /* RealmSwift */,
 				C61D1B3827BEBCCF007071C7 /* PopupView */,
-				C61D1B4F27C566DE007071C7 /* Subsonic */,
+				C61D1B5427C6F747007071C7 /* SwiftySound */,
 			);
 			productName = "Captains Log";
 			productReference = 740C2C7C2722479C004C95CF /* Captains Log.app */;
@@ -238,7 +238,7 @@
 			packageReferences = (
 				C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */,
-				C61D1B4E27C566DE007071C7 /* XCRemoteSwiftPackageReference "Subsonic" */,
+				C61D1B5327C6F747007071C7 /* XCRemoteSwiftPackageReference "SwiftySound" */,
 			);
 			productRefGroup = 740C2C7D2722479C004C95CF /* Products */;
 			projectDirPath = "";
@@ -276,7 +276,7 @@
 				74ADE7402724F997002D11EB /* DetailedLogView.swift in Sources */,
 				C61D1B4127C352BC007071C7 /* AudioRecorder.swift in Sources */,
 				C61D1B3227BDCB80007071C7 /* EncryptionView.swift in Sources */,
-				C628525227B9C475009CFBF8 /* LiveSpeechRecognizer.swift in Sources */,
+				C628525227B9C475009CFBF8 /* LiveRecognizer.swift in Sources */,
 				C61D1B2D27BDACCC007071C7 /* User.swift in Sources */,
 				74ADE73C2724F089002D11EB /* LogbookView.swift in Sources */,
 				740C2C822722479C004C95CF /* TitleView.swift in Sources */,
@@ -486,11 +486,11 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		C61D1B4E27C566DE007071C7 /* XCRemoteSwiftPackageReference "Subsonic" */ = {
+		C61D1B5327C6F747007071C7 /* XCRemoteSwiftPackageReference "SwiftySound" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/twostraws/Subsonic";
+			repositoryURL = "https://github.com/adamcichy/SwiftySound";
 			requirement = {
-				branch = main;
+				branch = master;
 				kind = branch;
 			};
 		};
@@ -510,10 +510,10 @@
 			package = C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
 		};
-		C61D1B4F27C566DE007071C7 /* Subsonic */ = {
+		C61D1B5427C6F747007071C7 /* SwiftySound */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C61D1B4E27C566DE007071C7 /* XCRemoteSwiftPackageReference "Subsonic" */;
-			productName = Subsonic;
+			package = C61D1B5327C6F747007071C7 /* XCRemoteSwiftPackageReference "SwiftySound" */;
+			productName = SwiftySound;
 		};
 		C67FE3BD27B02DF0008ADD94 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
