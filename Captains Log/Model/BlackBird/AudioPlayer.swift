@@ -1,26 +1,14 @@
-//AudioPlayer.swift
-
-//Created by BLCKBIRDS on 29.10.19.
-//Visit www.BLCKBIRDS.com for more.
-
 import Foundation
 import SwiftUI
 import Combine
 import AVFoundation
 
-class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
-    
-    let objectWillChange = PassthroughSubject<AudioPlayer, Never>()
-    
-    var isPlaying = false {
-        didSet {
-            objectWillChange.send(self)
-        }
-    }
+class AudioPlayer: ObservableObject {
     
     var audioPlayer: AVAudioPlayer!
-    
-    func startPlayback (audio: URL) {
+    var isPlaying = false
+
+    func startPlayback(audio: URL) {
         
         let playbackSession = AVAudioSession.sharedInstance()
         
@@ -32,7 +20,6 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audio)
-            audioPlayer.delegate = self
             audioPlayer.play()
             isPlaying = true
         } catch {
@@ -43,12 +30,6 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func stopPlayback() {
         audioPlayer.stop()
         isPlaying = false
-    }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if flag {
-            isPlaying = false
-        }
     }
     
 }

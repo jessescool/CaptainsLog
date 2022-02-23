@@ -79,3 +79,9 @@ public func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
 }
+
+public func getAudioRecording(id: UUID) -> URL {
+    return getDocumentsDirectory().appendingPathComponent("\(id.uuidString).m4a")
+}
+
+//getDocumentsDirectory().appendingPathComponent("\(log.id.uuidString).m4a")

@@ -27,6 +27,15 @@
           "revision": "9dff9f2862240d521ad6ad599541269177ddb993",
           "version": "10.22.0"
         }
+      },
+      {
+        "package": "Subsonic",
+        "repositoryURL": "https://github.com/twostraws/Subsonic",
+        "state": {
+          "branch": "main",
+          "revision": "b9ccab1c94294e2dd87b83d2c9cfb8da01629f84",
+          "version": null
+        }
       }
     ]
   },

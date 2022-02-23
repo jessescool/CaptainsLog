@@ -1,10 +1,13 @@
 import SwiftUI
 import RealmSwift
+import Subsonic
 
 struct DetailedLogView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedRealmObject var log: LogEntry // not sure if this is final
     @State private var isEditing: Bool = false
+    @StateObject private var audioPlayer = AudioPlayer()
+    
     
     var body: some View {
         VStack {
@@ -33,7 +36,11 @@ struct DetailedLogView: View {
                     HStack {
                         Label("Audio", systemImage: "speaker")
                         Spacer()
-                        // audio player
+                        Button {
+                            audioPlayer.startPlayback(audio: getAudioRecording(id: log.id)) // a little sketch...
+                        } label: {
+                            Image(systemName: "play")
+                        }
                     }
                 }
                 Section(header: Text("Transcription")) {
@@ -50,6 +57,13 @@ struct DetailedLogView: View {
             .listStyle(.inset)
             
             VStack {
+                
+                Button {
+                    recognizeFile(url: getAudioRecording(id: log.id))
+                } label: {
+                    Text("Transcribe")
+                }
+                
                 Button(isEditing ? "Done" : "Edit...") {
                     isEditing.toggle()
                 }
