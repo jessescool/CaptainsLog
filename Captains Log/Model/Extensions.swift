@@ -1,5 +1,7 @@
 import SwiftUI
+import Speech
 
+// For using @AppStorage with Array
 extension Array: RawRepresentable where Element: Codable {
     public init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),
@@ -20,6 +22,7 @@ extension Array: RawRepresentable where Element: Codable {
     }
 }
 
+// Hex Color
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -47,11 +50,13 @@ extension Color {
     }
 }
 
+// Custom app colors
 extension Color {
     static let defaultBlue = Color(hue: 0.576, saturation: 0.672, brightness: 0.568)
     static let recordRed = Color(hue: 0, saturation: 0.9, brightness: 0.69)
 }
 
+// Nav bar icon format
 extension Image {
     func navBarIcon(withPadding type: Edge.Set) -> some View {
         self
@@ -61,12 +66,14 @@ extension Image {
     }
 }
 
+// Sorting enum for Log Book
 enum Sort: String {
     case date = "date"
     case name = "name"
     case duration = "duration"
 }
 
+// Date to string with formatting as parameter
 extension Date {
     func toString(dateFormat format: String) -> String {
         let dateFormatter = DateFormatter()
@@ -75,13 +82,35 @@ extension Date {
     }
 }
 
+// Thanks @twostraws
 public func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
 }
 
+// Pulls audio by UUID from documents folder
 public func getAudioRecording(id: UUID) -> URL {
     return getDocumentsDirectory().appendingPathComponent("\(id.uuidString).m4a")
 }
 
-//getDocumentsDirectory().appendingPathComponent("\(log.id.uuidString).m4a")
+// SFSpeech auth check
+extension SFSpeechRecognizer {
+    static func hasAuthorizationToRecognize() async -> Bool {
+        await withCheckedContinuation { continuation in
+            requestAuthorization { status in
+                continuation.resume(returning: status == .authorized)
+            }
+        }
+    }
+}
+
+// AVAudio auth check
+extension AVAudioSession {
+    func hasPermissionToRecord() async -> Bool {
+        await withCheckedContinuation { continuation in
+            requestRecordPermission { authorized in
+                continuation.resume(returning: authorized)
+            }
+        }
+    }
+}

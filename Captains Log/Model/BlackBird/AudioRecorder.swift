@@ -1,7 +1,5 @@
 import AVFAudio
 
-
-
 class AudioRecorder: ObservableObject {
     
     var audioRecorder: AVAudioRecorder!

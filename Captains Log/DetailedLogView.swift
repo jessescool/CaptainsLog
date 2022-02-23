@@ -59,7 +59,11 @@ struct DetailedLogView: View {
                 
                 Button {
                     Task {
-                        await recognizeFile(url: getAudioRecording(id: log.id))
+                        do {
+                            try await recognizeFile(url: getAudioRecording(id: log.id))
+                        } catch {
+                            print("Unexpected error: \(error)")
+                        }
                     }
                 } label: {
                     Text("Transcribe")

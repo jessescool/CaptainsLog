@@ -5,7 +5,6 @@ import RealmSwift
 struct RecordView: View {
     @Binding var showingRecordView: Bool
     @StateRealmObject var newLog = LogEntry()
-    @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording: Bool = false
     @FocusState private var isNaming: Bool
     
@@ -24,16 +23,9 @@ struct RecordView: View {
             
             Spacer()
             
-            Text(speechRecognizer.transcript)
-                .padding()
-
-            Spacer()
-            
             if isRecording {
                 Button(role: .destructive) {
-                    speechRecognizer.stopTranscribing()
                     
-                    // testing...
                     audioRecorder.stopRecording()
                     
                     isRecording = false
@@ -49,12 +41,28 @@ struct RecordView: View {
                     .focused($isNaming)
                 HStack {
                     Button("Confirm") {
-                        newLog.transcription = speechRecognizer.transcript
                         if newLog.name.isEmpty {
                             let realm = try! Realm()
                             newLog.name = "Log \(realm.objects(LogEntry.self).count + 1)"
                         }
                         store(log: newLog)
+                        
+                        Task(priority: .high) {
+                            do {
+                                
+                                // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
+                                let thawedLog = newLog.thaw()
+                                let transcription: String = try await recognizeFile(url: getAudioRecording(id: newLog.id)).joined(separator: ". ")
+                                
+                                let realm = try! await Realm()
+                                try! realm.write {
+                                    thawedLog?.transcription = transcription
+                                }
+                                
+                            } catch {
+                                print("Unexpected error: \(error)")
+                            }
+                        }
                         
                         showingRecordView = false
                     }.buttonStyle(.bordered)
@@ -70,8 +78,6 @@ struct RecordView: View {
         
         .onAppear {
             isRecording = true
-            speechRecognizer.reset()
-            speechRecognizer.transcribe()
             
             // testing...
             audioRecorder.recordingName = newLog.id.uuidString // probably not the best way... maybe a lazy property in recorder class
