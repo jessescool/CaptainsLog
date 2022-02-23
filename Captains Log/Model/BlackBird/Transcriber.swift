@@ -9,16 +9,14 @@ import Speech
 
 func recognizeFile(url: URL) -> [String] {
     
-    var transcript: [String] = []
-
     guard let recognizer = SFSpeechRecognizer() else {
         // Not supported in user's locale
-        return ["Error"]
+        return ["nah"]
     }
     
     if !recognizer.isAvailable {
         // SpeechRecognizer not available
-        return ["Error"]
+        return ["nah"]
     }
     
     
@@ -33,19 +31,26 @@ func recognizeFile(url: URL) -> [String] {
     
     print("Supports ODR: \(recognizer.supportsOnDeviceRecognition)")
 
-    
-    recognizer.recognitionTask(with: request) { (result, error) in
-        guard let result = result else {
-            print(error)
-            return
+    func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) -> [String] {
+        var transcript: [String] = []
+        
+        recognizer.recognitionTask(with: request) { (result, error) in
+            guard let result = result else {
+                print(error)
+                return
+            }
+            
+            print(result.bestTranscription.formattedString)
+            transcript.append(result.bestTranscription.formattedString)
+
         }
         
-        print(result.bestTranscription.formattedString)
-        transcript.append(result.bestTranscription.formattedString)
-
+        return transcript
     }
-
-    // contextualStrings for personal phrases...
     
+    return recognize(request: request, with: recognizer)
 }
 
+
+
+// contextualStrings for personal phrases...
