@@ -23,6 +23,7 @@ struct RecordView: View {
             
             Spacer()
             
+            // Stop recording button
             if isRecording {
                 Button(role: .destructive) {
                     
@@ -35,18 +36,28 @@ struct RecordView: View {
                 }
                 .buttonStyle(RecordButton())
             } else {
+                // Enter name
                 TextField("Name", text: $newLog.name)
                     .textFieldStyle(.roundedBorder)
                     .padding(.horizontal)
                     .focused($isNaming)
+                
+                // Confirm or Cancel
                 HStack {
                     Button("Confirm") {
+                        
+                        // giving default name
                         if newLog.name.isEmpty {
-                            let realm = try! Realm()
                             newLog.name = "Log \(realm.objects(LogEntry.self).count + 1)"
                         }
+                        
+                        // saves log to realm
                         store(log: newLog)
                         
+                        // hides sheet
+                        showingRecordView = false
+                        
+                        // Creates async task to transcribe new recording
                         Task(priority: .high) {
                             do {
                                 
@@ -64,12 +75,14 @@ struct RecordView: View {
                             }
                         }
                         
-                        showingRecordView = false
-                    }.buttonStyle(.bordered)
+                    }
+                    .buttonStyle(.bordered)
                     
                     Button("Cancel", role: .destructive) {
                         showingRecordView = false
-                    }.buttonStyle(.bordered)
+                    }
+                    .buttonStyle(.bordered)
+                    
                 }
                 .padding(.bottom)
             }

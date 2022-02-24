@@ -47,7 +47,7 @@ struct DetailedLogView: View {
             Spacer()
             
             Button {
-                Sound.play(url: getAudioRecording(id: log.id))
+                Sound.play(url: log.audioURL)
             } label: {
                 Image(systemName: "play")
                     .imageScale(.large)
