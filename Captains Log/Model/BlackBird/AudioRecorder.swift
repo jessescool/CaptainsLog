@@ -3,7 +3,6 @@ import AVFAudio
 class AudioRecorder: ObservableObject {
     
     var audioRecorder: AVAudioRecorder!
-    var recording = false
     
     enum RecorderError: Error {
         case notPermittedToRecord
@@ -52,20 +51,27 @@ class AudioRecorder: ObservableObject {
     
     /// Begins recording.
     func startRecording() {
-        recording = true
         audioRecorder.record()
     }
     
     /// Pauses audio recording.
     func pauseRecording() {
-        recording = false
         audioRecorder.pause()
+    }
+    
+    /// Resumes recording, just for clarity
+    func resumeRecording() {
+        audioRecorder.record()
     }
     
     /// Stops audio recording.
     func stopRecording() {
         audioRecorder.stop()
-        recording = false
+    }
+    
+    /// Returns Bool
+    func isRecording() -> Bool {
+        return audioRecorder.isRecording
     }
     
     /// Returns time since recording began.
