@@ -20,9 +20,7 @@ class AudioRecorder: ObservableObject {
             }
         }
     }
-    
-//    "\(Date().toString(dateFormat: "MM-dd-yyyy HH:mm:ss")).m4a"
-    
+
     /// Creates and configues an AVAudioSession object, creates and configures AVAudioRecorder object,  creates an audio file in Documents directory.
     func prepare(filepath url: URL) throws {
         
@@ -58,6 +56,12 @@ class AudioRecorder: ObservableObject {
         audioRecorder.record()
     }
     
+    /// Pauses audio recording.
+    func pauseRecording() {
+        recording = false
+        audioRecorder.pause()
+    }
+    
     /// Stops audio recording.
     func stopRecording() {
         audioRecorder.stop()
@@ -70,13 +74,13 @@ class AudioRecorder: ObservableObject {
     }
     
     /// Deletes audio files with given URL
-    func deleteRecording(urlsToDelete: [URL]) {
+    func deleteRecording(urlsToDelete: [URL]) throws {
         for url in urlsToDelete {
             print("Deleting \(url)")
             do {
                try FileManager.default.removeItem(at: url) // this may not work
             } catch {
-                RecorderError.deleteError
+                throw RecorderError.deleteError
             }
         }
     }

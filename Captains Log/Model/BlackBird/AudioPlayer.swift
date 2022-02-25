@@ -6,7 +6,7 @@ import AVFoundation
 class AudioPlayer: ObservableObject {
     
     var audioPlayer: AVAudioPlayer!
-    var isPlaying = false
+    var playing = false
 
     func startPlayback(audio: URL) {
         
@@ -21,7 +21,7 @@ class AudioPlayer: ObservableObject {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audio)
             audioPlayer.play()
-            isPlaying = true
+            playing = true
         } catch {
             print("Playback failed.")
         }
@@ -29,7 +29,7 @@ class AudioPlayer: ObservableObject {
     
     func stopPlayback() {
         audioPlayer.stop()
-        isPlaying = false
+        playing = false
     }
     
 }
