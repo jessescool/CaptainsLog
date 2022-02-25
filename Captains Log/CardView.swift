@@ -10,11 +10,11 @@ struct CardView: View {
             HStack {
                 Label("\(log.date.formatted(date: .abbreviated, time: .omitted))", systemImage: "calendar")
                 Spacer()
-                Label("\(log.duration, specifier: "%.2f")s", systemImage: "hourglass.tophalf.filled")
+                Label("\(Int(log.duration.rounded()))s", systemImage: "hourglass.tophalf.filled")
             }
         }
         .padding()
-        .foregroundColor(Color(hue: 0.576, saturation: 0.672, brightness: 0.568))
+        .foregroundColor(.accentColor)
     }
 }
 

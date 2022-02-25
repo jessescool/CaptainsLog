@@ -19,7 +19,7 @@ import SwiftUI
 struct RecordButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.recordRed)
+            .foregroundColor(.accentColor)
             .font(.system(size: 80, weight: .ultraLight))
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }

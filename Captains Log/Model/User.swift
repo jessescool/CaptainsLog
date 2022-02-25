@@ -1,10 +1,10 @@
 import Foundation
 import SwiftUI
 
-enum Theme: Int { // int?
-    case light
-    case dark
-    case none
+enum Theme: String {
+    case light = "light"
+    case dark = "dark"
+    case none = "nil"
     
     var scheme: ColorScheme? {
         switch self {
@@ -15,10 +15,10 @@ enum Theme: Int { // int?
     }
 }
 
-enum AppAccentColor: Int, CaseIterable, Identifiable { // int?
-    case red
-    case blue
-    case yellow
+enum AppAccentColor: String, CaseIterable, Identifiable {
+    case red = "Commanding red"
+    case blue = "Scientific blue"
+    case yellow = "Operational yellow"
     var id: Self { self }
     
     var inColor: Color { // bad name...
@@ -29,6 +29,8 @@ enum AppAccentColor: Int, CaseIterable, Identifiable { // int?
         }
     }
 }
+
+// Color isn't updating....
 
 enum Sort: String, CaseIterable, Identifiable {
     case date = "date"
@@ -45,7 +47,7 @@ class AppSettings: ObservableObject {
     @AppStorage("authenticate") var authenticate: Bool = false
     @AppStorage("forcedTheme") var forcedTheme: Theme = .none
     
-    @AppStorage("accentColor") var accentColor: AppAccentColor = .red
+    @AppStorage("accentColor") var accentColor: AppAccentColor = .blue
     
 }
 

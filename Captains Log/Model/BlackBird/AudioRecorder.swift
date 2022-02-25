@@ -25,7 +25,10 @@ class AudioRecorder: ObservableObject {
     }
     
 //    "\(Date().toString(dateFormat: "MM-dd-yyyy HH:mm:ss")).m4a"
-    /// Creates a file in the File System, records audio to it
+    
+    /// Creates and configues an AVAudioSession object, creates an audio file in Documents directory, creates and configures AVAudioRecorder object with path to new audio file.
+    /// Begins recording.
+
     func startRecording() {
         
         let recordingSession = AVAudioSession.sharedInstance()
@@ -58,14 +61,20 @@ class AudioRecorder: ObservableObject {
         }
     }
     
-    
+    /// Stops audio recording.
     func stopRecording() {
         audioRecorder.stop()
         isRecording = false
     }
     
+    /// Returns time since recording began.
+    func getDuration() -> TimeInterval {
+        return audioRecorder.currentTime
+    }
+    
+    
+    /// Deletes audio files with given URL
     func deleteRecording(urlsToDelete: [URL]) {
-        
         for url in urlsToDelete {
             print(url)
             do {
@@ -75,8 +84,9 @@ class AudioRecorder: ObservableObject {
             }
         }
     }
+    
+    
 }
-
     
 
 

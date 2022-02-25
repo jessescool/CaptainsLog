@@ -50,20 +50,19 @@ extension Color {
     }
 }
 
-// Custom app colors
-extension Color {
-    static let defaultBlue = Color(hue: 0.576, saturation: 0.672, brightness: 0.568)
-    static let recordRed = Color(hue: 0, saturation: 0.9, brightness: 0.69)
-}
-
 // Nav bar icon format
 extension Image {
     func navBarIcon(withPadding type: Edge.Set) -> some View {
         self
-            .foregroundColor(.defaultBlue)
+            .foregroundColor(.accentColor)
             .imageScale(.large)
             .padding(type, 25)
     }
+}
+
+// Custom color
+extension Color {
+    static let accentColor = Color(hex: "2980B9")
 }
 
 // Date to string with formatting as parameter

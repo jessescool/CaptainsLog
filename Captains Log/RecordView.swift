@@ -27,6 +27,7 @@ struct RecordView: View {
             if isRecording {
                 Button(role: .destructive) {
                     
+                    newLog.duration = audioRecorder.getDuration()
                     audioRecorder.stopRecording()
                     
                     isRecording = false
