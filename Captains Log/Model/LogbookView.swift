@@ -6,11 +6,11 @@ struct LogbookView: View {
     @State private var filtering = false
     
     @State private var searchText = ""
-    @State private var sortedBy: Sort = .date
+    @State private var sortedBy: String = UserDefaults.standard.string(forKey: "defaultSort") ?? "date"
     @State private var sortOrderAscending: Bool = true
     var relevantLogs: Results<LogEntry> {
         if searchText.isEmpty {
-            return logs.sorted(byKeyPath: sortedBy.rawValue, ascending: sortOrderAscending)
+            return logs.sorted(byKeyPath: sortedBy, ascending: sortOrderAscending)
         } else {
             // obviously not final
             lazy var matches: Results<LogEntry> = {
@@ -18,7 +18,7 @@ struct LogbookView: View {
                     $0.name.contains(searchText) || $0.transcription.contains(searchText)
                 }
             }()
-            return matches.sorted(byKeyPath: sortedBy.rawValue, ascending: sortOrderAscending)
+            return matches.sorted(byKeyPath: sortedBy, ascending: sortOrderAscending)
         }
     }
     
@@ -45,9 +45,9 @@ struct LogbookView: View {
                 }
                 .confirmationDialog("Sort logs by...", isPresented: $filtering, titleVisibility: .visible) {
                     
-                    Button(Sort.name.rawValue) { sortedBy = .name }
-                    Button(Sort.date.rawValue) { sortedBy = .date }
-                    Button(Sort.duration.rawValue) { sortedBy = .duration }
+                    Button(Sort.name.rawValue) { sortedBy = Sort.name.rawValue }
+                    Button(Sort.date.rawValue) { sortedBy = Sort.date.rawValue }
+                    Button(Sort.duration.rawValue) { sortedBy = Sort.duration.rawValue }
                     
                 }
             }

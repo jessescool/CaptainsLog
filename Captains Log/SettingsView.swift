@@ -33,18 +33,7 @@ struct SettingsView: View {
     @State private var showingReset: Bool = false
     @State private var showingDefaultSort: Bool = false
 
-    @AppStorage("hapticFeedback") private var hapticFeedback: Bool = true
-    @AppStorage("defaultSort") private var defaultSort: Sort = Sort.name
-    @AppStorage("authenticate") private var authenticate: Bool = false
-    
-    @Environment(\.colorScheme) var currentSystemTheme
-    @AppStorage("syncWithSystemTheme") private var syncWithSystemTheme: Bool = true
-    @AppStorage("forcedThemeString") private var forcedThemeString: String = "light"
-    
-    // NEEDS WORK
-    @AppStorage("accentColorHex") private var accentColorHex: String = "BC3333"
-    @State private var accentColor: Color = Color.red
-    @State private var forcedTheme: ColorScheme = .light // needs AppStorage
+    @ObservedObject var appSettings = AppSettings.settings
     
     var body: some View {
         VStack {
@@ -56,19 +45,19 @@ struct SettingsView: View {
                         showingDefaultSort = true
                     } label: {
                         Row(text: "Default Sort", icon: Image(systemName: "arrow.up.arrow.down"),
-                            appendage: Text(defaultSort.rawValue)
+                            appendage: Text(appSettings.defaultSort)
                                 .foregroundColor(.secondary)
                         )
                     }
                     .confirmationDialog("Default sorting method:", isPresented: $showingDefaultSort, titleVisibility: .hidden) {
-                        Button(Sort.name.rawValue) { defaultSort = Sort.name }
-                        Button(Sort.date.rawValue) { defaultSort = Sort.date }
-                        Button(Sort.duration.rawValue) { defaultSort = Sort.duration }
+                        Button(Sort.name.rawValue) { appSettings.defaultSort = Sort.name.rawValue }
+                        Button(Sort.date.rawValue) { appSettings.defaultSort = Sort.date.rawValue }
+                        Button(Sort.duration.rawValue) { appSettings.defaultSort = Sort.duration.rawValue }
                     }
                     
                     
                     Row(text: "Haptic Feedback", icon: Image(systemName: "waveform"),
-                        appendage: Toggle("Toggle haptic feedback", isOn: $hapticFeedback)
+                        appendage: Toggle("Toggle haptic feedback", isOn: $appSettings.hapticFeedback)
                             .labelsHidden()
                     )
                     
@@ -76,29 +65,33 @@ struct SettingsView: View {
                 
                 Section(header: Text("Theme")) {
                     
-                    Row(text: "Accent Color", icon: Image(systemName: "paintpalette"),
-                        appendage: ColorPicker("Set an accent color", selection: $accentColor).labelsHidden()
-                    )
-                    
-                    Row(text: "Use System Theme", icon: Image(systemName: "moon"),
-                        appendage: Toggle("Use System Mode", isOn: $syncWithSystemTheme).labelsHidden()
-                    )
-                    
-                    if !syncWithSystemTheme {
-                        Picker("Choose a theme", selection: $forcedTheme) {
-                            Image(systemName: "sun.max").tag(ColorScheme.light)
-                            Image(systemName: "moon").tag(ColorScheme.dark)
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(.horizontal)
+                    NavigationLink(destination: AccentColorView()) {
+                        Row(text: "Accent Color", icon: Image(systemName: "paintpalette"),
+                            appendage: Image(systemName: "circle.fill")
+                                .foregroundColor(appSettings.accentColor.inColor)
+                        )
                     }
+                    
+                    
+                    Row(text: "Theme", icon: Image(systemName: "moon"),
+                        appendage: Picker("Choose a theme", selection: $appSettings.forcedTheme) {
+                        
+                        Image(systemName: "arrow.2.squarepath").tag(Theme.none)
+                        Image(systemName: "sun.max").tag(Theme.light)
+                        Image(systemName: "moon").tag(Theme.dark)
+                        
+                        }
+                            .pickerStyle(.segmented)
+                            .padding(.leading) // BAD: attempting to resize splitting row
+                    )
+                    
                 
                 }
                 
                 Section(header: Text("Privacy & Security")) {
                     
                     Row(text: "FaceID & Passcode", icon: Image(systemName: "faceid"),
-                        appendage: Toggle("Toggle Face ID & Passcode", isOn: $authenticate).labelsHidden()
+                        appendage: Toggle("Toggle Face ID & Passcode", isOn: $appSettings.authenticate).labelsHidden()
                     )
                     
                     NavigationLink(destination: EncryptionView()) {

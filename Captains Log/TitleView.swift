@@ -66,11 +66,11 @@ struct TitleView: View {
             } label: {
                 Image(systemName: "record.circle")
             }
-                .buttonStyle(RecordButton())
-                .padding()
-                .sheet(isPresented: $showingRecordView /* onDismiss: reset log sitaution */ ) {
-                    RecordView(showingRecordView: $showingRecordView)
-                }
+            .buttonStyle(RecordButton())
+            .padding()
+            .sheet(isPresented: $showingRecordView /* onDismiss: reset log sitaution */ ) {
+                RecordView(showingRecordView: $showingRecordView)
+            }
         }
     }
 }
