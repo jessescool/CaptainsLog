@@ -4,10 +4,10 @@ import RealmSwift
 
 struct RecordView: View {
     @Binding var showingRecordView: Bool
-    @StateRealmObject var newLog = LogEntry()
     @State private var isRecording: Bool = false
     @FocusState private var isNaming: Bool
     
+    @StateRealmObject var newLog = LogEntry()
     @StateObject var audioRecorder = AudioRecorder()
     
     var body: some View {
@@ -91,11 +91,18 @@ struct RecordView: View {
         .padding()
         
         .onAppear {
-            isRecording = true
             
-            // testing...
-            audioRecorder.recordingName = newLog.id.uuidString // probably not the best way... maybe a lazy property in recorder class
+            let newLogRecordingPath = getDocumentsDirectory().appendingPathComponent("\(newLog.id.uuidString).m4a")
+
+            do {
+                try audioRecorder.prepare(filepath: newLogRecordingPath)
+            } catch {
+                print(error)
+            }
+            
+            isRecording = true
             audioRecorder.startRecording()
+            
         }
 
     }

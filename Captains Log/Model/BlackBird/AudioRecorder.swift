@@ -3,10 +3,7 @@ import AVFAudio
 class AudioRecorder: ObservableObject {
     
     var audioRecorder: AVAudioRecorder!
-    var isRecording = false
-    
-    var recordingName: String = ""
-
+    var recording = false
     
     enum RecorderError: Error {
         case notPermittedToRecord
@@ -26,10 +23,8 @@ class AudioRecorder: ObservableObject {
     
 //    "\(Date().toString(dateFormat: "MM-dd-yyyy HH:mm:ss")).m4a"
     
-    /// Creates and configues an AVAudioSession object, creates an audio file in Documents directory, creates and configures AVAudioRecorder object with path to new audio file.
-    /// Begins recording.
-
-    func startRecording() {
+    /// Creates and configues an AVAudioSession object, creates and configures AVAudioRecorder object,  creates an audio file in Documents directory.
+    func prepare(filepath url: URL) throws {
         
         let recordingSession = AVAudioSession.sharedInstance()
         
@@ -37,11 +32,9 @@ class AudioRecorder: ObservableObject {
             try recordingSession.setCategory(.playAndRecord, mode: .default)
             try recordingSession.setActive(true)
         } catch {
-            RecorderError.sessionFailed
+            throw RecorderError.sessionFailed
         }
-        
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("\(recordingName).m4a")
-        
+                
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 48000,
@@ -50,21 +43,25 @@ class AudioRecorder: ObservableObject {
         ]
         
         do {
-            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
-            print(audioFilename)
-            // audioRecorder.prepareToRecord() // Is this needed?
-            isRecording = true
-            audioRecorder.record()
+            audioRecorder = try AVAudioRecorder(url: url, settings: settings)
+            audioRecorder.prepareToRecord()
+            print(url)
         } catch {
-            isRecording = false
-            RecorderError.recordingError
+            throw RecorderError.recordingError
         }
+        
+    }
+    
+    /// Begins recording.
+    func startRecording() {
+        recording = true
+        audioRecorder.record()
     }
     
     /// Stops audio recording.
     func stopRecording() {
         audioRecorder.stop()
-        isRecording = false
+        recording = false
     }
     
     /// Returns time since recording began.
@@ -72,13 +69,12 @@ class AudioRecorder: ObservableObject {
         return audioRecorder.currentTime
     }
     
-    
     /// Deletes audio files with given URL
     func deleteRecording(urlsToDelete: [URL]) {
         for url in urlsToDelete {
-            print(url)
+            print("Deleting \(url)")
             do {
-               try FileManager.default.removeItem(at: url)
+               try FileManager.default.removeItem(at: url) // this may not work
             } catch {
                 RecorderError.deleteError
             }
