@@ -15,10 +15,11 @@ enum Theme: Int { // int?
     }
 }
 
-enum AppAccentColor: Int, CaseIterable { // int?
+enum AppAccentColor: Int, CaseIterable, Identifiable { // int?
     case red
     case blue
     case yellow
+    var id: Self { self }
     
     var inColor: Color { // bad name...
         switch self {
@@ -27,6 +28,13 @@ enum AppAccentColor: Int, CaseIterable { // int?
         case .yellow: return Color(hex: "F1C40F")
         }
     }
+}
+
+enum Sort: String, CaseIterable, Identifiable {
+    case date = "date"
+    case name = "name"
+    case duration = "duration"
+    var id: Self { self }
 }
 
 class AppSettings: ObservableObject {

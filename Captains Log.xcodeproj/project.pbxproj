@@ -108,7 +108,6 @@
 				740C2C9027224BAE004C95CF /* Model */,
 				740C2C832722479F004C95CF /* Assets.xcassets */,
 				740C2C882722479F004C95CF /* Info.plist */,
-				C69347A227BCDB950024D235 /* Extensions.swift */,
 				740C2C852722479F004C95CF /* Preview Content */,
 			);
 			path = "Captains Log";
@@ -132,6 +131,7 @@
 				C61D1B3A27C04578007071C7 /* Location.swift */,
 				74ADE73B2724F089002D11EB /* LogbookView.swift */,
 				C61D1B3C27C059CD007071C7 /* Buttons.swift */,
+				C69347A227BCDB950024D235 /* Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

@@ -49,11 +49,18 @@ struct SettingsView: View {
                                 .foregroundColor(.secondary)
                         )
                     }
-                    .confirmationDialog("Default sorting method:", isPresented: $showingDefaultSort, titleVisibility: .hidden) {
-                        Button(Sort.name.rawValue) { appSettings.defaultSort = Sort.name.rawValue }
-                        Button(Sort.date.rawValue) { appSettings.defaultSort = Sort.date.rawValue }
-                        Button(Sort.duration.rawValue) { appSettings.defaultSort = Sort.duration.rawValue }
+                    .confirmationDialog("Choose a default sorting method...", isPresented: $showingDefaultSort, titleVisibility: .visible) {
+                        
+                        ForEach(Sort.allCases) { rule in
+                            Button {
+                                appSettings.defaultSort = rule.rawValue
+                            } label: {
+                                Text(rule.rawValue)
+                            }
+                        }
+                        
                     }
+                    
                     
                     
                     Row(text: "Haptic Feedback", icon: Image(systemName: "waveform"),
@@ -65,11 +72,13 @@ struct SettingsView: View {
                 
                 Section(header: Text("Theme")) {
                     
-                    NavigationLink(destination: AccentColorView()) {
-                        Row(text: "Accent Color", icon: Image(systemName: "paintpalette"),
-                            appendage: Image(systemName: "circle.fill")
-                                .foregroundColor(appSettings.accentColor.inColor)
-                        )
+                    Picker(selection: $appSettings.accentColor) {
+                        ForEach(AppAccentColor.allCases) { color in
+                            Image(systemName: "circle.fill")
+                                .foregroundColor(color.inColor)
+                        }
+                    } label: {
+                        Label("Accent Color", systemImage: "paintpalette")
                     }
                     
                     

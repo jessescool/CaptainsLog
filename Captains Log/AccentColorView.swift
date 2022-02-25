@@ -11,14 +11,11 @@ struct AccentColorView: View {
     @ObservedObject var appSettings = AppSettings.settings
     
     var body: some View {
-        List(AppAccentColor.allCases, id: \.self) { color in
-            Button {
-                appSettings.accentColor = color
-            } label: {
+        Picker("Color", selection: $appSettings.accentColor) {
+            List(AppAccentColor.allCases) { color in
                 Image(systemName: "circle.fill")
                     .foregroundColor(color.inColor)
             }
-            
         }
         .navigationTitle("Accent Color")
     }

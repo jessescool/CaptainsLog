@@ -66,13 +66,6 @@ extension Image {
     }
 }
 
-// Sorting enum for Log Book
-enum Sort: String {
-    case date = "date"
-    case name = "name"
-    case duration = "duration"
-}
-
 // Date to string with formatting as parameter
 extension Date {
     func toString(dateFormat format: String) -> String {
