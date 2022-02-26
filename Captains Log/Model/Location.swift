@@ -1,33 +1,15 @@
-//import CoreLocation
-//
-//class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-//    @Published var authorizationStatus: CLAuthorizationStatus
-//
-//    private let locationManager: CLLocationManager
-//
-//    override init() {
-//        locationManager = CLLocationManager()
-//        authorizationStatus = locationManager.authorizationStatus
-//
-//        super.init()
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startUpdatingLocation()
-//    }
-//
-//    func requestPermission() {
-//        locationManager.requestWhenInUseAuthorization()
-//    }
-//
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        authorizationStatus = manager.authorizationStatus
-//    }
-//}
-
 import Foundation
 import CoreLocation
 import Combine
 
+enum RealmLocation: Double {
+    case latitude = "latitude"
+    case longitude = "longitude"
+}
+
+// Doesn't know what to do when no location is found
+
+@MainActor // not sure if this is foolproof, or if it needs to be so general.
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     private let locationManager = CLLocationManager()
@@ -36,7 +18,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var lastLocation: CLLocation? {
         didSet {
             if let oldValue = oldValue {
-                Task(priority: .background) {
+                Task(priority: .high) {
                     do {
                         placemark = try await geocode(location: oldValue)[0]
                     } catch {
@@ -109,27 +91,4 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-//    var placemarks: [CLPlacemark] = await geocode(location: lastLocation!)
 }
-
-//func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async throws -> [SFSpeechRecognitionResult] {
-//
-//    return await withCheckedContinuation { continuation in
-//
-//        var draft = [SFSpeechRecognitionResult]()
-//
-//        recognizer.recognitionTask(with: request) { (result, error) in
-//            guard let result = result else {
-//                print("ERROR: \(error!)")
-//                // should be throwing...
-//                return
-//            }
-//
-//            draft.append(result)
-//
-//            if result.isFinal {
-//                continuation.resume(returning: draft)
-//            }
-//        }
-//    }
-//}

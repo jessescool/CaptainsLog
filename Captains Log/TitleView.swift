@@ -9,9 +9,7 @@ struct TitleView: View {
     
     
     @StateObject var locationManager = LocationManager()
-    var placeName: String? {
-        return locationManager.placemark?.name
-    }
+    var placeName: String? { locationManager.placemark?.name }
 
     var body: some View {
         VStack {
