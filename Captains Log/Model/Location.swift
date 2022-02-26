@@ -2,11 +2,6 @@ import Foundation
 import CoreLocation
 import Combine
 
-enum RealmLocation: Double {
-    case latitude = "latitude"
-    case longitude = "longitude"
-}
-
 // Doesn't know what to do when no location is found
 
 @MainActor // not sure if this is foolproof, or if it needs to be so general.
