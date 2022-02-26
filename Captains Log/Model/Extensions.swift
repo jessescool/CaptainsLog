@@ -74,17 +74,6 @@ extension Date {
     }
 }
 
-// Thanks @twostraws
-public func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-}
-
-// Pulls audio by UUID from documents folder
-public func getAudioRecording(id: UUID) -> URL {
-    return getDocumentsDirectory().appendingPathComponent("\(id.uuidString).m4a")
-}
-
 // SFSpeech auth check
 extension SFSpeechRecognizer {
     static func hasAuthorizationToRecognize() async -> Bool {

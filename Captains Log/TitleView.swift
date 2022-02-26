@@ -3,11 +3,16 @@ import SwiftUI
 import CoreLocation
 
 struct TitleView: View {
+    @State var showingRecordView: Bool = false
     private var date = Date.now.formatted(date: .complete, time: .omitted)
     private var time = Date.now.formatted(date: .omitted, time: .shortened)
-
-    @State var showingRecordView: Bool = false
     
+    
+    @StateObject var locationManager = LocationManager()
+    var placeName: String? {
+        return locationManager.placemark?.name
+    }
+
     var body: some View {
         VStack {
             
@@ -36,10 +41,11 @@ struct TitleView: View {
                 HStack {
                     Image(systemName: "mappin")
                         .padding(.trailing)
-                    Text("Oakland") // to be changed
+                    Text(placeName ?? "Unknown")
                         .font(.title2)
                         .bold()
                 }
+                
                 HStack {
                     Image(systemName: "calendar")
                         .padding(.trailing)

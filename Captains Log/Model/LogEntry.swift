@@ -9,8 +9,10 @@ class LogEntry: Object, Identifiable {
     @Persisted var location: Double = 0.0
     @Persisted var transcription: String = ""
     
-    var audioURL: URL {
-        getAudioRecording(id: id)
+    var audio: URL {
+        get throws {
+            try getAudioURL(file: self.id)
+        }
     }
     
     convenience init(id: UUID = UUID(), name: String = "", date: Date = Date.now, duration: Double = 0.0, location: Double = 0.0, transcription: String = "") {

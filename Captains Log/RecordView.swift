@@ -64,7 +64,7 @@ struct RecordView: View {
                                 
                                 // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
                                 let thawedLog = newLog.thaw()
-                                let transcription: String = try await recognizeFile(url: getAudioRecording(id: newLog.id)).joined(separator: ". ")
+                                let transcription: String = try await recognizeFile(url: thawedLog!.audio).joined(separator: ". ")
                                 
                                 let realm = try! await Realm()
                                 try! realm.write {
@@ -92,7 +92,7 @@ struct RecordView: View {
         
         .onAppear {
             
-            let newLogRecordingPath = getDocumentsDirectory().appendingPathComponent("\(newLog.id.uuidString).m4a")
+            let newLogRecordingPath = documentsPath().appendingPathComponent("\(newLog.id.uuidString).m4a")
 
             do {
                 try audioRecorder.prepare(filepath: newLogRecordingPath)

@@ -5,6 +5,7 @@ enum TranscriptionistError: Error {
     case notAuthorizedToRecognize
     case recognizerIsUnavailable
     case noODR
+    case nilTask
     
     var message: String {
         switch self {
@@ -12,30 +13,39 @@ enum TranscriptionistError: Error {
         case .notAuthorizedToRecognize: return "Not authorized to recognize speech"
         case .recognizerIsUnavailable: return "Recognizer is unavailable"
         case .noODR: return "Device does not support local speech recognition"
+        case .nilTask: return "Task didn't work..."
         }
     }
 }
 
+/// Transcribes audio file asychronously...
 func recognizeFile(url: URL) async throws -> [String] {
     
-    guard let recognizer = SFSpeechRecognizer() else {
-        // locale issue...
-        throw TranscriptionistError.nilRecognizer
-    }
-    
-    if !recognizer.isAvailable {
-        // SpeechRecognizer not available
-        throw TranscriptionistError.recognizerIsUnavailable
-    }
-    
-    let recognitionResults: [SFSpeechRecognitionResult] = try await recognize(request: prepareRequest(from: url), with: recognizer)
+    let recognizer: SFSpeechRecognizer = try prepareRecognizer()
+    let request: SFSpeechURLRecognitionRequest = try prepareRequest(from: url)
+    let recognitionResults: [SFSpeechRecognitionResult] = try await recognize(request: request, with: recognizer)
     
     var transcript = [String]()
     for result in recognitionResults {
         transcript.append(result.bestTranscription.formattedString)
     }
     
+    /// Prepares and configures a SFSpeechRecognizer object
+    func prepareRecognizer() throws -> SFSpeechRecognizer {
+        guard let recognizer = SFSpeechRecognizer() else {
+            // locale issue...
+            throw TranscriptionistError.nilRecognizer
+        }
+        
+        if !recognizer.isAvailable {
+            // SpeechRecognizer not available
+            throw TranscriptionistError.recognizerIsUnavailable
+        }
+        
+        return recognizer
+    }
     
+    /// Prepares a SFSpeechURLRecognitionRequest if the SFSpeechRecognizer supports ODR, otherwise throws
     func prepareRequest(from url: URL) throws -> SFSpeechURLRecognitionRequest {
         let request = SFSpeechURLRecognitionRequest(url: url)
         request.shouldReportPartialResults = false
@@ -51,7 +61,8 @@ func recognizeFile(url: URL) async throws -> [String] {
         return request
     }
     
-    func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async -> [SFSpeechRecognitionResult] {
+    /// Initializes a SFSpeechRecognitionTask with a request and recognizer
+    func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async throws -> [SFSpeechRecognitionResult] {
         
         return await withCheckedContinuation { continuation in
             
@@ -60,6 +71,7 @@ func recognizeFile(url: URL) async throws -> [String] {
             recognizer.recognitionTask(with: request) { (result, error) in
                 guard let result = result else {
                     print("ERROR: \(error!)")
+                    // should be throwing...
                     return
                 }
                 
@@ -74,7 +86,6 @@ func recognizeFile(url: URL) async throws -> [String] {
     
     print(transcript)
     return transcript
-
 }
 
 // I want this to return a String....
