@@ -9,7 +9,7 @@ struct TitleView: View {
     
     
     @StateObject var locationManager = LocationManager()
-    var placeName: String? { locationManager.placemark?.name }
+    var placeName: String? { locationManager.associatedPlacemark?.subLocality }
 
     var body: some View {
         VStack {
@@ -34,31 +34,30 @@ struct TitleView: View {
             Spacer()
 
     // ----------
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 
                 HStack {
                     Image(systemName: "mappin")
-                        .padding(.trailing)
                     Text(placeName ?? "Unknown")
-                        .font(.title2)
                         .bold()
                 }
+                .padding()
                 
                 HStack {
                     Image(systemName: "calendar")
-                        .padding(.trailing)
                     Text("\(date)")
-                        .font(.title2)
                         .bold()
                 }
+                .padding()
+                
                 HStack {
                     Image(systemName: "clock")
-                        .padding(.trailing)
                     Text("\(time)")
-                        .font(.title2)
                         .bold()
                 }
+                .padding()
             }
+            .font(.title2)
             .padding()
                 
             Spacer()

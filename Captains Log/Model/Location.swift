@@ -2,20 +2,20 @@ import Foundation
 import CoreLocation
 import Combine
 
-// Doesn't know what to do when no location is found
-
 @MainActor // not sure if this is foolproof, or if it needs to be so general.
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
+    
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation? {
-        didSet {
-            if let oldValue = oldValue {
+        // Code that updates associatedPlacemark
+        willSet {
+            if let newValue = newValue {
                 Task(priority: .high) {
                     do {
-                        placemark = try await geocode(location: oldValue)[0]
+                        associatedPlacemark = try await geocode(location: newValue)[0]
                     } catch {
                         print(error)
                     }
@@ -23,7 +23,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     }
-    @Published var placemark: CLPlacemark?
+    @Published var associatedPlacemark: CLPlacemark?
 
     override init() {
         super.init()
@@ -58,10 +58,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         lastLocation = location
         print(#function, location)
     }
-          
-    
-    // Rest of the class
-
 
     func geocode(location: CLLocation) async throws -> [CLPlacemark] {
         
