@@ -7,7 +7,6 @@ struct TitleView: View {
     private var date = Date.now.formatted(date: .complete, time: .omitted)
     private var time = Date.now.formatted(date: .omitted, time: .shortened)
     
-    
     @StateObject var locationManager = LocationManager()
     var placeName: String? { locationManager.associatedPlacemark?.subLocality }
 

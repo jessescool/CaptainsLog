@@ -150,3 +150,10 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
 }
 
+
+
+                do {
+                    location = try await placemark(location: CLLocation(latitude: latitude, longitude: longitude))
+                } catch {
+                    print("effa")
+                }

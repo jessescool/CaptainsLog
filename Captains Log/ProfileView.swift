@@ -1,9 +1,10 @@
 import SwiftUI
+import CoreLocation
 
 struct ProfileView: View {
     
     var body: some View {
-        Text("hello")
+        Text("Hello")
     }
     
 }

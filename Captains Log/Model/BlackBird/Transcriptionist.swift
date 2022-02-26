@@ -64,6 +64,7 @@ func recognizeFile(url: URL) async throws -> [String] {
     /// Initializes a SFSpeechRecognitionTask with a request and recognizer
     func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async throws -> [SFSpeechRecognitionResult] {
         
+        // took away return
         return await withCheckedContinuation { continuation in
             
             var draft = [SFSpeechRecognitionResult]()

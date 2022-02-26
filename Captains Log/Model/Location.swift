@@ -15,7 +15,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if let newValue = newValue {
                 Task(priority: .high) {
                     do {
-                        associatedPlacemark = try await geocode(location: newValue)[0]
+                        associatedPlacemark = try await placemark(location: newValue)
                     } catch {
                         print(error)
                     }
@@ -58,28 +58,29 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         lastLocation = location
         print(#function, location)
     }
+    
+}
 
-    func geocode(location: CLLocation) async throws -> [CLPlacemark] {
+func placemark(location: CLLocation) async throws -> CLPlacemark {
+    let geocoder = CLGeocoder()
+    
+    return await withCheckedContinuation { continuation in
         
-        return await withCheckedContinuation { continuation in
-            
-            var possibleLocations = [CLPlacemark]()
-            
-            geocoder.reverseGeocodeLocation(location) { (places, error) in
-                guard let places = places else {
-                    return
-                }
-                
-                for place in places {
-                    possibleLocations.append(place)
-                }
-                
-                if possibleLocations.count > 0 {
-                    continuation.resume(returning: possibleLocations)
-                }
-                
+        var possibleLocations = [CLPlacemark]()
+        
+        geocoder.reverseGeocodeLocation(location) { (places, error) in
+            guard let places = places else {
+                return
             }
+            
+            for place in places {
+                possibleLocations.append(place)
+            }
+            
+            if possibleLocations.count > 0 {
+                continuation.resume(returning: possibleLocations[0])
+            }
+            
         }
     }
-    
 }
