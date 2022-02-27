@@ -61,6 +61,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
 }
 
+/// Needs CoreLocation, asynchronously gives a placemark to a CLLocation.
 func placemark(location: CLLocation) async throws -> CLPlacemark {
     let geocoder = CLGeocoder()
     
@@ -84,3 +85,26 @@ func placemark(location: CLLocation) async throws -> CLPlacemark {
         }
     }
 }
+
+//func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async throws -> [SFSpeechRecognitionResult] {
+//
+//    // took away return
+//    return await withCheckedContinuation { continuation in
+//
+//        var draft = [SFSpeechRecognitionResult]()
+//
+//        recognizer.recognitionTask(with: request) { (result, error) in
+//            guard let result = result else {
+//                print("ERROR: \(error!)")
+//                // should be throwing...
+//                return
+//            }
+//
+//            draft.append(result)
+//
+//            if result.isFinal {
+//                continuation.resume(returning: draft)
+//            }
+//        }
+//    }
+//}
