@@ -9,20 +9,21 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let geocoder = CLGeocoder()
     
     @Published var locationStatus: CLAuthorizationStatus?
-    @Published var lastLocation: CLLocation? {
-        // Code that updates associatedPlacemark
-        willSet {
-            if let newValue = newValue {
-                Task(priority: .high) {
-                    do {
-                        associatedPlacemark = try await placemark(location: newValue)
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
-        }
-    }
+    @Published var lastLocation: CLLocation?
+//    {
+//        // Code that updates associatedPlacemark
+//        willSet {
+//            if let newValue = newValue {
+//                Task(priority: .high) {
+//                    do {
+//                        associatedPlacemark = try await placemark(location: newValue)
+//                    } catch {
+//                        print(error)
+//                    }
+//                }
+//            }
+//        }
+//    }
     @Published var associatedPlacemark: CLPlacemark?
 
     override init() {

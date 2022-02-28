@@ -29,15 +29,17 @@ struct DetailedLogView: View {
                     HStack {
                         Label("Location", systemImage: "mappin.and.ellipse")
                         Spacer()
-                        Text("\(log.location)")
+                        Text("Location")
                     }
                 }
-                Section(header: Text("Transcription")) {
-                    if isEditing {
-                        TextEditor(text: $log.transcription)
-                            .foregroundColor(.gray)
-                    } else {
-                        Text(log.transcription)
+                
+                if log.transcript != nil {
+                    Section(header: Text("Transcription")) {
+                        if isEditing {
+                            // editing mode
+                        } else {
+                            Text(log.transcript ?? "mumbo jumbo")
+                        }
                     }
                 }
                 
@@ -48,7 +50,7 @@ struct DetailedLogView: View {
             
             Button {
                 do {
-                    try Sound.play(url: log.audio)
+//                    try Sound.play(url: log.audioURL)
                 } catch {
                     print(error)
                 }
@@ -90,7 +92,7 @@ struct DetailedLogView: View {
 struct DetailedLogView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DetailedLogView(log: LogEntry.tempData[0])
+            DetailedLogView(log: LogEntry(name: "Foodstuffs"))
         }
     }
 }

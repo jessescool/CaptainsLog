@@ -1,5 +1,6 @@
 import SwiftUI
 import Speech
+import RealmSwift
 
 // For using @AppStorage with Array
 extension Array: RawRepresentable where Element: Codable {
@@ -93,5 +94,16 @@ extension AVAudioSession {
                 continuation.resume(returning: authorized)
             }
         }
+    }
+}
+
+// URL type in RealmSwift
+extension URL: FailableCustomPersistable {
+    public typealias PersistedType = String
+    public init?(persistedValue: String) {
+        self.init(string: persistedValue)
+    }
+    public var persistableValue: PersistedType {
+        self.absoluteString
     }
 }

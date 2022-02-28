@@ -58,17 +58,20 @@ struct RecordView: View {
                         // hides sheet
                         showingRecordView = false
                         
+                        newLog.transcriptor = try! Transcriptor(file: newLog.audioURL!)
+                        
                         // Creates async task to transcribe new recording
                         Task(priority: .high) {
                             do {
                                 
                                 // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
                                 let thawedLog = newLog.thaw()
-                                let transcription: String = try await recognizeFile(url: thawedLog!.audio).joined(separator: ". ")
                                 
-                                let realm = try! await Realm()
-                                try! realm.write {
-                                    thawedLog?.transcription = transcription
+                                if let thawedLog = thawedLog {
+                                    let transcription: String = try await recognize(url: thawedLog.audioURL!).joined(separator: ". ")
+                                    try! realm.write {
+                                        thawedLog.transcript = transcription
+                                    }
                                 }
                                 
                             } catch {
@@ -104,7 +107,6 @@ struct RecordView: View {
             audioRecorder.startRecording()
             
         }
-
     }
 }
 

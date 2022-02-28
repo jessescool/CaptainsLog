@@ -1,6 +1,30 @@
 import Speech
+import RealmSwift
+import UIKit
 
-enum TranscriptionistError: Error {
+actor Transcriptor {
+    
+    
+    
+    // Contents
+    let file: URL
+    private(set) var enclosedTranscript: [String]?
+    
+    func updateTranscript() async {
+        let transcription = Task(priority: .high) { () -> [String]? in
+            return try? await recognize(url: self.file)
+        }
+        
+        self.enclosedTranscript = await transcription.value
+    }
+
+    init(file: URL) {
+        self.file = file
+    }
+
+}
+
+enum TranscriptorError: Error {
     case nilRecognizer
     case notAuthorizedToRecognize
     case recognizerIsUnavailable
@@ -19,7 +43,7 @@ enum TranscriptionistError: Error {
 }
 
 /// Transcribes audio file asychronously...
-func recognizeFile(url: URL) async throws -> [String] {
+func recognize(url: URL) async throws -> [String] {
     
     let recognizer: SFSpeechRecognizer = try prepareRecognizer()
     let request: SFSpeechURLRecognitionRequest = try prepareRequest(from: url)
@@ -34,12 +58,12 @@ func recognizeFile(url: URL) async throws -> [String] {
     func prepareRecognizer() throws -> SFSpeechRecognizer {
         guard let recognizer = SFSpeechRecognizer() else {
             // locale issue...
-            throw TranscriptionistError.nilRecognizer
+            throw TranscriptorError.nilRecognizer
         }
         
         if !recognizer.isAvailable {
             // SpeechRecognizer not available
-            throw TranscriptionistError.recognizerIsUnavailable
+            throw TranscriptorError.recognizerIsUnavailable
         }
         
         return recognizer
@@ -51,11 +75,14 @@ func recognizeFile(url: URL) async throws -> [String] {
         request.shouldReportPartialResults = false
         request.taskHint = .dictation
         
+        // contextualStrings for personal phrases...
+        
         if recognizer.supportsOnDeviceRecognition {
             request.requiresOnDeviceRecognition = true
             print("Supports ODR")
         } else {
-            throw TranscriptionistError.noODR
+            request.requiresOnDeviceRecognition = false
+//                throw TranscriptorError.noODR
         }
         
         return request
@@ -88,9 +115,3 @@ func recognizeFile(url: URL) async throws -> [String] {
     print(transcript)
     return transcript
 }
-
-// I want this to return a String....
-
-
-
-// contextualStrings for personal phrases...

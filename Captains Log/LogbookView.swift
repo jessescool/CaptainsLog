@@ -15,7 +15,7 @@ struct LogbookView: View {
             // obviously not final
             lazy var matches: Results<LogEntry> = {
                 logs.where {
-                    $0.name.contains(searchText) || $0.transcription.contains(searchText)
+                    $0.name.contains(searchText)
                 }
             }()
             return matches.sorted(byKeyPath: sortedBy, ascending: sortOrderAscending)
