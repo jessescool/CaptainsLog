@@ -24,9 +24,9 @@ actor Transcriptor {
     let file: URL
     private var enclosedTranscript: [String]?
     
-    func getTranscript() throws {
+    func getTranscript() throws -> String {
         if let enclosedTranscript = enclosedTranscript {
-            print(enclosedTranscript.joined(separator: " "))
+            return enclosedTranscript.joined(separator: " ")
         } else {
             throw TranscriptorError.nilTask
         }
