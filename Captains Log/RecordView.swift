@@ -57,26 +57,24 @@ struct RecordView: View {
                         
                         // hides sheet
                         showingRecordView = false
-                        
-                        newLog.transcriptor = try! Transcriptor(file: newLog.audioURL!)
-                        
+                                                
                         // Creates async task to transcribe new recording
                         Task(priority: .high) {
-                            do {
-                                
-                                // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
-                                let thawedLog = newLog.thaw()
-                                
-                                if let thawedLog = thawedLog {
-                                    let transcription: String = try await recognize(url: thawedLog.audioURL!).joined(separator: ". ")
+                            
+                            // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
+                            let thawedLog = newLog.thaw()
+                            
+                            if let thawedLog = thawedLog {
+                                let potentialTranscriptPieces = try? await LogEntry.transcribe(log: thawedLog)
+                                if let potentialTranscriptPieces = potentialTranscriptPieces {
                                     try! realm.write {
-                                        thawedLog.transcript = transcription
+                                        thawedLog.transcript = potentialTranscriptPieces.joined(separator: " ")
                                     }
+                                    print(thawedLog.transcript ?? "No transcript")
                                 }
                                 
-                            } catch {
-                                print("Unexpected error: \(error)")
                             }
+                            
                         }
                         
                     }
