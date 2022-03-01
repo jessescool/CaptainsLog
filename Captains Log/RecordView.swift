@@ -62,17 +62,13 @@ struct RecordView: View {
                         Task(priority: .high) {
                             
                             // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
-                            let thawedLog = newLog.thaw()
-                            
-                            if let thawedLog = thawedLog {
-                                let potentialTranscriptPieces = try? await LogEntry.transcribe(log: thawedLog)
-                                if let potentialTranscriptPieces = potentialTranscriptPieces {
-                                    try! realm.write {
-                                        thawedLog.transcript = potentialTranscriptPieces.joined(separator: " ")
-                                    }
-                                    print(thawedLog.transcript ?? "No transcript")
-                                }
-                                
+                            let URLtoTranscribe = try! newLog.audioURL!
+                            let transcriptor = Transcriptor(file: URLtoTranscribe)
+                            try? await transcriptor.recognize()
+                            do {
+                                try await transcriptor.getTranscript()
+                            } catch {
+                                print(error)
                             }
                             
                         }
