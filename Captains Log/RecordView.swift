@@ -58,7 +58,9 @@ struct RecordView: View {
                         // hides sheet
                         showingRecordView = false
                                                 
-                        // Creates async task to transcribe new recording
+                        /// This task begins async transcription of the newly-created audio file.
+                        ///     Breaks if...
+                        ///     - Log has already been deleted by the time the task finishes.
                         Task(priority: .high) {
                             
                             // NOT AT ALL SAFE, breaks on log delete before transcription finishes.

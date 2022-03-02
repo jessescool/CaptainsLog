@@ -21,6 +21,14 @@ class LogEntry: Object, Identifiable {
         }
     }
     
+    func hasTranscriptor() -> Bool {
+        if transcriptor != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     // convenience init due to Realm's Object.init()
     convenience init(name: String = "") {
         self.init() // for Object.init()

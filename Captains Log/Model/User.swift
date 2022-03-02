@@ -46,7 +46,6 @@ class AppSettings: ObservableObject {
     @AppStorage("defaultSort") var defaultSort: String = Sort.name.rawValue
     @AppStorage("authenticate") var authenticate: Bool = false
     @AppStorage("forcedTheme") var forcedTheme: Theme = .none
-    
     @AppStorage("accentColor") var accentColor: AppAccentColor = .blue
     
 }

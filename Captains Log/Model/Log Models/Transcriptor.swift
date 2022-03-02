@@ -24,6 +24,7 @@ actor Transcriptor {
     let file: URL
     private var enclosedTranscript: [String]?
     
+    /// Can be modified to give variable results.
     func getTranscript() throws -> String {
         if let enclosedTranscript = enclosedTranscript {
             return enclosedTranscript.joined(separator: " ")
@@ -87,14 +88,14 @@ actor Transcriptor {
         func recognize(request: SFSpeechURLRecognitionRequest, with recognizer: SFSpeechRecognizer) async throws -> [SFSpeechRecognitionResult] {
             
             // took away return
-            return await withCheckedContinuation { continuation in
+            return try await withCheckedThrowingContinuation { continuation in
                 
                 var draft = [SFSpeechRecognitionResult]()
 
                 recognizer.recognitionTask(with: request) { (result, error) in
                     guard let result = result else {
-                        print("ERROR: \(error!)")
-                        // should be throwing...
+                        // guard expression stops continuation leakage.
+                        continuation.resume(throwing: TranscriptorError.nilTask)
                         return
                     }
                     
@@ -104,11 +105,13 @@ actor Transcriptor {
                         continuation.resume(returning: draft)
                     }
                 }
+                
             }
+            
+            
         }
         
         self.enclosedTranscript = transcript
     }
-
 }
 

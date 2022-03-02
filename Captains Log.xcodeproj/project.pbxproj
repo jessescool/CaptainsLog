@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				C61D1B4827C45C4F007071C7 /* Audio Models */,
-				C628524E27B9C475009CFBF8 /* LogEntry.swift */,
+				C63460E127CEDD9600685F1B /* Log Models */,
 				C61D1B2C27BDACCC007071C7 /* User.swift */,
 				C628524F27B9C475009CFBF8 /* Storage.swift */,
 				C61D1B3A27C04578007071C7 /* Location.swift */,
@@ -148,12 +148,20 @@
 			isa = PBXGroup;
 			children = (
 				C628524D27B9C475009CFBF8 /* LiveRecognizer.swift */,
-				C61D1B4927C477D5007071C7 /* Transcriptor.swift */,
 				C61D1B4027C352BC007071C7 /* AudioRecorder.swift */,
 				C61D1B4427C35527007071C7 /* AudioPlayer.swift */,
 			);
 			name = "Audio Models";
 			path = BlackBird;
+			sourceTree = "<group>";
+		};
+		C63460E127CEDD9600685F1B /* Log Models */ = {
+			isa = PBXGroup;
+			children = (
+				C628524E27B9C475009CFBF8 /* LogEntry.swift */,
+				C61D1B4927C477D5007071C7 /* Transcriptor.swift */,
+			);
+			path = "Log Models";
 			sourceTree = "<group>";
 		};
 		C67FE3C527B4421F008ADD94 /* Recording Screen */ = {
