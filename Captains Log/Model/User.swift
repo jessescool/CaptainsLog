@@ -1,55 +1,47 @@
 import Foundation
-import SwiftUI
+import RealmSwift
 
-enum Theme: String {
-    case light = "light"
-    case dark = "dark"
-    case none = "nil"
+class User: Object, Identifiable {
+    static var defaultUser = User()
+    // Required:
+    @Persisted(primaryKey: true) var id: UUID
+    @Persisted var username: String
+    @Persisted var customWords = List<String>()
     
-    var scheme: ColorScheme? {
-        switch self {
-        case .light: return .light
-        case .dark: return .dark
-        case .none: return nil
-        }
+    // Added later:
+    @Persisted var tags = List<Tag>()
+    var statistics = Statistics()
+    
+    // naively appends a tag to tags
+    func addTag(_ tag: Tag) {
+        tags.append(tag)
+    }
+    
+    func addCustomWord(_ word: String) {
+        customWords.append(word)
+    }
+    
+    convenience init(username: String) {
+        self.init()
+        self.id = UUID()
+        self.username = username
+    }
+
+}
+
+
+class Tag: EmbeddedObject {
+    @Persisted var name: String
+
+    convenience init(name: String) {
+        self.init()
+        self.name = name
     }
 }
 
-enum AppAccentColor: String, CaseIterable, Identifiable {
-    case red = "Commanding red"
-    case blue = "Scientific blue"
-    case yellow = "Operational yellow"
-    var id: Self { self }
-    
-    var inColor: Color { // bad name...
-        switch self {
-        case .red: return Color(hex: "C0392B")
-        case .blue: return Color(hex: "2980B9")
-        case .yellow: return Color(hex: "F1C40F")
-        }
-    }
-}
-
-// Color isn't updating....
-
-enum Sort: String, CaseIterable, Identifiable {
-    case date = "date"
-    case name = "name"
-    case duration = "duration"
-    var id: Self { self }
-}
-
-class AppSettings: ObservableObject {
-    static let settings = AppSettings()
-    
-    @AppStorage("hapticFeedback") var hapticFeedback: Bool = true
-    @AppStorage("defaultSort") var defaultSort: String = Sort.name.rawValue
-    @AppStorage("authenticate") var authenticate: Bool = false
-    @AppStorage("forcedTheme") var forcedTheme: Theme = .none
-    @AppStorage("accentColor") var accentColor: AppAccentColor = .blue
-    
-}
-
-class AppUser: ObservableObject {
-    static let user = AppUser()
+/// A data structure that contains ONLY computed properties.
+struct Statistics {
+    var minutesRecorded: TimeInterval { return Double.random(in: 1.0..<10.0) }
+    var mostUsedWords: [String] { return ["Gucci", "Louie", "YSL"] }
+    // and many more to come
 }

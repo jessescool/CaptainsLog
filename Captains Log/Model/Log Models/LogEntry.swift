@@ -11,21 +11,14 @@ class LogEntry: Object, Identifiable {
     // Initialized immediately before log is written to realm
     @Persisted var name: String = ""
     @Persisted var duration: TimeInterval = 0.0
-
-    var transcriptor: Transcriptor?
+    
     @Persisted var transcript: String?
+    var transcriptor: Transcriptor?
+    func hasTranscriptor() -> Bool { transcriptor != nil ? true : false }
 
     var audioURL: URL? {
         get throws {
             try getAudioURL(file: self.id)
-        }
-    }
-    
-    func hasTranscriptor() -> Bool {
-        if transcriptor != nil {
-            return true
-        } else {
-            return false
         }
     }
     
