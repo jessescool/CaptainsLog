@@ -53,7 +53,7 @@ struct RecordView: View {
                         }
                         
                         // saves log to realm
-                        store(log: newLog)
+                        storeLog(newLog)
                         
                         // hides sheet
                         showingRecordView = false

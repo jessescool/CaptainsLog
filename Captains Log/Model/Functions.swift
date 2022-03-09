@@ -7,12 +7,13 @@ public func documentsPath() -> URL {
     return paths[0]
 }
 
-enum FileError: Error {
-    case DNE
-}
-
 // Pulls audio by UUID from documents folder
 func getAudioURL(file id: UUID) throws -> URL {
+    
+    enum FileError: Error {
+        case DNE
+    }
+    
     // does this work if URL does not exist?
     let potentialPath: URL = documentsPath().appendingPathComponent("\(id.uuidString).m4a")
     
@@ -30,32 +31,4 @@ func getAudioURL(file id: UUID) throws -> URL {
     }
     
     return potentialPath
-}
-
-// NOT WORKING YET, BUT IMPORTANT
-func recognizeAudio(@ThreadSafe log: LogEntry?) async {
-    guard let log = log else {
-        return
-    }
-    
-    let audioURL = try! log.audioURL!
-    let transcriptor = Transcriptor(file: audioURL)
-    
-    do {
-        try await transcriptor.recognize()
-        try await print(transcriptor.getTranscript())
-    } catch {
-        print(error)
-    }
-    
-    let potentialTranscript: String? = try? await transcriptor.getTranscript()
-    
-    // Where it begins to get thread-unsafe and sketch...
-    let thawedLog = log.thaw()
-    if let thawedLog = thawedLog {
-        try! realm.write {
-            thawedLog.transcript = potentialTranscript
-        }
-    }
-    
 }

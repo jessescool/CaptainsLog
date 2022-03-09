@@ -8,6 +8,7 @@ struct LogbookView: View {
     @State private var sortedBy: String = UserDefaults.standard.string(forKey: "defaultSort") ?? "date"
     @State private var sortOrderAscending: Bool = true
     
+    // CAN NOW USE Realm Query "where" keyword
     var relevantLogs: Results<LogEntry> {
         if searchText.isEmpty {
             return logs.sorted(byKeyPath: sortedBy, ascending: sortOrderAscending)

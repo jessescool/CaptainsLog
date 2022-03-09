@@ -29,6 +29,7 @@ class User: Object, Identifiable {
 
 }
 
+/// A general Tag object.
 class Tag: EmbeddedObject {
     @Persisted var name: String
 

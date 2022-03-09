@@ -1,4 +1,5 @@
 import Speech
+import RealmSwift
 
 actor Transcriptor {
     
@@ -115,3 +116,30 @@ actor Transcriptor {
     }
 }
 
+// NOT WORKING YET, BUT IMPORTANT
+func recognizeAudio(@ThreadSafe log: LogEntry?) async {
+    guard let log = log else {
+        return
+    }
+    
+    let audioURL = try! log.audioURL!
+    let transcriptor = Transcriptor(file: audioURL)
+    
+    do {
+        try await transcriptor.recognize()
+        try await print(transcriptor.getTranscript())
+    } catch {
+        print(error)
+    }
+    
+    let potentialTranscript: String? = try? await transcriptor.getTranscript()
+    
+    // Where it begins to get thread-unsafe and sketch...
+    let thawedLog = log.thaw()
+    if let thawedLog = thawedLog {
+        try! realm.write {
+            thawedLog.transcript = potentialTranscript
+        }
+    }
+    
+}

@@ -25,7 +25,7 @@
 		C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628523C27B9A9D0009CFBF8 /* CardView.swift */; };
 		C628525227B9C475009CFBF8 /* LiveRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524D27B9C475009CFBF8 /* LiveRecognizer.swift */; };
 		C628525327B9C475009CFBF8 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524E27B9C475009CFBF8 /* LogEntry.swift */; };
-		C628525427B9C475009CFBF8 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524F27B9C475009CFBF8 /* Storage.swift */; };
+		C628525427B9C475009CFBF8 /* LogStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628524F27B9C475009CFBF8 /* LogStorage.swift */; };
 		C63460E527CFD39100685F1B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63460E427CFD39100685F1B /* User.swift */; };
 		C63460E727D0041700685F1B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63460E627D0041700685F1B /* TagView.swift */; };
 		C6471A7327C97757009816E4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6471A7227C97757009816E4 /* Functions.swift */; };
@@ -58,7 +58,7 @@
 		C628523C27B9A9D0009CFBF8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C628524D27B9C475009CFBF8 /* LiveRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveRecognizer.swift; sourceTree = "<group>"; };
 		C628524E27B9C475009CFBF8 /* LogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
-		C628524F27B9C475009CFBF8 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		C628524F27B9C475009CFBF8 /* LogStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogStorage.swift; sourceTree = "<group>"; };
 		C63460E427CFD39100685F1B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C63460E627D0041700685F1B /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		C6471A7227C97757009816E4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -106,9 +106,10 @@
 			children = (
 				C67FE3CD27B466A4008ADD94 /* misc */,
 				740C2C7F2722479C004C95CF /* CaptainsLog.swift */,
-				C67FE3C527B4421F008ADD94 /* Recording Screen */,
-				C67FE3C727B4424D008ADD94 /* Logbook Screen */,
-				C67FE3C827B4428F008ADD94 /* Options */,
+				C67FE3C527B4421F008ADD94 /* Recording */,
+				C67FE3C727B4424D008ADD94 /* Logbook */,
+				C68FB11527D90CEB00F6CBDD /* Settings */,
+				C67FE3C827B4428F008ADD94 /* Profile */,
 				740C2C9027224BAE004C95CF /* Model */,
 				740C2C832722479F004C95CF /* Assets.xcassets */,
 				740C2C882722479F004C95CF /* Info.plist */,
@@ -130,9 +131,6 @@
 			children = (
 				C61D1B4827C45C4F007071C7 /* Audio Models */,
 				C63460E127CEDD9600685F1B /* Log Models */,
-				C61D1B2C27BDACCC007071C7 /* Settings.swift */,
-				C63460E427CFD39100685F1B /* User.swift */,
-				C628524F27B9C475009CFBF8 /* Storage.swift */,
 				C61D1B3A27C04578007071C7 /* Location.swift */,
 				C61D1B3C27C059CD007071C7 /* Buttons.swift */,
 				C69347A227BCDB950024D235 /* Extensions.swift */,
@@ -165,20 +163,21 @@
 			children = (
 				C628524E27B9C475009CFBF8 /* LogEntry.swift */,
 				C61D1B4927C477D5007071C7 /* Transcriptor.swift */,
+				C628524F27B9C475009CFBF8 /* LogStorage.swift */,
 			);
 			path = "Log Models";
 			sourceTree = "<group>";
 		};
-		C67FE3C527B4421F008ADD94 /* Recording Screen */ = {
+		C67FE3C527B4421F008ADD94 /* Recording */ = {
 			isa = PBXGroup;
 			children = (
 				740C2C812722479C004C95CF /* TitleView.swift */,
 				C6DF87DF27AF930400955947 /* RecordView.swift */,
 			);
-			name = "Recording Screen";
+			name = Recording;
 			sourceTree = "<group>";
 		};
-		C67FE3C727B4424D008ADD94 /* Logbook Screen */ = {
+		C67FE3C727B4424D008ADD94 /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
 				74ADE73B2724F089002D11EB /* LogbookView.swift */,
@@ -186,18 +185,27 @@
 				C67FE3D527B706D3008ADD94 /* SearchBar.swift */,
 				74ADE73F2724F997002D11EB /* DetailedLogView.swift */,
 			);
-			name = "Logbook Screen";
+			name = Logbook;
 			sourceTree = "<group>";
 		};
-		C67FE3C827B4428F008ADD94 /* Options */ = {
+		C67FE3C827B4428F008ADD94 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				C6A69ADE2781325A00D6A55F /* ProfileView.swift */,
 				C63460E627D0041700685F1B /* TagView.swift */,
+				C63460E427CFD39100685F1B /* User.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		C68FB11527D90CEB00F6CBDD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
 				C6D3762E27851339003FD962 /* SettingsView.swift */,
+				C61D1B2C27BDACCC007071C7 /* Settings.swift */,
 				C61D1B2E27BDBA5C007071C7 /* Subordinate Settings */,
 			);
-			name = Options;
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,7 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C628523D27B9A9D1009CFBF8 /* CardView.swift in Sources */,
-				C628525427B9C475009CFBF8 /* Storage.swift in Sources */,
+				C628525427B9C475009CFBF8 /* LogStorage.swift in Sources */,
 				C67FE3D627B706D3008ADD94 /* SearchBar.swift in Sources */,
 				C61D1B4527C35527007071C7 /* AudioPlayer.swift in Sources */,
 				C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */,

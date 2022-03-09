@@ -3,8 +3,9 @@ import RealmSwift
 
 let realm = try! Realm()
 
-func store(log: LogEntry) {
+func storeLog(_ log: LogEntry) {
     let realm = try! Realm()
+    
     try! realm.write {
         realm.add(log, update: .modified)
     }
@@ -17,6 +18,7 @@ func store(log: LogEntry) {
 
 func deleteLog(primaryKey: UUID) {
     let realm = try! Realm()
+    
     if let objectToDelete = realm.object(ofType: LogEntry.self, forPrimaryKey: primaryKey) {
         try! realm.write {
             print("Deleted \(objectToDelete.name)/")
