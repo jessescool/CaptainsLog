@@ -63,17 +63,19 @@ struct RecordView: View {
                         ///     - Log has already been deleted by the time the task finishes.
                         Task(priority: .high) {
                             
-                            let audioURL = try! newLog.audioURL!
-                            let transcriptor = Transcriptor(file: audioURL)
-                                                        
                             do {
+                                
+                                let transcriptor = Transcriptor(file: try! newLog.audioURL!)
                                 try await transcriptor.transcribe()
-                                try await pinTranscript(transcriptor.returnTranscript(), to: newLog)
+                                
+                                // checks if realm object is managed
+                                if newLog.realm != nil {
+                                    try await pinTranscript(transcriptor.returnTranscript(), to: newLog)
+                                }
+                                
                             } catch {
                                 print(error)
                             }
-                            
-
                             
                         }
                         
