@@ -13,8 +13,6 @@ class LogEntry: Object, Identifiable {
     @Persisted var duration: TimeInterval = 0.0
     
     @Persisted var transcript: String?
-    var transcriptor: Transcriptor?
-    func hasTranscriptor() -> Bool { transcriptor != nil ? true : false }
 
     var audioURL: URL? {
         get throws {

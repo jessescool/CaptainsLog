@@ -1,6 +1,13 @@
 import Speech
 import RealmSwift
 
+enum GeneralError: Error {
+    case deletedLog
+}
+
+
+
+
 actor Transcriptor {
     
     enum TranscriptorError: Error {
@@ -9,6 +16,7 @@ actor Transcriptor {
         case recognizerIsUnavailable
         case noODR
         case nilTask
+        case nilTranscript
         
         var message: String {
             switch self {
@@ -17,30 +25,35 @@ actor Transcriptor {
             case .recognizerIsUnavailable: return "Recognizer is unavailable"
             case .noODR: return "Device does not support local speech recognition"
             case .nilTask: return "Task didn't work..."
+            case .nilTranscript: return "Enclosed transcript was empty. Please call makeTranscript()."
             }
         }
     }
 
     // Contents
-    let file: URL
-    private var enclosedTranscript: [String]?
+    let audioFile: URL
+    private var enclosedTranscript: [String]? // Optional string to preserve data, although should perhaps be [SFSpeechRecognitionResult]?
     
     /// Can be modified to give variable results.
-    func getTranscript() throws -> String {
+    func transcribe() async throws {
+        try await recognize()
+    }
+    
+    func returnTranscript() throws -> String {
         if let enclosedTranscript = enclosedTranscript {
             return enclosedTranscript.joined(separator: " ")
         } else {
-            throw TranscriptorError.nilTask
+            throw TranscriptorError.nilTranscript
         }
     }
 
     init(file: URL) {
-        self.file = file
+        self.audioFile = file
     }
     
     /// Transcribes audio file asychronously...
-    func recognize() async throws {
-        let url = self.file
+    private func recognize() async throws {
+        let url = self.audioFile
         
         let recognizer: SFSpeechRecognizer = try prepareRecognizer()
         let request: SFSpeechURLRecognitionRequest = try prepareRequest(from: url)
@@ -112,34 +125,22 @@ actor Transcriptor {
             
         }
         
+        print("Returning: '\(transcript)'")
         self.enclosedTranscript = transcript
     }
 }
 
-// NOT WORKING YET, BUT IMPORTANT
-func recognizeAudio(@ThreadSafe log: LogEntry?) async {
+func pinTranscript(_ transcript: String, @ThreadSafe to log: LogEntry?) throws {
+    
     guard let log = log else {
-        return
+        throw GeneralError.deletedLog
     }
-    
-    let audioURL = try! log.audioURL!
-    let transcriptor = Transcriptor(file: audioURL)
-    
-    do {
-        try await transcriptor.recognize()
-        try await print(transcriptor.getTranscript())
-    } catch {
-        print(error)
+
+    let realm = try! Realm()
+    try! realm.write {
+        log.transcript = transcript
     }
-    
-    let potentialTranscript: String? = try? await transcriptor.getTranscript()
-    
-    // Where it begins to get thread-unsafe and sketch...
-    let thawedLog = log.thaw()
-    if let thawedLog = thawedLog {
-        try! realm.write {
-            thawedLog.transcript = potentialTranscript
-        }
-    }
-    
+
+    print("Pinned '\(transcript)' to \(log.name)")
+
 }

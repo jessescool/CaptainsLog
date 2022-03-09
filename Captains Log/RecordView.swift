@@ -63,26 +63,17 @@ struct RecordView: View {
                         ///     - Log has already been deleted by the time the task finishes.
                         Task(priority: .high) {
                             
-                            // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
                             let audioURL = try! newLog.audioURL!
                             let transcriptor = Transcriptor(file: audioURL)
-                            
+                                                        
                             do {
-                                try await transcriptor.recognize()
-                                try await print(transcriptor.getTranscript())
+                                try await transcriptor.transcribe()
+                                try await pinTranscript(transcriptor.returnTranscript(), to: newLog)
                             } catch {
                                 print(error)
                             }
                             
-                            let potentialTranscript: String? = try? await transcriptor.getTranscript()
-                            
-                            // Where it begins to get thread-unsafe and sketch...
-                            let thawedLog = newLog.thaw()
-                            if let thawedLog = thawedLog {
-                                try! realm.write {
-                                    thawedLog.transcript = potentialTranscript
-                                }
-                            }
+
                             
                         }
                         

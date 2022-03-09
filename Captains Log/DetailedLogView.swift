@@ -88,32 +88,15 @@ struct DetailedLogView: View {
         .task {
             if log.transcript == nil {
                 
-            /// This task begins async transcription of the newly-created audio file.
-            ///     Breaks if...
-            ///     - Log has already been deleted by the time the task finishes.
-                
-                // NOT AT ALL SAFE, breaks on log delete before transcription finishes.
-                let audioURL = try! log.audioURL!
-                let transcriptor = Transcriptor(file: audioURL)
-                
-                do {
-                    try await transcriptor.recognize()
-                    try await print(transcriptor.getTranscript())
-                } catch {
-                    print(error)
-                }
-                
-                let potentialTranscript: String? = try? await transcriptor.getTranscript()
-                
-                // Where it begins to get thread-unsafe and sketch...
-                let thawedLog = log.thaw()
-                if let thawedLog = thawedLog {
-                    try! realm.write {
-                        thawedLog.transcript = potentialTranscript
-                    }
-                }
-                    
-                
+//                let audioURL = try! log.audioURL!
+//                let transcriptor = Transcriptor(file: audioURL)
+//
+//                do {
+//                    try await transcriptor.transcribe()
+//                } catch {
+//                    print(error)
+//                }
+            
             }
         }
         
