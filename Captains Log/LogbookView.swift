@@ -60,7 +60,7 @@ struct LogbookView: View {
                 }
             }
             .listStyle(.inset)
-            .animation(.default)
+            .animation(.default, value: 1) // uncelar...
             
             SearchBar(text: $searchText)
                 .padding()

@@ -8,7 +8,6 @@ struct TitleView: View {
     private var time = Date.now.formatted(date: .omitted, time: .shortened)
     
     @StateObject var locationManager = LocationManager()
-    var placeName: String? { locationManager.associatedPlacemark?.subLocality } // live, thankfully
 
     var body: some View {
         VStack {
@@ -37,7 +36,7 @@ struct TitleView: View {
                 
                 HStack {
                     Image(systemName: "mappin")
-                    Text(placeName ?? "Unknown")
+                    Text(locationManager.associatedPlacemark?.subLocality ?? "Unknown")
                         .bold()
                 }
                 .padding()
