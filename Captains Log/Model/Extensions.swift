@@ -107,3 +107,14 @@ extension URL: FailableCustomPersistable {
         self.absoluteString
     }
 }
+
+/// Checks if an object has been deleted in the time that an async function has created a new value.
+extension Object {
+    func isManaged() -> Bool {
+        if self.realm != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+}

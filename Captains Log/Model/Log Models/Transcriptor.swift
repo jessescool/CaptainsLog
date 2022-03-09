@@ -5,9 +5,6 @@ enum GeneralError: Error {
     case deletedLog
 }
 
-
-
-
 actor Transcriptor {
     
     enum TranscriptorError: Error {
@@ -30,29 +27,43 @@ actor Transcriptor {
         }
     }
 
-    // Contents
     let audioFile: URL
+    let destination: LogEntry
     private var enclosedTranscript: [String]? // Optional string to preserve data, although should perhaps be [SFSpeechRecognitionResult]?
-    
-    /// Can be modified to give variable results.
-    func transcribe() async throws {
-        try await recognize()
+
+    init(audio: URL, to destination: LogEntry) {
+        self.audioFile = audio
+        self.destination = destination
     }
     
-    func returnTranscript() throws -> String {
-        if let enclosedTranscript = enclosedTranscript {
-            return enclosedTranscript.joined(separator: " ")
-        } else {
+    
+    /// If `enclosedTranscript` contains a transcript, this function pins its value to the destination thread-safe log entry object.
+    /// Throws errors if...
+    ///     - log has been deleted
+    ///     - transcriptor contains no transcript
+
+    func pin() throws {
+        @ThreadSafe var log: LogEntry? = destination
+        
+        guard let log = log else {
+            throw GeneralError.deletedLog
+        }
+        
+        guard let enclosedTranscript = enclosedTranscript else {
             throw TranscriptorError.nilTranscript
         }
-    }
-
-    init(file: URL) {
-        self.audioFile = file
+        
+        let smoothedTranscript = enclosedTranscript.joined(separator: " ")
+        
+        let realm = try! Realm()
+        try! realm.write {
+            log.transcript = smoothedTranscript
+        }
     }
     
-    /// Transcribes audio file asychronously...
-    private func recognize() async throws {
+    
+    /// Transcribes audio file `audioFile` asychronously and writes to `enclosedTranscript`.
+    func transcribe() async throws {
         let url = self.audioFile
         
         let recognizer: SFSpeechRecognizer = try prepareRecognizer()
@@ -122,25 +133,9 @@ actor Transcriptor {
                 
             }
             
-            
         }
         
         print("Returning: '\(transcript)'")
         self.enclosedTranscript = transcript
     }
-}
-
-func pinTranscript(_ transcript: String, @ThreadSafe to log: LogEntry?) throws {
-    
-    guard let log = log else {
-        throw GeneralError.deletedLog
-    }
-
-    let realm = try! Realm()
-    try! realm.write {
-        log.transcript = transcript
-    }
-
-    print("Pinned '\(transcript)' to \(log.name)")
-
 }

@@ -65,12 +65,14 @@ struct RecordView: View {
                             
                             do {
                                 
-                                let transcriptor = Transcriptor(file: try! newLog.audioURL!)
+                                // can be cleaned up...
+                                let audioURL = try! newLog.audioURL!
+                                
+                                let transcriptor = Transcriptor(audio: audioURL, to: newLog)
                                 try await transcriptor.transcribe()
                                 
-                                // checks if realm object is managed
-                                if newLog.realm != nil {
-                                    try await pinTranscript(transcriptor.returnTranscript(), to: newLog)
+                                if newLog.isManaged() {
+                                    try await transcriptor.pin()
                                 }
                                 
                             } catch {
