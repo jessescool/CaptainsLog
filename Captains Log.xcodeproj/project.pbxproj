@@ -33,7 +33,8 @@
 		C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BF27B02DF0008ADD94 /* RealmSwift */; };
 		C67FE3CE27B466A4008ADD94 /* misc in Resources */ = {isa = PBXBuildFile; fileRef = C67FE3CD27B466A4008ADD94 /* misc */; };
 		C67FE3D627B706D3008ADD94 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FE3D527B706D3008ADD94 /* SearchBar.swift */; };
-		C68FB11827DB16B800F6CBDD /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = C68FB11727DB16B800F6CBDD /* Drawer */; };
+		C68FB11D27DB1C5400F6CBDD /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = C68FB11C27DB1C5400F6CBDD /* BottomSheet */; };
+		C68FB11F27DBAC5E00F6CBDD /* RecordSheetOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68FB11E27DBAC5E00F6CBDD /* RecordSheetOptions.swift */; };
 		C69347A327BCDB950024D235 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69347A227BCDB950024D235 /* Extensions.swift */; };
 		C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A69ADE2781325A00D6A55F /* ProfileView.swift */; };
 		C6D3762F27851339003FD962 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3762E27851339003FD962 /* SettingsView.swift */; };
@@ -65,6 +66,7 @@
 		C6471A7227C97757009816E4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		C67FE3CD27B466A4008ADD94 /* misc */ = {isa = PBXFileReference; lastKnownFileType = text; path = misc; sourceTree = "<group>"; };
 		C67FE3D527B706D3008ADD94 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		C68FB11E27DBAC5E00F6CBDD /* RecordSheetOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSheetOptions.swift; sourceTree = "<group>"; };
 		C69347A227BCDB950024D235 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C6A69ADE2781325A00D6A55F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C6D3762E27851339003FD962 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C68FB11827DB16B800F6CBDD /* Drawer in Frameworks */,
+				C68FB11D27DB1C5400F6CBDD /* BottomSheet in Frameworks */,
 				C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */,
 				C61D1B5527C6F747007071C7 /* SwiftySound in Frameworks */,
 				C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */,
@@ -175,6 +177,7 @@
 			children = (
 				740C2C812722479C004C95CF /* TitleView.swift */,
 				C6DF87DF27AF930400955947 /* RecordView.swift */,
+				C68FB11E27DBAC5E00F6CBDD /* RecordSheetOptions.swift */,
 			);
 			name = Recording;
 			sourceTree = "<group>";
@@ -231,7 +234,7 @@
 				C67FE3BF27B02DF0008ADD94 /* RealmSwift */,
 				C61D1B3827BEBCCF007071C7 /* PopupView */,
 				C61D1B5427C6F747007071C7 /* SwiftySound */,
-				C68FB11727DB16B800F6CBDD /* Drawer */,
+				C68FB11C27DB1C5400F6CBDD /* BottomSheet */,
 			);
 			productName = "Captains Log";
 			productReference = 740C2C7C2722479C004C95CF /* Captains Log.app */;
@@ -264,7 +267,7 @@
 				C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */,
 				C61D1B5327C6F747007071C7 /* XCRemoteSwiftPackageReference "SwiftySound" */,
-				C68FB11627DB16B800F6CBDD /* XCRemoteSwiftPackageReference "swiftui-drawer" */,
+				C68FB11B27DB1C5400F6CBDD /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = 740C2C7D2722479C004C95CF /* Products */;
 			projectDirPath = "";
@@ -306,6 +309,7 @@
 				C61D1B2D27BDACCC007071C7 /* Settings.swift in Sources */,
 				74ADE73C2724F089002D11EB /* LogbookView.swift in Sources */,
 				740C2C822722479C004C95CF /* TitleView.swift in Sources */,
+				C68FB11F27DBAC5E00F6CBDD /* RecordSheetOptions.swift in Sources */,
 				C6D3762F27851339003FD962 /* SettingsView.swift in Sources */,
 				C61D1B3B27C04578007071C7 /* Location.swift in Sources */,
 				C61D1B3D27C059CD007071C7 /* Buttons.swift in Sources */,
@@ -530,12 +534,12 @@
 				minimumVersion = 10.24.0;
 			};
 		};
-		C68FB11627DB16B800F6CBDD /* XCRemoteSwiftPackageReference "swiftui-drawer" */ = {
+		C68FB11B27DB1C5400F6CBDD /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/maustinstar/swiftui-drawer";
+			repositoryURL = "https://github.com/lucaszischka/BottomSheet";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 2.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -561,10 +565,10 @@
 			package = C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		C68FB11727DB16B800F6CBDD /* Drawer */ = {
+		C68FB11C27DB1C5400F6CBDD /* BottomSheet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C68FB11627DB16B800F6CBDD /* XCRemoteSwiftPackageReference "swiftui-drawer" */;
-			productName = Drawer;
+			package = C68FB11B27DB1C5400F6CBDD /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

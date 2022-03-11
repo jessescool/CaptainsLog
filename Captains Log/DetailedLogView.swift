@@ -1,6 +1,7 @@
 import SwiftUI
 import RealmSwift
 import SwiftySound // for now...
+import CoreLocation
 
 struct DetailedLogView: View {
     @Environment(\.dismiss) var dismiss
@@ -8,6 +9,14 @@ struct DetailedLogView: View {
     @State private var isEditing: Bool = false
     
     @StateObject var locationManager = LocationManager()
+    var logLocation: CLLocation? {
+        if let lat = log.location["latitude"], let long = log.location["longitude"] {
+            return CLLocation(latitude: lat!, longitude: long!)
+        } else {
+            return nil
+        }
+    }
+    @State var logPlacemark: String?
         
     var body: some View {
         VStack {
@@ -108,7 +117,15 @@ struct DetailedLogView: View {
             
             }
         }
-        
+        .onAppear {
+            
+            Task {
+                if let logLocation = logLocation {
+                    logPlacemark = try? await locationManager.placemark(location: logLocation).subLocality
+                }
+            }
+            
+        }
     }
 }
 

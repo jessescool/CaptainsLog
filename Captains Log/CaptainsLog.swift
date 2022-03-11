@@ -16,6 +16,7 @@ struct CaptainsLog: App {
                 .navigationBarHidden(true)
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .preferredColorScheme(appSettings.forcedTheme.scheme ?? currentSystemTheme)
+                .edgesIgnoringSafeArea(.bottom)
             }
         }
     }

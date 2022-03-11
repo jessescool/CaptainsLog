@@ -1,9 +1,10 @@
 import SwiftUI
 import AVFoundation
 import RealmSwift
+import BottomSheet
 
 struct RecordView: View {
-    @Binding var showingRecordView: Bool
+    @Binding var recordView: RecordSheetPosition
     @State private var isRecording: Bool = false
     @FocusState private var isNaming: Bool
     
@@ -27,7 +28,7 @@ struct RecordView: View {
             
             // Stop recording button
             if isRecording {
-                Button(role: .destructive) {
+                Button {
                     
                     newLog.duration = audioRecorder.getDuration()
                     audioRecorder.stopRecording()
@@ -58,7 +59,7 @@ struct RecordView: View {
                         storeLog(newLog)
                         
                         // hides sheet
-                        showingRecordView = false
+                        recordView = .bottom
                                                 
                         /// This task begins async transcription of the newly-created audio file.
                         ///     Breaks if...
@@ -87,16 +88,13 @@ struct RecordView: View {
                     .buttonStyle(.bordered)
                     
                     Button("Cancel", role: .destructive) {
-                        showingRecordView = false
+                        recordView = .bottom
                     }
                     .buttonStyle(.bordered)
                     
                 }
-                .padding(.bottom)
             }
-        }
-        .padding()
-        
+        }≈
         .onAppear {
             
             newLog.location["latitude"] = locationManager.lastLocation?.coordinate.latitude
@@ -119,6 +117,8 @@ struct RecordView: View {
 
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordView(showingRecordView: .constant(true))
+        RecordView(recordView: .constant(.bottom))
+        RecordView(recordView: .constant(.middle))
+        RecordView(recordView: .constant(.top))
     }
 }

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BottomSheet",
+        "repositoryURL": "https://github.com/lucaszischka/BottomSheet",
+        "state": {
+          "branch": null,
+          "revision": "e72f137d71ba311e9e3f39b75ed4c0c2c97c8a98",
+          "version": "2.6.0"
+        }
+      },
+      {
         "package": "PopupView",
         "repositoryURL": "https://github.com/exyte/PopupView",
         "state": {
@@ -26,15 +35,6 @@
           "branch": null,
           "revision": "2380340c876da7a2d17b0b59e21e339120d09bb3",
           "version": "10.24.0"
-        }
-      },
-      {
-        "package": "Drawer",
-        "repositoryURL": "https://github.com/maustinstar/swiftui-drawer",
-        "state": {
-          "branch": "master",
-          "revision": "6d22f5c1362bfa71f2915c28aebba343b9243363",
-          "version": null
         }
       },
       {
