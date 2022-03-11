@@ -33,6 +33,7 @@
 		C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C67FE3BF27B02DF0008ADD94 /* RealmSwift */; };
 		C67FE3CE27B466A4008ADD94 /* misc in Resources */ = {isa = PBXBuildFile; fileRef = C67FE3CD27B466A4008ADD94 /* misc */; };
 		C67FE3D627B706D3008ADD94 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FE3D527B706D3008ADD94 /* SearchBar.swift */; };
+		C68FB11827DB16B800F6CBDD /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = C68FB11727DB16B800F6CBDD /* Drawer */; };
 		C69347A327BCDB950024D235 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69347A227BCDB950024D235 /* Extensions.swift */; };
 		C6A69ADF2781325A00D6A55F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A69ADE2781325A00D6A55F /* ProfileView.swift */; };
 		C6D3762F27851339003FD962 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3762E27851339003FD962 /* SettingsView.swift */; };
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C68FB11827DB16B800F6CBDD /* Drawer in Frameworks */,
 				C61D1B3927BEBCCF007071C7 /* PopupView in Frameworks */,
 				C61D1B5527C6F747007071C7 /* SwiftySound in Frameworks */,
 				C67FE3C027B02DF0008ADD94 /* RealmSwift in Frameworks */,
@@ -229,6 +231,7 @@
 				C67FE3BF27B02DF0008ADD94 /* RealmSwift */,
 				C61D1B3827BEBCCF007071C7 /* PopupView */,
 				C61D1B5427C6F747007071C7 /* SwiftySound */,
+				C68FB11727DB16B800F6CBDD /* Drawer */,
 			);
 			productName = "Captains Log";
 			productReference = 740C2C7C2722479C004C95CF /* Captains Log.app */;
@@ -261,6 +264,7 @@
 				C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				C61D1B3727BEBCCF007071C7 /* XCRemoteSwiftPackageReference "PopupView" */,
 				C61D1B5327C6F747007071C7 /* XCRemoteSwiftPackageReference "SwiftySound" */,
+				C68FB11627DB16B800F6CBDD /* XCRemoteSwiftPackageReference "swiftui-drawer" */,
 			);
 			productRefGroup = 740C2C7D2722479C004C95CF /* Products */;
 			projectDirPath = "";
@@ -526,6 +530,14 @@
 				minimumVersion = 10.24.0;
 			};
 		};
+		C68FB11627DB16B800F6CBDD /* XCRemoteSwiftPackageReference "swiftui-drawer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maustinstar/swiftui-drawer";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -548,6 +560,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C67FE3BC27B02DF0008ADD94 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		C68FB11727DB16B800F6CBDD /* Drawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C68FB11627DB16B800F6CBDD /* XCRemoteSwiftPackageReference "swiftui-drawer" */;
+			productName = Drawer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

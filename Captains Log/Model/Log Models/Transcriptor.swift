@@ -59,6 +59,7 @@ actor Transcriptor {
         try! realm.write {
             log.transcript = smoothedTranscript
         }
+        
     }
     
     

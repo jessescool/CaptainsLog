@@ -10,6 +10,8 @@ struct RecordView: View {
     @StateRealmObject var newLog = LogEntry()
     @StateObject var audioRecorder = AudioRecorder()
     
+    @StateObject var locationManager = LocationManager()
+    
     var body: some View {
         VStack {
             
@@ -96,6 +98,9 @@ struct RecordView: View {
         .padding()
         
         .onAppear {
+            
+            newLog.location["latitude"] = locationManager.lastLocation?.coordinate.latitude
+            newLog.location["longitude"] = locationManager.lastLocation?.coordinate.longitude
             
             let newLogRecordingPath = documentsPath().appendingPathComponent("\(newLog.id.uuidString).m4a")
 

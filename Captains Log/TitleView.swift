@@ -36,7 +36,7 @@ struct TitleView: View {
                 
                 HStack {
                     Image(systemName: "mappin")
-                    Text(locationManager.associatedPlacemark?.subLocality ?? "Unknown")
+                    Text(locationManager.lastPlacemark?.subLocality ?? "Unknown")
                         .bold()
                 }
                 .padding()

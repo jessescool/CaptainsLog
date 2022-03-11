@@ -6,6 +6,8 @@ struct DetailedLogView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedRealmObject var log: LogEntry // not sure if this is final
     @State private var isEditing: Bool = false
+    
+    @StateObject var locationManager = LocationManager()
         
     var body: some View {
         VStack {
@@ -29,7 +31,7 @@ struct DetailedLogView: View {
                     HStack {
                         Label("Location", systemImage: "mappin.and.ellipse")
                         Spacer()
-                        Text("Location")
+                        Text(locationManager.lastPlacemark?.subLocality ?? "Unknown")
                     }
                 }
                 
@@ -88,14 +90,21 @@ struct DetailedLogView: View {
         .task {
             if log.transcript == nil {
                 
-//                let audioURL = try! log.audioURL!
-//                let transcriptor = Transcriptor(file: audioURL)
-//
-//                do {
-//                    try await transcriptor.transcribe()
-//                } catch {
-//                    print(error)
-//                }
+                do {
+                    
+                    // can be cleaned up...
+                    let audioURL = try! log.audioURL!
+                    
+                    let transcriptor = Transcriptor(audio: audioURL, to: log)
+                    try await transcriptor.transcribe()
+                    
+                    if log.isManaged() {
+                        try await transcriptor.pin()
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             
             }
         }

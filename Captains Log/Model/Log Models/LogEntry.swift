@@ -6,7 +6,7 @@ class LogEntry: Object, Identifiable {
     // Initialized upon creation
     @Persisted(primaryKey: true) var id: UUID = UUID()
     @Persisted var date: Date = Date.now
-    @Persisted var location: Double? = 1.21
+    @Persisted var location: Map<String, Double?>
 
     // Initialized immediately before log is written to realm
     @Persisted var name: String = ""
@@ -27,7 +27,10 @@ class LogEntry: Object, Identifiable {
         self.id = UUID()
         self.name = name // only property to set...
         self.date = Date.now
-        self.location = 1.21
+        
+        self.location["latitude"] = nil
+        self.location["longitude"] = nil
+        
         self.duration = 0.0
     }
 }

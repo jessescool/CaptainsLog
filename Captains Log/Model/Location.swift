@@ -13,7 +13,7 @@ enum LocationError: Error {
     
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation?
-    @Published var associatedPlacemark: CLPlacemark?
+    @Published var lastPlacemark: CLPlacemark?
 
     override init() {
         super.init()
@@ -49,7 +49,7 @@ enum LocationError: Error {
         
         // hopefully this is thread-safe
         Task {
-            self.associatedPlacemark = try? await placemark(location: location)
+            self.lastPlacemark = try? await placemark(location: location)
         }
         
         print(#function, location)
