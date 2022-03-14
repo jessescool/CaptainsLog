@@ -30,16 +30,17 @@ struct RecordView: View {
             if isRecording {
                 Button {
                     
-                    newLog.duration = audioRecorder.getDuration()
-                    audioRecorder.stopRecording()
+                    newLog.duration = audioRecorder.getDuration() // change this to inspect the audio file itself
+                    audioRecorder.stopRecording() // stops recording
                     
-                    isRecording = false
+                    isRecording = false //
                     isNaming = true
                     
                 } label: {
                     Image(systemName: "stop.circle")
                 }
                 .buttonStyle(RecordButton())
+                
             } else {
                 // Enter name
                 TextField("Name", text: $newLog.name)

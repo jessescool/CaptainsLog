@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CardView: View {
     let log: LogEntry
+    
     var body: some View {
         
         VStack(alignment: .leading) {
@@ -14,8 +15,8 @@ struct CardView: View {
                 Label("\(Int(log.duration.rounded()))s", systemImage: "hourglass.tophalf.filled")
             }
         }
-        .padding()
         .foregroundColor(.accentColor)
+        .padding()
     }
 }
 
