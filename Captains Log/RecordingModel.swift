@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import BottomSheet
 
-var allSheetOptions: [BottomSheet.Options] = []
+var allSheetOptions: [BottomSheet.Options] = [.noBottomPosition]
 
 var bottomSheetOptions: [BottomSheet.Options] = [.noDragIndicator, .cornerRadius(0)] + allSheetOptions
 var middleSheetOptions: [BottomSheet.Options] = [.allowContentDrag, .swipeToDismiss, .cornerRadius(25)] + allSheetOptions
@@ -10,7 +10,7 @@ var topSheetOptions: [BottomSheet.Options] = [.allowContentDrag, .swipeToDismiss
 
 
 public enum RecordSheetPosition: CGFloat, CaseIterable {
-    case top = 0.975, middle = 0.4, bottom = 0.15, hidden = 0
+    case top = 0.975, middle = 0.4, bottom = 0.14, hidden = 0
 }
 
 struct Record: View {
@@ -20,7 +20,7 @@ struct Record: View {
         HStack {
             Spacer()
             Button() {
-                withAnimation(.easeIn(duration: 0.1)) {
+                withAnimation(.easeOut) {
                     recordViewPosition = .middle
                 }
             } label: {
@@ -32,3 +32,11 @@ struct Record: View {
     }
 }
 
+struct RecordButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.red)
+            .font(.system(size: 70, weight: .ultraLight))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+    }
+}

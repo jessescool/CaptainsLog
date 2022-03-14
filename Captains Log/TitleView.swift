@@ -23,38 +23,7 @@ struct TitleHeader: View {
     }
 }
 
-struct SummaryInfo: View {
-    private var date = Date.now.formatted(date: .complete, time: .omitted)
-    private var time = Date.now.formatted(date: .omitted, time: .shortened)
-    @StateObject var locationManager = LocationManager()
-    
-    var body: some View {
-        VStack(alignment: .center) {
-            
-            HStack {
-                Image(systemName: "mappin")
-                Text(locationManager.lastPlacemark?.subLocality ?? "Unknown")
-                    .bold()
-            }
-            .padding()
-            
-            HStack {
-                Image(systemName: "calendar")
-                Text("\(date)")
-                    .bold()
-            }
-            .padding()
-            
-            HStack {
-                Image(systemName: "clock")
-                Text("\(time)")
-                    .bold()
-            }
-            .padding()
-        }
-        .font(.title2)
-    }
-}
+
 
 struct TitleView: View {
     @State var recordViewPosition: RecordSheetPosition = .bottom //1
@@ -78,13 +47,24 @@ struct TitleView: View {
         }
         .bottomSheet(
             bottomSheetPosition: $recordViewPosition,
-            options: recordViewPosition != .bottom ? middleSheetOptions : bottomSheetOptions,
-            headerContent: {
-                if recordViewPosition == .bottom { Record(recordViewPosition: $recordViewPosition) }
-            })
-
-        { // content:
-            RecordView(recordView: $recordViewPosition)
+            options: recordViewPosition != .bottom ? middleSheetOptions : bottomSheetOptions
+        ){ // content:
+            if recordViewPosition == .bottom {
+                withAnimation {
+                    VStack {
+                        Spacer()
+                        Record(recordViewPosition: $recordViewPosition)
+                    }
+                    .transition(.opacity)
+                }
+            } else {
+                withAnimation {
+                    VStack {
+                        RecordView(recordView: $recordViewPosition)
+                    }
+                    .transition(.opacity)
+                }
+            }
         }
 
     }

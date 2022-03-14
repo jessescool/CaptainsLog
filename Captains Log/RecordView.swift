@@ -35,6 +35,7 @@ struct RecordView: View {
                     
                     isRecording = false
                     isNaming = true
+                    
                 } label: {
                     Image(systemName: "stop.circle")
                 }
@@ -48,6 +49,7 @@ struct RecordView: View {
                 
                 // Confirm or Cancel
                 HStack {
+                    
                     Button("Confirm") {
                         
                         // giving default name
@@ -59,7 +61,9 @@ struct RecordView: View {
                         storeLog(newLog)
                         
                         // hides sheet
-                        recordView = .bottom
+                        withAnimation(.easeInOut) {
+                            recordView = .bottom
+                        }
                                                 
                         /// This task begins async transcription of the newly-created audio file.
                         ///     Breaks if...
@@ -81,22 +85,24 @@ struct RecordView: View {
                             } catch {
                                 print(error)
                             }
-                            
+        
                         }
                         
                     }
                     .buttonStyle(.bordered)
                     
                     Button("Cancel", role: .destructive) {
-                        recordView = .bottom
+                        withAnimation(.easeInOut) {
+                            recordView = .bottom
+                        }
                     }
                     .buttonStyle(.bordered)
                     
                 }
             }
-        }≈
+        }
         .onAppear {
-            
+        
             newLog.location["latitude"] = locationManager.lastLocation?.coordinate.latitude
             newLog.location["longitude"] = locationManager.lastLocation?.coordinate.longitude
             

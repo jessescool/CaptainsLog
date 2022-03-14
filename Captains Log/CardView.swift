@@ -3,6 +3,7 @@ import SwiftUI
 struct CardView: View {
     let log: LogEntry
     var body: some View {
+        
         VStack(alignment: .leading) {
             Text(log.name)
                 .font(.headline)
