@@ -13,7 +13,7 @@ struct SummaryInfo: View {
     @StateObject var locationManager = LocationManager()
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .leading) {
             SummaryCapsule(title: locationManager.lastPlacemark?.subLocality ?? "Unknown", image: Image(systemName: "mappin"))
             SummaryCapsule(title: date, image: Image(systemName: "calendar"))
             SummaryCapsule(title: time, image: Image(systemName: "clock"))
@@ -29,12 +29,13 @@ struct SummaryCapsule: View {
         
         ZStack {
             
-            Color.accentColor
+            Color.yellow
                 .cornerRadius(15)
             
             HStack {
                 image
                 Text(title).bold()
+                Spacer()
             }
             .font(.title2)
             .padding()

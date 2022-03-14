@@ -36,6 +36,10 @@ struct RecordView: View {
                     isRecording = false //
                     isNaming = true
                     
+                    withAnimation(.easeInOut) {
+                        recordView = .top
+                    }
+                    
                 } label: {
                     Image(systemName: "stop.circle")
                 }

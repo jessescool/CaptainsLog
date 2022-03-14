@@ -34,12 +34,9 @@ struct TitleView: View {
             TitleHeader()
                 .padding()
 
-            Spacer()
-
             SummaryInfo()
                 .padding()
 
-            Spacer()
             Spacer()
 
     // ----------
